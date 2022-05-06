@@ -1,0 +1,180 @@
+
+.mb-4{
+    width: 160px;
+}
+
+.badge{
+    color: #202f56;
+    font-size: medium;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.badge:hover, .badge:focus, .badge:active{
+    color: #ffc107;
+}
+
+.welcome{
+    /*font-family: "29LT Bukra Semibold";*/
+    color: #202f56;
+    text-decoration: none;
+}
+
+.btn{
+    background-color: #ffc107;
+    border-width: 0;
+    /*font-family: "29LT Bukra Semibold";*/
+}
+
+.btn:hover{
+    background-color: #ffc107;
+    color: #202f56;
+    border-width: 0;
+}
+
+.btn:focus, .btn:active, .btn.active, .btn:focus:active{
+    background-color: #202f56;
+    color: #ffc107;
+    border-width: 0;
+    outline: none;
+    box-shadow: none;
+}
+/*
+
+.badge:hover{
+    color: #f6871b;
+}*/
+
+p{
+    font-size: medium;
+    color: black;
+    /*font-family: "Aileron Regular";*/
+}
+
+body {
+    min-height:100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-image: url("/images/fondo.png");
+    background-position: center center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.max-w-log {
+    max-width: 390px;
+}
+
+.max-w-forgp {
+    max-width: 440px;
+    box-shadow: inset -3px -3px 0 #202f56, 9px 9px 0 #ffc107;
+}
+
+.max-w-reg{
+    max-width: 900px;
+}
+
+.max-w-regfree{
+    max-width: 1000px;
+}
+
+.form-signin {
+    font-weight: normal;
+    color: #333333;
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+    background-color: white;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input {
+    margin-bottom: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: #202f56;
+    background-color: #f1f1f1;
+}
+
+.form-signin input:focus{
+    box-shadow: none;
+}
+
+.form-signin input:-webkit-autofill, .form-signin input:-webkit-autofill:hover, .form-signin input:-webkit-autofill:focus, .form-signin input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0px 1000px #cacaca inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.bi, .fab, .fa-whatsapp, .fa-facebook-f, .fa-instagram, .fa-linkedin-in{
+    font-size: x-large;
+}
+
+.form-icon{
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    color: #202f56;
+    opacity: 75%;
+}
+
+.form-icon:hover{
+    cursor: pointer;
+}
+
+.button-icon{
+    position:relative;
+    right: -35%;
+    color: white;
+}
+
+.button-icon2{
+    position:relative;
+    right: -15%;
+    color: white;
+}
+
+.bg-gb{
+    background-color: #7a8399;
+}
+
+.bg-b{
+    background-color: #202f56;
+}
+
+.text-gb{
+    color: #7a8399;
+    text-decoration: none;
+}
+
+hr {
+    margin: 14px 0;
+    color: #202f56;
+    background-color: #202f56;
+    height:2px!important;
+    opacity: 1;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
