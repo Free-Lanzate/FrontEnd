@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Documentation\\css",
+    "\\public",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\FixedPlugin",
+    "\\src\\components\\Footer",
+    "\\src\\components\\Navbars",
+    "\\src\\components\\Sidebar",
+    "\\src\\layouts"
+  ],
+  "SelectedNode": "\\src\\index.js",
+  "PreviewInSolutionExplorer": false
+}
