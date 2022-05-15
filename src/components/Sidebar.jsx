@@ -1,60 +1,68 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Layout, Menu } from 'antd'
 
 
-const Sidebar = () => {
+function Sidebar ()  {
+
+const {Sider} =Layout;
+    
   return (
-    <div className='sidebar'>
+    <Sider className='sidebar'>
         <div className="top">
             <Link to = "/">
             <span className='logo'>FreeLanzate</span>
             </Link>
         </div>
         <div className="center">
-            <ul>
-                <li>
-                    <Link to = "buscar">
+
+            <Menu theme='dark' mode='inline' defaultSelectedKeys={["1"]}>
+                <Menu.Item key="1">
+                    <Link to = {"buscar"}>
                     <span>
                         Buscar
                     </span>
                     </Link>
-                </li>
-                <li>
+                </Menu.Item>
+                <Menu.Item>
                     <Link to = "perfil">
                     <span>
                         Mi perfil
                     </span>
                     </Link>
-                </li>
-                <li>
+                </Menu.Item>
+                <Menu.Item>
                     <Link to = "ordenes">
                     <span>
                         Mis ordenes
                     </span>
                     </Link>
-                </li>
-                <li>
+                </Menu.Item>
+                <Menu.Item>
                     <Link to = "recomendaciones">
                     <span>
                         Recomendados
                     </span>
                     </Link>
-                </li>
-                <li>
+                </Menu.Item>
+
+                <Menu.Item>
                     <Link to = "carrito">
                     <span>
                         Mi carrito
                     </span>
                     </Link>
-                </li>
-                <li>
+                </Menu.Item>
+                <Menu.Item>
                     <Link to = "anuncios">
                     <span>
                         Anunciarme
                     </span>
                     </Link>
-                </li>
-            </ul>
+                </Menu.Item>
+            </Menu>
+
+            
         </div>
         <div className="bottom">
             <ul>
@@ -63,7 +71,7 @@ const Sidebar = () => {
                 </li>
             </ul>
         </div>
-    </div>
+    </Sider>
   )
 }
 

@@ -1,28 +1,25 @@
 import React from 'react'
-import { Routes, Route, Link, } from 'react-router-dom'
-import Login from "../views/Login"
-import Recuperarcontraseña from '../views/Recuperarcontraseña'
-import Registro from '../views/Registro'
+import "./usuario.scss"
+import {Layout} from "antd"
 
-const Visitante = () => {
+function Visitante (props) {
+
+  const {children} = props;
+  const {Header, Content, Footer} = Layout;
+
   return (
-    <div>Visitante
+    <div className='visitante'>
 
-    <Link to="registro"> registro </Link>
-    <Link to="/login">Login</Link>
-    <Link to="/recuperar"> recuperar </Link>
-
-    <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='registro' element={<Registro />} />
-        <Route path='/recuperar' element={<Recuperarcontraseña />} />
-        
-    </Routes>
-    
+      <Layout>
+        <h2>Menu side Visitante</h2>
+        <Layout>
+          <Header>Header...</Header>
+          <Content> {children} </Content>
+          <Footer>Footerccccc</Footer>
+        </Layout>
+      </Layout>
     </div>
-
-    
-  )
+  );
 }
 
 export default Visitante
