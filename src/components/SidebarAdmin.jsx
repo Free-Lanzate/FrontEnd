@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 
 
-function Sidebar ()  {
+function SidebarAdmin ()  {
 
 const {Sider} =Layout;
     
@@ -18,28 +18,28 @@ const {Sider} =Layout;
 
             <Menu theme='dark' mode='inline' defaultSelectedKeys={["1"]}>
                 <Menu.Item key="1">
-                    <Link to = "/usuario/buscar">
+                    <Link to = "/freelanzer/buscar">
                     <span>
                         Buscar
                     </span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to = "/usuario/perfil">
+                    <Link to = "/freelanzer/perfil">
                     <span>
                         Mi perfil
                     </span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to = "/usuario/ordenes">
+                    <Link to = "/freelanzer/ordenes">
                     <span>
                         Mis ordenes
                     </span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to = "/usuario/recomendaciones">
+                    <Link to = "/freelanzer/recomendaciones">
                     <span>
                         Recomendados
                     </span>
@@ -47,14 +47,14 @@ const {Sider} =Layout;
                 </Menu.Item>
 
                 <Menu.Item>
-                    <Link to = "/usuario/carrito">
+                    <Link to = "/freelanzer/carrito">
                     <span>
                         Mi carrito
                     </span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to = "/usuario/anuncio">
+                    <Link to = "/freelanzer/anuncio">
                     <span>
                         Anunciarme
                     </span>
@@ -75,4 +75,4 @@ const {Sider} =Layout;
   )
 }
 
-export default Sidebar
+export default SidebarAdmin

@@ -18,32 +18,32 @@ const routesUsuario = [
         component: Buscar
     },
     {
-        path: '/usuario/',
+        path: 'usuario/buscar',
         component: Buscar,
         layout: Usuario,
     },
     {
-        path: '/usuario/',
+        path: 'usuario/perfil',
         component: Perfil,
         layout: Usuario,
     },
     {
-        path: '/usuario/',
+        path: 'usuario/ordenes',
         component: Ordenes,
         layout: Usuario,
     },
     {
-        path: '/usuario/',
+        path: 'usuario/recomendaciones',
         component: Recomendaciones,
         layout: Usuario,
     },
     {
-        path: '/usuario/',
+        path: '/usuario/carrito',
         component: Carrito,
         layout: Usuario,
     },
     {
-        path: '/usuario/',
+        path: '/usuario/anuncio',
         component: Anuncios,
         layout: Usuario,
     },
@@ -54,7 +54,7 @@ const routesFreelanzer = [
     {
         path: "/freelanzer",
         layout: Freelanzer,
-        component: Freelanzer
+        component: Buscar
     },
     {
         path: '/freelanzer/buscar',
@@ -82,7 +82,7 @@ const routesFreelanzer = [
         layout: Freelanzer,
     },
     {
-        path: '/freelanzer/anuncios',
+        path: '/freelanzer/anuncio',
         component: Anuncios,
         layout: Freelanzer,
     },
