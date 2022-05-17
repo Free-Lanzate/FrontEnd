@@ -18,28 +18,28 @@ const {Sider} =Layout;
 
             <Menu theme='dark' mode='inline' defaultSelectedKeys={["1"]}>
                 <Menu.Item key="1">
-                    <Link to = "/usuario/buscar">
+                    <Link to = "../buscar">
                     <span>
                         Buscar
                     </span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to = "/usuario/perfil">
+                    <Link to = "../perfil">
                     <span>
                         Mi perfil
                     </span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to = "/usuario/ordenes">
+                    <Link to = "../ordenes">
                     <span>
                         Mis ordenes
                     </span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to = "/usuario/recomendaciones">
+                    <Link to = "../recomendaciones">
                     <span>
                         Recomendados
                     </span>
@@ -47,14 +47,14 @@ const {Sider} =Layout;
                 </Menu.Item>
 
                 <Menu.Item>
-                    <Link to = "/usuario/carrito">
+                    <Link to = "../carrito">
                     <span>
                         Mi carrito
                     </span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to = "/usuario/anuncio">
+                    <Link to = "../anuncio">
                     <span>
                         Anunciarme
                     </span>

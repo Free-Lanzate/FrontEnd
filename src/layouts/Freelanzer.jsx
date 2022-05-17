@@ -1,7 +1,7 @@
 import React from 'react'
 import "./usuario.scss"
 import {Layout} from "antd"
-import SidebarAdmin from "../components/SidebarAdmin"
+import Sidebar from "../components/Sidebar"
 
 
 function freelanzer(props) {
@@ -14,7 +14,7 @@ function freelanzer(props) {
 
       <Layout>
       <Sider>
-      <SidebarAdmin/>
+      <Sidebar/>
       </Sider>
         <Layout>
           <Header>Header...</Header>
