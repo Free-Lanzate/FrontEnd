@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import routes from "./routes";
+import internalRoutes from "./internalRoutes";
 
 
 
@@ -11,11 +12,17 @@ function App() {
         {routes.map((route, index) => (
           <Route
           key={index}
-          path={route.path}
-          element={<route.layout>
-            <route.component/>
-          </route.layout>} 
-          />
+          path={route.path}>
+              {internalRoutes.map((internalRoute,index2) => (
+                  <Route
+                      key={index2}
+                      path={internalRoute.path}
+                      element = {<route.layout>
+                          <internalRoute.component/>
+                      </route.layout>}
+                  />
+              ))}
+          </Route>
         ))}
       </Routes>
     </BrowserRouter>
