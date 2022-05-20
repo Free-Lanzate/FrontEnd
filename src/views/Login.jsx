@@ -1,10 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 
-const Login = () => {
+function Login (){
+
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: ""
+  });
+
+  const changeForm = e => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const login = e =>{
+    e.preventDefault();
+
+    console.log(inputs);
+  }
+
   return (
     <div>
-      <main className="form-signin rounded max-w-log">
+      <main className="form-signin rounded max-w-log" onChange={changeForm} onSubmit={login}>
     <form action="/welcome" method="get">
         <img className="w-50 mb-4 mt-2" src="/images/Logo.png" alt="Free-Lánzate" />
         <p className="h5 welcome mb-3 fw-bold">¡Te damos la bienvenida!</p>

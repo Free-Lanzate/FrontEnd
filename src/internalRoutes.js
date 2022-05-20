@@ -5,6 +5,8 @@ import Ordenes from "./views/Ordenes"
 import Perfil from "./views/Perfil"
 import Recomendaciones from "./views/Recomendaciones"
 import Login from "./views/Login"
+import Registro from "./views/Registro"
+import Recuperarcontraseña from "./views/Recuperarcontraseña"
 
 const routesSidebar = [
     {
@@ -30,6 +32,22 @@ const routesSidebar = [
     {
         path: 'anuncio',
         component: Anuncios,
+    },
+    {
+        path: 'login',
+        component: Login,
+    },
+    {
+        path: 'registro',
+        component: Registro,
+    },
+    {
+        path: 'recuperar',
+        component: Recuperarcontraseña,
+    },
+    {
+        path: '',
+        component: Buscar,
     }
 ]
 
