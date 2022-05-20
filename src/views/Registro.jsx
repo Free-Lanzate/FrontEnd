@@ -1,9 +1,9 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
 import { notification } from "antd";
-import {
-    emailValidation,
-    minLengthValidation
-  } from "../utils/formValidation"
+import { emailValidation, minLengthValidation} from "../utils/formValidation";
+import {registro} from "../api";
+
+
 
 const Registro = () => {
 
@@ -54,7 +54,7 @@ const Registro = () => {
             message: "Las contraseñas tienen que ser iguales."
             });
         } else {
-            console.log("correcto")
+            const result = registro(inputs)
         };
     }
 }
