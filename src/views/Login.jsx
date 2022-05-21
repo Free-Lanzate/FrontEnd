@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
+import {iniciar_sesion} from "../api";
 
 function Login (){
 
@@ -17,8 +18,7 @@ function Login (){
 
   const login = e =>{
     e.preventDefault();
-
-    console.log(inputs);
+    const result = iniciar_sesion(inputs);
   }
 
   return (

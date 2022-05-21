@@ -15,7 +15,7 @@ function Visitante (props) {
         <Layout>
           <Header>Header...</Header>
           <Content> {children} </Content>
-          <Footer>Footerccccc</Footer>
+          <Footer id="token">Footerccccc</Footer>
         </Layout>
       </Layout>
     </div>
