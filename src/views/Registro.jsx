@@ -9,12 +9,12 @@ const Registro = () => {
 
     const [inputs, setInputs] = useState({
         username: "",
-        firstName: "juan",
+        firstName: "Juan",
         lastName: "Bustamante",
         password: "",
         email: "",
-        location: "req.body.location",
-        avatarUrl: "req.body.avatarUrl",
+        location: "",
+        avatarUrl: "",
       });
 
       const [formValid, setFormValid] = useState({
