@@ -8,15 +8,18 @@ import {registro} from "../api";
 const Registro = () => {
 
     const [inputs, setInputs] = useState({
-        nombre: "",
+        username: "",
+        firstName: "juan",
+        lastName: "Bustamante",
+        password: "",
         email: "",
-        newPassword: "",
-        repeatPassword: "",
+        location: "req.body.location",
+        avatarUrl: "req.body.avatarUrl",
       });
 
       const [formValid, setFormValid] = useState({
         email: false,
-        newPassword: false,
+        password: false,
         repeatPassword: false,
       });
 
@@ -41,15 +44,15 @@ const Registro = () => {
       const register = e => {
         e.preventDefault();
         const emailVal = inputs.email;
-        const newPasswordVal = inputs.newPassword;
+        const passwordVal = inputs.password;
         const repeatPasswordVal = inputs.repeatPassword;
 
-        if (!emailVal || !newPasswordVal || !repeatPasswordVal) {
+        if (!emailVal || !passwordVal || !repeatPasswordVal) {
         notification["error"]({
             message: "Todos los campos son obligatorios"
         });
         } else {
-        if (newPasswordVal !== repeatPasswordVal) {
+        if (passwordVal !== repeatPasswordVal) {
             notification["error"]({
             message: "Las contraseñas tienen que ser iguales."
             });
@@ -76,8 +79,8 @@ const Registro = () => {
                             <input
                                     type="text"
                                     className="form-control mb-3"
-                                    id="nombre"
-                                    name="nombre"
+                                    id="username"
+                                    name="username"
                                     placeholder="name"
                                     onChange={inputValidation}
                             />
@@ -108,8 +111,8 @@ const Registro = () => {
                             <input
                                     type="password"
                                     className="form-control mb-3"
-                                    id="newPassword"
-                                    name="newPassword"
+                                    id="password"
+                                    name="password"
                                     placeholder="newPassword"
                                     onChange={inputValidation}
                             />
@@ -136,63 +139,7 @@ const Registro = () => {
                     </div>
                     <div className="h3 mb-3 fw-normal">
                         <p>¿Ya estás registrado?<a href="/login" className="badge mt-2">Inicia sesión</a></p>
-                    </div>
-                </div>
-                <div className="col-md">
-                    <p className="h5 welcome mb-3 fw-bold">Información Bancaria</p>
-                    <hr className="bg-gb w-75 mx-auto"/>
-                    <p className="h5 welcome mb-3 fw-bold">Tarjeta de crédito</p>
-                    <div className="form-floating w-75 mx-auto mt-4">
-                        <input
-                                type="text"
-                                className="form-control mb-3"
-                                id="nombreTarjeta"
-                                name="nombreTarjeta"
-                                placeholder="nameCard"
-                        />
-                        <label for="nombreTarjeta">Nombre que aparece en la tarjeta</label>
-                    </div>
-                    <div className="form-floating w-75 mx-auto">
-                        <input
-                                type="number"
-                                className="form-control mb-3"
-                                id="numCard"
-                                name="numCard"
-                                placeholder="numCard"
-                        />
-                        <label for="numCard">Número de la tarjeta</label>
-                    </div>
-                    <div className="w-75 mx-auto d-flex">
-                        <div className="col form-floating">
-                            <input
-                                    type="date"
-                                    className="form-control mb-3"
-                                    id="expDate"
-                                    name="expDate"
-                                    placeholder="expDate"
-                            />
-                            <label for="expDate">Fecha de expiración</label>
-                        </div>
-                        <div className="col-4 form-floating ms-3">
-                            <input
-                                    type="number"
-                                    className="form-control"
-                                    id="CVV"
-                                    name="CVV"
-                                    placeholder="numCard"
-                            />
-                            <label for="CVV">CVV</label>
-                        </div>
-                    </div>
-                    <div className="w-75 mx-auto my-2">
-                        <input
-                                type="checkbox"
-                                className="me-3"
-                                id="free"
-                                name="free"
-                                placeholder="free"
-                        />
-                        <label for="free"> Deseo registrarme como freelancer</label>
+
                     </div>
                     <button className="w-75 btn btn-lg btn-primary fw-bold mx-auto mt-2 mb-3" type="submit">Continuar</button>
                 </div>
