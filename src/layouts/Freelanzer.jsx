@@ -1,5 +1,4 @@
 import React from 'react'
-import "./usuario.scss"
 import {Layout} from "antd"
 import Sidebar from "../components/Sidebar"
 

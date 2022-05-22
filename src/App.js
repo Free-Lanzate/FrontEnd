@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import routes from "./routes";
 import internalRoutes from "./internalRoutes";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/sass/global.scss";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 function App() {

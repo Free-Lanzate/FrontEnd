@@ -16,7 +16,7 @@ export function registro(data){
       return res.text()
   }).then(data => {
       if(err) window.alert(data)
-      else document.getElementById("token").innerText = data
+      else window.alert(data)
   })
 
     
@@ -53,6 +53,6 @@ export function iniciar_sesion(data) {
         return res.text()
     }).then(data => {
         if(err) window.alert(data)
-        else document.getElementById("token").innerText = data
+        else window.alert(data)
     })
 }

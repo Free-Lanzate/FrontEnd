@@ -1,5 +1,4 @@
 import React from 'react'
-import "./usuario.scss"
 import {Layout} from "antd"
 
 function Visitante (props) {
@@ -11,11 +10,8 @@ function Visitante (props) {
     <div className='visitante'>
 
       <Layout>
-        <h2>Menu side Visitante</h2>
         <Layout>
-          <Header>Header...</Header>
           <Content> {children} </Content>
-          <Footer id="token">Footerccccc</Footer>
         </Layout>
       </Layout>
     </div>

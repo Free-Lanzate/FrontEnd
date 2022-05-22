@@ -2,10 +2,23 @@ import React,{useState} from 'react';
 import { notification } from "antd";
 import { emailValidation, minLengthValidation} from "../utils/formValidation";
 import {registro} from "../api";
+import Logo from "../assets/images/Logo.png"
+import Background from "../assets/images/fondo.png"
+import {showHide} from "../utils/passwordVisibility"
 
 
 
 const Registro = () => {
+
+    const style = {
+        backgroundImage: `url(${Background})`,
+        backgroundPosition: 'center center',
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        width: '100vw',
+        height: '100vh'
+    }
 
     const [inputs, setInputs] = useState({
         username: "",
@@ -13,8 +26,8 @@ const Registro = () => {
         lastName: "Bustamante",
         password: "",
         email: "",
-        location: "",
-        avatarUrl: "",
+        location: "req.body.location",
+        avatarUrl: "req.body.avatarUrl",
       });
 
       const [formValid, setFormValid] = useState({
@@ -63,90 +76,103 @@ const Registro = () => {
 }
 
   return (
-<div>
-    <main className="form-signin rounded max-w-reg" onSubmit={register} onChange={changeForm}>
-        <form>
-            <img className="mb-4 d-flex justify-content-start" src="/images/Logo.png" alt="Free-Lánzate"/>
-            <div className="row g-2">
-                <div className="col-md">
-                    <p className="h5 welcome mb-3 fw-bold">Crea tu cuenta</p>
+    <div className="reg text-center d-flex" style={style}>
+        <div className="form-signin rounded max-w-reg my-auto" onSubmit={register} onChange={changeForm}>
+            <form>
+                <img className="mb-4 d-flex justify-content-start" src={Logo} alt="Free-Lánzate"/>
+                <div className="row g-2">
+                    <h5 className="welcome mb-3 fw-bold">Crea tu cuenta</h5>
                     <p>Por favor, diligencia los siguientes campos</p>
-                    <div className="input-group w-75 mx-auto mt-2">
-                        <div>
-                            <span className="input-group-text bg-gb text-white"><i className="bi bi-person-circle my-1"></i></span>
-                        </div>
-                        <div className="form-floating flex-grow-1">
-                            <input
-                                    type="text"
-                                    className="form-control mb-3"
-                                    id="username"
-                                    name="username"
-                                    placeholder="name"
-                                    onChange={inputValidation}
-                            />
-                            <label for="nombre">Nombre completo</label>
-                        </div>
-                    </div>
-                    <div className="input-group w-75 mx-auto">
-                        <div>
-                            <span className="input-group-text bg-gb text-white"><i className="bi bi-envelope-fill my-1"></i></span>
-                        </div>
-                        <div className="form-floating flex-grow-1">
-                            <input
-                                    type="email"
-                                    className="form-control mb-3"
-                                    id="email"
-                                    name="email"
-                                    placeholder="username"
-                                    onChange={inputValidation}
-                            />
-                            <label for="email">Correo electrónico</label>
-                        </div>
-                    </div>
-                    <div className="input-group w-75 mx-auto">
-                        <div>
-                            <span className="input-group-text bg-gb text-white"><i className="bi bi-lock-fill my-1"></i></span>
-                        </div>
-                        <div className="form-floating flex-grow-1">
-                            <input
-                                    type="password"
-                                    className="form-control mb-3"
-                                    id="password"
-                                    name="password"
-                                    placeholder="newPassword"
-                                    onChange={inputValidation}
-                            />
-                            <label for="newPassword">Contraseña nueva</label>
-                            <i className="bi bi-eye-slash-fill form-icon" onclick="ShowHide(this)"></i>
-                        </div>
-                    </div>
-                    <div className="input-group w-75 mx-auto">
-                        <div>
-                            <span className="input-group-text bg-gb text-white"><i className="bi bi-shield-fill-check my-1"></i></span>
-                        </div>
-                        <div className="form-floating flex-grow-1">
-                            <input
-                                    type="password"
-                                    className="form-control mb-3"
-                                    id="repeatPassword"
-                                    name="repeatPassword"
-                                    placeholder="repeatPassword"
-                                    onChange={inputValidation}
-                            />
-                            <label for="repeatPassword">Confirma la contraseña</label>
-                            <i className="bi bi-eye-slash-fill form-icon" onclick="ShowHide(this)"></i>
-                        </div>
-                    </div>
-                    <div className="h3 mb-3 fw-normal">
-                        <p>¿Ya estás registrado?<a href="/login" className="badge mt-2">Inicia sesión</a></p>
-
-                    </div>
-                    <button className="w-75 btn btn-lg btn-primary fw-bold mx-auto mt-2 mb-3" type="submit">Continuar</button>
                 </div>
-            </div>
-        </form>
-    </main>
-</div>
+                <div className="row g-2">
+                    <div className="col-md">
+                        <div className="input-group w-75 mx-auto mt-2">
+                            <div>
+                                <span className="input-group-text bg-gb text-white"><i className="bi bi-person-circle my-1"> </i></span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                        type="text"
+                                        className="form-control mb-3"
+                                        id="username"
+                                        name="username"
+                                        placeholder="name"
+                                        onChange={inputValidation}
+                                />
+                                <label htmlFor="nombre">Nombre completo</label>
+                            </div>
+                        </div>
+                        <div className="input-group w-75 mx-auto">
+                            <div>
+                                <span className="input-group-text bg-gb text-white"><i className="bi bi-envelope-fill my-1"> </i></span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                        type="email"
+                                        className="form-control mb-3"
+                                        id="email"
+                                        name="email"
+                                        placeholder="username"
+                                        onChange={inputValidation}
+                                />
+                                <label htmlFor="email">Correo electrónico</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md">
+                        <div className="input-group w-75 mx-auto mt-2">
+                            <div>
+                                <span className="input-group-text bg-gb text-white"><i className="bi bi-lock-fill my-1"> </i></span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                        type="password"
+                                        className="form-control mb-3"
+                                        id="password"
+                                        name="password"
+                                        placeholder="newPassword"
+                                        onChange={inputValidation}
+                                />
+                                <label htmlFor="newPassword">Contraseña nueva</label>
+                                <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
+                            </div>
+                        </div>
+                        <div className="input-group w-75 mx-auto">
+                            <div>
+                                <span className="input-group-text bg-gb text-white"><i className="bi bi-shield-fill-check my-1"> </i></span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                        type="password"
+                                        className="form-control mb-3"
+                                        id="repeatPassword"
+                                        name="repeatPassword"
+                                        placeholder="repeatPassword"
+                                        onChange={inputValidation}
+                                />
+                                <label htmlFor="repeatPassword">Confirma la contraseña</label>
+                                <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="row g-2 my-3">
+                    <div className="w-75 mx-auto my-2 h5 fw-bold free">
+                        <input
+                            type="checkbox"
+                            className="me-3"
+                            id="free"
+                            name="free"
+                            placeholder="free"
+                        />
+                        <label htmlFor="free"> Deseo registrarme como freelancer</label>
+                    </div>
+                    <p>¿Ya estás registrado?<a href="/login" className="badge">Inicia sesión</a></p>
+                    <button className="w-75 btn btn-lg btn-primary fw-bold mx-auto" type="submit">Continuar</button>
+                </div>
+            </form>
+        </div>
+    </div>
   )
 }
 
