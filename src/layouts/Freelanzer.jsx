@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar"
 
 function freelanzer(props) {
 
-  const {children} = props;
+  const {items} = props;
   const {Header, Content, Footer, Sider} = Layout;
 
   return (
@@ -18,7 +18,7 @@ function freelanzer(props) {
       </Sider>
         <Layout>
           <Header>Header...</Header>
-          <Content> {children} </Content>
+          <Content> {items} </Content>
           <Footer>Footerccccc</Footer>
         </Layout>
       </Layout> 

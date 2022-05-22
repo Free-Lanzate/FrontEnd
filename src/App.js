@@ -2,12 +2,13 @@ import React from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import routes from "./routes";
 import internalRoutes from "./internalRoutes";
-
+import AuthProvider from "./providers/AuthProvider";
 
 
 function App() {
   return (
-    <BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
       <Routes>
         {routes.map((route, index) => (
           <Route
@@ -26,6 +27,7 @@ function App() {
         ))}
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

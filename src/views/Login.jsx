@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
-import {iniciar_sesion} from "../api";
+import {iniciar_sesion} from "../api/user"
+import {TOKEN} from "../utils/tokens"
+import {notification} from "antd"
 
 function Login (){
 
@@ -16,9 +18,33 @@ function Login (){
     });
   };
 
-  const login = e =>{
+  const login = async e =>{
     e.preventDefault();
-    const result = iniciar_sesion(inputs);
+    const result = await iniciar_sesion(inputs);
+
+    if(result === 'Nombre de usuario incorrecto') {
+      notification["error"]({
+        message: result
+      });
+    }
+    else if(result ==='La contraseña es incorrecta.'){
+      notification["error"]({
+        message: result
+      });
+    }
+    else if(result ==='Por favor ingrese todos los campos'){
+      notification["error"]({
+        message: result
+      });
+    }
+    else{
+      const token = result
+      localStorage.setItem(TOKEN, token);
+      notification["success"]({
+        message: "Login correcto."
+        });
+        window.location.href = "usuario";
+    }
   }
 
   return (
