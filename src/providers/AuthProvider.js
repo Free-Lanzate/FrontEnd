@@ -16,6 +16,7 @@ export default function AuthProvider(props) {
         checkUserLogin(setUser);
       }, []);
 
+    user = setUser
     return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }
     
