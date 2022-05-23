@@ -15,6 +15,7 @@ const Registro = () => {
         email: "",
         location: "",
         avatarUrl: "",
+        isisFreelancer: false
       });
 
       const [formValid, setFormValid] = useState({
@@ -67,6 +68,7 @@ const Registro = () => {
                     message: result.message
                     });
                     resetForm();
+                    window.location.href = "login";
                 }
             };
         }
