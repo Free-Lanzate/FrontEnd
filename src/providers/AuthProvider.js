@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 export default function AuthProvider(props) {
 
     const { children } = props;
-    const [user, setUser] = useState({
+    let [user, setUser] = useState({
         user: null,
         isLoading: true
     });
@@ -16,7 +16,7 @@ export default function AuthProvider(props) {
         checkUserLogin(setUser);
       }, []);
 
-  
+    user = setUser
     return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }
     
@@ -30,7 +30,7 @@ function checkUserLogin(setUser) {
               isLoading: false
             });
         } else {
-            const user = jwtDecode(accessToken).sub
+            const user = jwtDecode(accessToken).sub.username
             setUser({
                 isLoading: false,
                 user: user
