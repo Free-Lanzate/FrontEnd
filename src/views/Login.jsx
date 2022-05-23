@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import {iniciar_sesion} from "../api/user"
 import {TOKEN} from "../utils/tokens"
 import {notification} from "antd"
+import{getAccessToken} from "../api/auth"
 
 function Login (){
 
@@ -46,6 +47,11 @@ function Login (){
         window.location.href = "usuario";
     }
   }
+
+  if(getAccessToken()){
+    return <Navigate to = '/usuario'/>
+  }
+
 
   return (
     <div>

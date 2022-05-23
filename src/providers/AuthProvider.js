@@ -8,7 +8,7 @@ export default function AuthProvider(props) {
 
     const { children } = props;
     let [user, setUser] = useState({
-        user: null,
+        user: 'null',
         isLoading: true
     });
 
@@ -16,7 +16,8 @@ export default function AuthProvider(props) {
         checkUserLogin(setUser);
       }, []);
 
-    user = setUser
+    console.log(user)
+
     return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }
     

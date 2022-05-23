@@ -1,9 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Button } from 'antd'
+import { logout } from "../api/auth"
 
 
 function Sidebar ()  {
+
+    const logoutUser = () => {
+        logout();
+        window.location.reload();
+      };
+    
 
 const {Sider} =Layout;
     
@@ -67,7 +74,8 @@ const {Sider} =Layout;
         <div className="bottom">
             <ul>
                 <li>
-                    Salir
+
+                    <Button type="link" onClick={logoutUser}>Salir </Button>
                 </li>
             </ul>
         </div>
