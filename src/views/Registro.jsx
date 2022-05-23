@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
 import { notification } from "antd";
 import { emailValidation, minLengthValidation} from "../utils/formValidation";
-import {registro} from "../api";
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
 import {showHide} from "../utils/passwordVisibility"
+import {registro} from "../api/user";
 
 
 
@@ -26,8 +26,9 @@ const Registro = () => {
         lastName: "Bustamante",
         password: "",
         email: "",
-        location: "req.body.location",
-        avatarUrl: "req.body.avatarUrl",
+        location: "",
+        avatarUrl: "",
+        isisFreelancer: false
       });
 
       const [formValid, setFormValid] = useState({
@@ -54,7 +55,7 @@ const Registro = () => {
         }
       };
 
-      const register = e => {
+    const register = async e => {
         e.preventDefault();
         const emailVal = inputs.email;
         const passwordVal = inputs.password;
@@ -65,15 +66,51 @@ const Registro = () => {
             message: "Todos los campos son obligatorios"
         });
         } else {
-        if (passwordVal !== repeatPasswordVal) {
-            notification["error"]({
-            message: "Las contraseñas tienen que ser iguales."
-            });
-        } else {
-            const result = registro(inputs)
-        };
+            if (passwordVal !== repeatPasswordVal) {
+                notification["error"]({
+                message: "Las contraseñas tienen que ser iguales."
+                });
+            } else {
+                const result = await registro(inputs);
+                if (!result.ok) {
+                    notification["error"]({
+                    message: result.message
+                    });
+                } else {
+                    notification["success"]({
+                    message: result.message
+                    });
+                    resetForm();
+                    window.location.href = "login";
+                }
+            };
+        }
     }
-}
+
+    const resetForm = () => {
+        const inputs = document.getElementsByTagName("input");
+
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].classList.remove("success");
+          inputs[i].classList.remove("error");
+        }
+
+        setInputs({
+            username: "",
+            firstName: "Juan",
+            lastName: "Bustamante",
+            password: "",
+            email: "",
+            location: "",
+            avatarUrl: ""
+        });
+
+        setFormValid({
+            email: false,
+            password: false,
+            repeatPassword: false,
+        });
+      };
 
   return (
     <div className="reg text-center d-flex" style={style}>
@@ -130,10 +167,10 @@ const Registro = () => {
                                         className="form-control mb-3"
                                         id="password"
                                         name="password"
-                                        placeholder="newPassword"
+                                        placeholder="password"
                                         onChange={inputValidation}
                                 />
-                                <label htmlFor="newPassword">Contraseña nueva</label>
+                                <label htmlFor="password">Contraseña nueva</label>
                                 <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
                             </div>
                         </div>

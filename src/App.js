@@ -7,10 +7,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/sass/global.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "font-awesome/css/font-awesome.min.css";
+import AuthProvider from "./providers/AuthProvider";
+
 
 function App() {
   return (
-    <BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
       <Routes>
         {routes.map((route, index) => (
             <Route
@@ -38,6 +41,7 @@ function App() {
         ))}
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

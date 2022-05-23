@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Button } from 'antd'
+import { logout } from "../api/auth"
 import MenuBackground from "../assets/images/menu-lat.png";
 
 
@@ -16,6 +17,12 @@ function Sidebar (props)  {
         height: '100vh'
     }
 
+    const logoutUser = () => {
+        logout();
+        window.location.reload();
+      };
+
+
     const {Sider} = Layout;
     const rol = props.rol;
 
@@ -25,13 +32,13 @@ function Sidebar (props)  {
 
     function anuncio(rol) {
         if (rol==="/freelanzer") return(
-        <Menu.Item key="6">
-            <Link to="../anuncio">
+            <Menu.Item key="6">
+                <Link to="../anuncio">
                 <span>
                     Anunciarme
                 </span>
-            </Link>
-        </Menu.Item>)
+                </Link>
+            </Menu.Item>)
         else return null
     }
 
@@ -111,27 +118,27 @@ function Sidebar (props)  {
         else return(
             <ul>
                 <li>
-                    Salir
+                    <Button type="link" onClick={logoutUser}>Salir </Button>
                 </li>
             </ul>
         )
     }
 
-        return (
-            <Sider className='sidebar' style={style}>
-                <div className="top">
-                    <Link to={rol}>
-                        <span className='logo'>FreeLanzate</span>
-                    </Link>
-                </div>
-                <div className="center">
-                    {buildMenu(rol)}
-                </div>
-                <div className="bottom">
-                    {buildBottom(rol)}
-                </div>
-            </Sider>
-        )
+    return (
+        <Sider className='sidebar' style={style}>
+            <div className="top">
+                <Link to={rol}>
+                    <span className='logo'>FreeLanzate</span>
+                </Link>
+            </div>
+            <div className="center">
+                {buildMenu(rol)}
+            </div>
+            <div className="bottom">
+                {buildBottom(rol)}
+            </div>
+        </Sider>
+    )
 }
 
-export default Sidebar
+    export default Sidebar

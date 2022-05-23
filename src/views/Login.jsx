@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
-import {iniciar_sesion} from "../api"
+import { Link, Navigate } from 'react-router-dom'
+import {iniciar_sesion} from "../api/user"
+import {TOKEN} from "../utils/tokens"
+import {notification} from "antd"
+import{getAccessToken} from "../api/auth"
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
 import {showHide} from "../utils/passwordVisibility"
@@ -29,10 +32,39 @@ function Login (){
     });
   };
 
-  const login = e =>{
+  const login = async e =>{
     e.preventDefault();
-    const result = iniciar_sesion(inputs);
+    const result = await iniciar_sesion(inputs);
+
+    if(result === 'Nombre de usuario incorrecto') {
+      notification["error"]({
+        message: result
+      });
+    }
+    else if(result ==='La contraseña es incorrecta.'){
+      notification["error"]({
+        message: result
+      });
+    }
+    else if(result ==='Por favor ingrese todos los campos'){
+      notification["error"]({
+        message: result
+      });
+    }
+    else{
+      const token = result
+      localStorage.setItem(TOKEN, token);
+      notification["success"]({
+        message: "Login correcto."
+        });
+        window.location.href = "usuario";
+    }
   }
+
+  if(getAccessToken()){
+    return <Navigate to = '/usuario'/>
+  }
+
 
   return (
     <div className="login text-center d-flex" style={style}>
