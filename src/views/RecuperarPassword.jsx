@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
 
-const Recuperarcontraseña = () => {
+const RecuperarPassword = () => {
 
     const style = {
         backgroundImage: `url(${Background})`,
@@ -39,4 +39,4 @@ const Recuperarcontraseña = () => {
     )
 }
 
-export default Recuperarcontraseña
+export default RecuperarPassword

@@ -1,6 +1,8 @@
 import Login from "./views/Login";
 import Registro from "./views/Registro";
-import Recuperarcontraseña from "./views/Recuperarcontraseña";
+import RegistroFreelancer from "./views/RegistroFreelancer";
+import RecuperarPassword from "./views/RecuperarPassword";
+import RestablecerPassword from "./views/RestablecerPassword";
 import Buscar from "./views/Buscar";
 import Visitante from "./layouts/Visitante";
 
@@ -17,9 +19,19 @@ const routesVisitante = [
         layout: Visitante
     },
     {
+        path: '/registro-freelancer',
+        component: RegistroFreelancer,
+        layout: Visitante,
+    },
+    {
         path: '/recuperar',
-        component: Recuperarcontraseña,
+        component: RecuperarPassword,
         layout: Visitante
+    },
+    {
+        path: '/restablecer',
+        component: RestablecerPassword,
+        layout: Visitante,
     },
     {
         path: '/',

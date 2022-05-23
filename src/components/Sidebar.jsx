@@ -1,9 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
+import MenuBackground from "../assets/images/menu-lat.png";
 
 
 function Sidebar (props)  {
+
+    const style = {
+        backgroundImage: `url(${MenuBackground})`,
+        backgroundPosition: 'center center',
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        width: '100vw',
+        height: '100vh'
+    }
 
     const {Sider} = Layout;
     const rol = props.rol;
@@ -107,7 +118,7 @@ function Sidebar (props)  {
     }
 
         return (
-            <Sider className='sidebar'>
+            <Sider className='sidebar' style={style}>
                 <div className="top">
                     <Link to={rol}>
                         <span className='logo'>FreeLanzate</span>

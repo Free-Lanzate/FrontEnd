@@ -5,8 +5,8 @@ import internalRoutes from "./internalRoutes";
 import visitorRoutes from "./visitorRoutes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/sass/global.scss";
-import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "font-awesome/css/font-awesome.min.css";
 
 function App() {
   return (
