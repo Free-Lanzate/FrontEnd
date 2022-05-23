@@ -7,13 +7,14 @@ function freelanzer(props) {
 
   const {children} = props;
   const {Header, Content, Footer, Sider} = Layout;
+  const rol = props.rol;
 
   return (
     <div className='freelanzer'>
 
       <Layout>
       <Sider>
-      <Sidebar/>
+        <Sidebar rol={rol}/>
       </Sider>
         <Layout>
           <Header>Header...</Header>

@@ -1,7 +1,5 @@
 import Freelanzer from "./layouts/Freelanzer"
 import Usuario from "./layouts/Usuario"
-import Visitante from "./layouts/Visitante"
-//import Login from "./views/Login"
 
 const routesUsuario = [
     
@@ -19,14 +17,6 @@ const routesFreelanzer = [
     }
 ]
 
-const routesVisitante = [
-    
-    {
-        path: "/",
-        layout: Visitante,
-    }
-]
-
-const routes = [...routesFreelanzer, ...routesUsuario, ...routesVisitante]
+const routes = [...routesFreelanzer, ...routesUsuario]
 
 export default routes

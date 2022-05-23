@@ -6,13 +6,14 @@ function Usuario (props) {
 
   const {children} = props;
   const {Header, Content, Footer, Sider} = Layout;
+  const rol = props.rol;
 
   return (
     <div className='usuario'>
 
     <Layout>
       <Sider>
-      <Sidebar/>
+        <Sidebar rol={rol}/>
       </Sider>
         <Header>Header</Header>
         <Content>{children}</Content>
