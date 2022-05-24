@@ -3,18 +3,17 @@ import { Link } from 'react-router-dom'
 import { Layout, Menu, Button } from 'antd'
 import { logout } from "../api/auth"
 import MenuBackground from "../assets/images/menu-lat.png";
+import Logo from "../assets/images/Logo.png"
 
 
 function Sidebar (props)  {
 
     const style = {
         backgroundImage: `url(${MenuBackground})`,
-        backgroundPosition: 'center center',
-        backgroundSize: '100% 100%',
+        backgroundPosition: 'left bottom',
+        backgroundSize: '270px 100%',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed',
-        width: '100vw',
-        height: '100vh'
     }
 
     const logoutUser = () => {
@@ -126,15 +125,15 @@ function Sidebar (props)  {
 
     return (
         <Sider className='sidebar' style={style}>
-            <div className="top">
+            <div className="top mt-3">
                 <Link to={rol}>
-                    <span className='logo'>FreeLanzate</span>
+                    <img className="logo d-flex justify-content-center" src={Logo} alt="Free-Lánzate"/>
                 </Link>
             </div>
-            <div className="center">
+            <div className="center mt-5">
                 {buildMenu(rol)}
             </div>
-            <div className="bottom">
+            <div className="bottom mb-0">
                 {buildBottom(rol)}
             </div>
         </Sider>

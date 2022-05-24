@@ -10,17 +10,13 @@ function freelanzer(props) {
   const rol = props.rol;
 
   return (
-    <div className='freelanzer'>
+    <div>
 
-      <Layout>
+      <Layout className='d-flex flex-row'>
       <Sider>
         <Sidebar rol={rol}/>
       </Sider>
-        <Layout>
-          <Header>Header...</Header>
           <Content> {items} </Content>
-          <Footer>Footerccccc</Footer>
-        </Layout>
       </Layout> 
         
     </div>

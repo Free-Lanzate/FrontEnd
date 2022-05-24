@@ -22,15 +22,13 @@ function Usuario (props) {
   }
   if(user && !isLoading){
       return (
-          <div className='usuario'>
+          <div>
 
-            <Layout>
+            <Layout className='d-flex flex-row'>
               <Sider>
                 <Sidebar rol={rol}/>
               </Sider>
-              <Header>Header</Header>
               <Content>{children}</Content>
-              <Footer>Footer</Footer>
             </Layout>
           </div>
       );
