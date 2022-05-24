@@ -28,8 +28,10 @@ const Registro = () => {
         email: "",
         location: "",
         avatarUrl: "",
-        isisFreelancer: false
+        isFreelancer: false
       });
+
+      console.log(inputs)
 
       const [formValid, setFormValid] = useState({
         email: false,
@@ -38,10 +40,16 @@ const Registro = () => {
       });
 
       const changeForm = e => {
-          setInputs({
+         if(e.target.name === 'isFreelancer'){
+            setInputs({
+                ...inputs,
+                [e.target.name]: e.target.checked
+              });
+         }else {
+             setInputs({
             ...inputs,
             [e.target.name]: e.target.value
-          });
+          });}
       };
 
       const inputValidation = e => {
@@ -53,6 +61,9 @@ const Registro = () => {
         if (type === "password") {
           setFormValid({ ...formValid, [name]: minLengthValidation(e.target, 6) });
         }
+        if (type === "checkbox") {
+            setFormValid({ ...formValid, [name]: true });
+          }
       };
 
     const register = async e => {
@@ -72,20 +83,30 @@ const Registro = () => {
                 });
             } else {
                 const result = await registro(inputs);
+                console.log(result)
                 if (!result.ok) {
                     notification["error"]({
                     message: result.message
                     });
                 } else {
-                    notification["success"]({
-                    message: result.message
-                    });
-                    resetForm();
-                    window.location.href = "login";
+                    if(result.free){
+                        notification["success"]({
+                        message: result.message
+                        });
+                        resetForm();
+                        window.location.href = "registro-freelancer";
+                    }else{
+                        notification["success"]({
+                        message: result.message
+                        });
+                        resetForm();
+                        window.location.href = "login";
+                    }
                 }
             };
         }
     }
+
 
     const resetForm = () => {
         const inputs = document.getElementsByTagName("input");
@@ -100,9 +121,11 @@ const Registro = () => {
             firstName: "Juan",
             lastName: "Bustamante",
             password: "",
+            repeatPassword: "",
             email: "",
             location: "",
-            avatarUrl: ""
+            avatarUrl: "",
+            isFreelancer: false
         });
 
         setFormValid({
@@ -135,6 +158,7 @@ const Registro = () => {
                                         name="username"
                                         placeholder="name"
                                         onChange={inputValidation}
+                                        value = {inputs.username}
                                 />
                                 <label htmlFor="nombre">Nombre completo</label>
                             </div>
@@ -151,6 +175,7 @@ const Registro = () => {
                                         name="email"
                                         placeholder="username"
                                         onChange={inputValidation}
+                                        value = {inputs.email}
                                 />
                                 <label htmlFor="email">Correo electrónico</label>
                             </div>
@@ -169,6 +194,7 @@ const Registro = () => {
                                         name="password"
                                         placeholder="password"
                                         onChange={inputValidation}
+                                        value = {inputs.password}
                                 />
                                 <label htmlFor="password">Contraseña nueva</label>
                                 <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
@@ -185,7 +211,8 @@ const Registro = () => {
                                         id="repeatPassword"
                                         name="repeatPassword"
                                         placeholder="repeatPassword"
-                                        onChange={inputValidation}
+                                    
+                                        value = {inputs.repeatPassword}
                                 />
                                 <label htmlFor="repeatPassword">Confirma la contraseña</label>
                                 <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
@@ -198,9 +225,9 @@ const Registro = () => {
                         <input
                             type="checkbox"
                             className="me-3"
-                            id="free"
-                            name="free"
-                            placeholder="free"
+                            id="isFreelancer"
+                            name="isFreelancer"
+                            defaultChecked = {inputs.isFreelancer}
                         />
                         <label htmlFor="free"> Deseo registrarme como freelancer</label>
                     </div>

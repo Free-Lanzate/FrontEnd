@@ -1,3 +1,5 @@
+
+
 export function registro(data){
   const url = 'http://localhost:8000/register';
     const params = {
@@ -13,13 +15,16 @@ export function registro(data){
     })
     .then(result => {
       if (result.id) {
-        return { ok: true, message: "Usuario creado correctamente" };
+        if(result.isFreelancer){
+          localStorage.setItem("ID", result.id);
+          return { ok: true, free: true, message: "Freelancer creado correctamente" };
+        }else{
+          return { ok: true, message: "Usuario creado correctamente" };
+        }
       }
+      console.log('resultado:' + result)
       return { ok: false, message: result.message };
     })
-    .catch(err => {
-      return { ok: false, message: "Falla al registrar el usuario" };
-    });
 }
 
 export function iniciar_sesion(data) {
