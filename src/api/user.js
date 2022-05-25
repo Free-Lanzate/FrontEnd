@@ -45,3 +45,22 @@ export function iniciar_sesion(data) {
       return result;
     })
 }
+
+
+export function registroFreelancer(data){
+  const url = 'http://localhost:8000/register/freelancer';
+    const params = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+
+    return fetch(url, params).then(response =>{
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+}

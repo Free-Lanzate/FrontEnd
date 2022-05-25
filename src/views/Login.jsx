@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {iniciar_sesion} from "../api/user"
 import {TOKEN} from "../utils/tokens"
 import {notification} from "antd"
-import{getAccessToken} from "../api/auth"
+
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
 import {showHide} from "../utils/passwordVisibility"
+import jwtDecode from 'jwt-decode'
 
 function Login (){
 
@@ -41,7 +42,7 @@ function Login (){
         message: result
       });
     }
-    else if(result ==='La contraseña es incorrecta.'){
+    else if(result ==='La contraseña es incorrecta'){
       notification["error"]({
         message: result
       });
@@ -52,17 +53,17 @@ function Login (){
       });
     }
     else{
-      const token = result
-      localStorage.setItem(TOKEN, token);
+      const free = jwtDecode(result)
+      localStorage.setItem(TOKEN, result);
       notification["success"]({
         message: "Login correcto."
         });
-        window.location.href = "usuario";
+        if(free.sub.isFreelancer){
+          window.location.href = "freelanzer";
+        }else{
+          window.location.href = "usuario";
+        }
     }
-  }
-
-  if(getAccessToken()){
-    return <Navigate to = '/usuario'/>
   }
 
 

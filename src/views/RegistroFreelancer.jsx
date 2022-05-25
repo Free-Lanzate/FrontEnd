@@ -1,9 +1,8 @@
 import React,{useState} from 'react';
 import { notification } from "antd";
-import { emailValidation, minLengthValidation} from "../utils/formValidation";
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
-import {showHide} from "../utils/passwordVisibility"
+import {registroFreelancer} from "../api/user";
 
 
 
@@ -19,8 +18,64 @@ const RegistroFreelancer = () => {
         height: '100vh'
     }
 
+    const [inputs, setInputs] = useState({
+        UserId: localStorage.getItem('ID'),
+        oneliner : 'req.body.oneliner',
+        websiteUrl : 'req.body.websiteUrl',
+        freelancerDescription: 'req.body.freelancerRating',
+        country: '',
+        city: '',
+        postalCode: '',
+        address: '',
+        freelancerRating: 1,
+      });
+
+      const changeForm = e => {
+        setInputs({
+        ...inputs,
+        [e.target.name]: e.target.value
+         });
+     };
+
+     const registrar = async e => {
+        e.preventDefault();
+        
+        const result = await registroFreelancer(inputs);
+        console.log(result)
+        if (result.id) {
+            notification["success"]({
+                message: "Registro correcto"
+            });
+            resetForm();
+            localStorage.removeItem('ID')
+            window.location.href = "login";
+        } else {
+            notification["error"]({
+            message: "Error en el registro"
+            });        
+        }
+    };
+
+    const resetForm = () => {
+
+        setInputs({
+            UserId: localStorage.getItem('ID'),
+            oneliner : 'req.body.oneliner',
+            websiteUrl : 'req.body.websiteUrl',
+            freelancerDescription: 'req.body.freelancerRating',
+            country: '',
+            city: '',
+            postalCode: '',
+            address: '',
+            freelancerRating: 1,
+        });
+      };
+
+
+
+
   return (
-    <div className="reg text-center d-flex" style={style}>
+    <div className="reg text-center d-flex" style={style} onSubmit={registrar} onChange={changeForm} >
         <div className="form-signin rounded max-w-reg my-auto">
             <form>
                 <img className="mb-4 d-flex justify-content-start" src={Logo} alt="Free-Lánzate"/>
@@ -37,9 +92,10 @@ const RegistroFreelancer = () => {
                                         <input
                                             type="text"
                                             className="form-control mb-3"
-                                            id="pais"
-                                            name="pais"
+                                            id="country"
+                                            name="country"
                                             placeholder="pais"
+                                            defaultValue={inputs.country}
                                         />
                                         <label htmlFor="pais">País</label>
                                     </div>
@@ -47,9 +103,10 @@ const RegistroFreelancer = () => {
                                         <input
                                             type="text"
                                             className="form-control mb-3"
-                                            id="ciudad"
-                                            name="ciudad"
+                                            id="city"
+                                            name="city"
                                             placeholder="ciudad"
+                                            defaultValue={inputs.city}
                                         />
                                         <label htmlFor="ciudad">Ciudad</label>
                                     </div>
@@ -57,9 +114,10 @@ const RegistroFreelancer = () => {
                                         <input
                                             type="number"
                                             className="form-control mb-3"
-                                            id="postal"
-                                            name="postal"
+                                            id="postalCode"
+                                            name="postalCode"
                                             placeholder="postal"
+                                            defaultValue={inputs.postalCode}
                                         />
                                         <label htmlFor="postal">Código Postal</label>
                                     </div>
@@ -71,9 +129,10 @@ const RegistroFreelancer = () => {
                                         <input
                                             type="text"
                                             className="form-control mb-3"
-                                            id="dir"
-                                            name="dir"
+                                            id="address"
+                                            name="address"
                                             placeholder="dir"
+                                            defaultValue={inputs.address}
                                         />
                                         <label htmlFor="dir">Dirección</label>
                                     </div>

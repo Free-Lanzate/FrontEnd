@@ -1,6 +1,8 @@
 import React from 'react'
 import {Layout} from "antd"
 import Sidebar from "../components/Sidebar"
+import {Navigate} from "react-router-dom"
+import{getAccessToken} from "../api/auth"
 
 function Visitante (props) {
 
@@ -8,6 +10,10 @@ function Visitante (props) {
   const {Content, Sider} = Layout;
   const side = props.side;
   const rol = "/";
+
+  if(getAccessToken()){
+    return <Navigate to = '/usuario'/>
+  }
 
     if (side){
       return (

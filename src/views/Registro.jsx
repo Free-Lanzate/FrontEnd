@@ -31,8 +31,6 @@ const Registro = () => {
         isFreelancer: false
       });
 
-      console.log(inputs)
-
       const [formValid, setFormValid] = useState({
         email: false,
         password: false,
@@ -211,7 +209,7 @@ const Registro = () => {
                                         id="repeatPassword"
                                         name="repeatPassword"
                                         placeholder="repeatPassword"
-                                    
+                                        onChange={inputValidation}
                                         value = {inputs.repeatPassword}
                                 />
                                 <label htmlFor="repeatPassword">Confirma la contraseña</label>

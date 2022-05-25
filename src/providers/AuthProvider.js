@@ -9,7 +9,8 @@ export default function AuthProvider(props) {
     const { children } = props;
     let [user, setUser] = useState({
         user: 'null',
-        isLoading: true
+        isLoading: true,
+        isfreelancer: false
     });
 
     useEffect(() => {
@@ -28,13 +29,16 @@ function checkUserLogin(setUser) {
             logout();
             setUser({
               user: null,
-              isLoading: false
+              isLoading: false,
+              isfreelancer: false
             });
         } else {
             const user = jwtDecode(accessToken).sub.username
+            const free = jwtDecode(accessToken).sub.isFreelancer
             setUser({
                 isLoading: false,
-                user: user
+                user: user,
+                isFreelancer: free
           });
         }
     }

@@ -15,7 +15,6 @@ export function getAccessToken() {
 
 export function logout() {
   localStorage.removeItem(TOKEN);
-  localStorage.removeItem(TOKEN);
 }
 
 function willExpireToken(token) {

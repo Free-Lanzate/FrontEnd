@@ -9,7 +9,7 @@ function Usuario (props) {
   const {children} = props;
   const {Header, Content, Footer, Sider} = Layout;
   const rol = props.rol;
-  const{user, isLoading} = useAuth();
+  const{user, isLoading, isFreelancer} = useAuth();
   console.log("usuario: "+ user)
 
   if(!user && !isLoading){
@@ -18,12 +18,10 @@ function Usuario (props) {
       <Navigate to = "/login" />
       </>
     )
-
   }
-  if(user && !isLoading){
+  if(user && !isLoading && !isFreelancer){
       return (
           <div className='usuario'>
-
             <Layout>
               <Sider>
                 <Sidebar rol={rol}/>
@@ -34,6 +32,13 @@ function Usuario (props) {
             </Layout>
           </div>
       );
+    }
+  if(user && isFreelancer){
+      return(
+        <>
+        <Navigate to = "/freelanzer" />
+        </>
+      )
     }
 
     return null;
