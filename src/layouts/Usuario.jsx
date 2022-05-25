@@ -2,7 +2,7 @@ import React from 'react'
 import {Layout} from "antd"
 import Sidebar from "../components/Sidebar"
 import useAuth from '../hooks/useAuth'
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 function Usuario (props) {
 
@@ -21,15 +21,14 @@ function Usuario (props) {
   }
   if(user && !isLoading && !isFreelancer){
       return (
-          <div className='usuario'>
-            <Layout>
-              <Sider>
-                <Sidebar rol={rol}/>
-              </Sider>
-              <Header>Header</Header>
-              <Content>{children}</Content>
-              <Footer>Footer</Footer>
-            </Layout>
+          <div>
+
+              <Layout className='d-flex flex-row'>
+                  <Sider>
+                      <Sidebar rol={rol}/>
+                  </Sider>
+                  <Content>{children}</Content>
+              </Layout>
           </div>
       );
     }

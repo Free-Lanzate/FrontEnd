@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar"
 import useAuth from '../hooks/useAuth'
 import { Navigate } from "react-router-dom";
 
+
 function Freelanzer(props) {
 
   const {children} = props;
@@ -28,20 +29,18 @@ function Freelanzer(props) {
     )
     }
     if(user && !isLoading && isFreelancer){
-      return (
-        <div className='freelanzer'>
-          <Layout>
-            <Sider>
-              <Sidebar rol={rol}/>
-            </Sider>
-            <Layout>
-              <Header>Header...</Header>
-              <Content> {children} </Content>
-              <Footer>Footerccccc</Footer>
-            </Layout>
-          </Layout> 
-        </div>
-      );
+        return (
+            <div>
+
+                <Layout className='d-flex flex-row'>
+                    <Sider>
+                        <Sidebar rol={rol}/>
+                    </Sider>
+                    <Content> {children} </Content>
+                </Layout>
+
+            </div>
+        )
     }
 
   return null;

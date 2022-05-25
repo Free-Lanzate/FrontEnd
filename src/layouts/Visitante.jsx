@@ -17,8 +17,8 @@ function Visitante (props) {
 
     if (side){
       return (
-        <div className='usuario'>
-          <Layout>
+        <div>
+          <Layout className='d-flex flex-row'>
             <Sider>
               <Sidebar rol={rol}/>
             </Sider>
@@ -28,7 +28,7 @@ function Visitante (props) {
       )
     }else{
       return (
-        <div className='visitante'>
+        <div>
           <Layout>
             <Content> {children} </Content>
           </Layout>

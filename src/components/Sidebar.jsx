@@ -3,18 +3,17 @@ import { Link } from 'react-router-dom'
 import { Layout, Menu, Button } from 'antd'
 import { logout } from "../api/auth"
 import MenuBackground from "../assets/images/menu-lat.png";
+import Logo from "../assets/images/Logo.png"
 
 
 function Sidebar (props)  {
 
     const style = {
         backgroundImage: `url(${MenuBackground})`,
-        backgroundPosition: 'center center',
-        backgroundSize: '100% 100%',
+        backgroundPosition: 'left bottom',
+        backgroundSize: '270px 100%',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed',
-        width: '100vw',
-        height: '100vh'
     }
 
     const logoutUser = () => {
@@ -35,6 +34,7 @@ function Sidebar (props)  {
             <Menu.Item key="6">
                 <Link to="../anuncio">
                 <span>
+                    <i className="bi bi-megaphone-fill me-3"> </i>
                     Anunciarme
                 </span>
                 </Link>
@@ -46,20 +46,21 @@ function Sidebar (props)  {
         if (rol==="/") return(
             <Menu theme='dark' mode='inline' defaultSelectedKeys={[defaultKeys]}>
                 <Menu.Item key="1">
-                    <Link to="../buscar">
+                    <Link to="/">
                         <span>
+                            <i className="bi bi-search me-3"> </i>
                             Buscar
                         </span>
                     </Link>
                 </Menu.Item>
-                <div>
-                    <p>
+                <div className="text-center">
+                    <span>
                         ¿Deseas dar a conocer tu negocio, contactar con otros emprendedores,
                         adquirir sus productos o servicios, reseñarlos, consultar tu historial
                         de compras y, además, recibir recomendaciones?
 
                         ¡Únete ahora!
-                    </p>
+                    </span>
                 </div>
             </Menu>
         )
@@ -68,6 +69,7 @@ function Sidebar (props)  {
                 <Menu.Item key="1">
                     <Link to="../buscar">
                         <span>
+                            <i className="bi bi-search me-3"> </i>
                             Buscar
                         </span>
                     </Link>
@@ -75,6 +77,7 @@ function Sidebar (props)  {
                 <Menu.Item key="2">
                     <Link to="../perfil">
                         <span>
+                            <i className="bi bi-person-fill me-3"> </i>
                             Mi perfil
                         </span>
                     </Link>
@@ -82,6 +85,7 @@ function Sidebar (props)  {
                 <Menu.Item key="3">
                     <Link to="../ordenes">
                         <span>
+                            <i className="bi bi-card-list me-3"> </i>
                             Mis órdenes
                         </span>
                     </Link>
@@ -89,6 +93,7 @@ function Sidebar (props)  {
                 <Menu.Item key="4">
                     <Link to="../recomendaciones">
                         <span>
+                            <i className="bi bi-bookmark-heart-fill me-3"> </i>
                             Recomendados
                         </span>
                     </Link>
@@ -96,6 +101,7 @@ function Sidebar (props)  {
                 <Menu.Item key="5">
                     <Link to="../carrito">
                         <span>
+                            <i className="bi bi-cart-dash-fill me-3"> </i>
                             Mi carrito
                         </span>
                     </Link>
@@ -106,19 +112,33 @@ function Sidebar (props)  {
 
     function buildBottom(rol) {
         if (rol==="/") return(
-            <ul>
+            <ul className="visitante">
                 <li>
-                    Iniciar Sesión
+                    <Link to="/login">
+                        <span>
+                            <i className="bi bi-door-open-fill me-3 mb-0"> </i>
+                            Iniciar Sesión
+                        </span>
+                    </Link>
                 </li>
+                <hr/>
                 <li>
-                    Registrarse
+                    <Link to="/registro">
+                        <span>
+                            Registrarse
+                            <i className="bi bi-person-plus-fill ms-5"> </i>
+                        </span>
+                    </Link>
                 </li>
             </ul>
         )
         else return(
-            <ul>
+            <ul className={rol.substring(1)}>
                 <li>
-                    <Button type="link" onClick={logoutUser}>Salir </Button>
+                    <span onClick={logoutUser}>
+                        <i className="bi bi-arrow-left-square-fill me-3"> </i>
+                        Salir
+                    </span>
                 </li>
             </ul>
         )
@@ -126,15 +146,15 @@ function Sidebar (props)  {
 
     return (
         <Sider className='sidebar' style={style}>
-            <div className="top">
+            <div className="top mt-3">
                 <Link to={rol}>
-                    <span className='logo'>FreeLanzate</span>
+                    <img className="logo d-flex justify-content-center" src={Logo} alt="Free-Lánzate"/>
                 </Link>
             </div>
-            <div className="center">
+            <div className="center mt-5">
                 {buildMenu(rol)}
             </div>
-            <div className="bottom">
+            <div className="bottom mt-5">
                 {buildBottom(rol)}
             </div>
         </Sider>
