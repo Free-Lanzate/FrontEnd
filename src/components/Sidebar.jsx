@@ -154,7 +154,7 @@ function Sidebar (props)  {
             <div className="center mt-5">
                 {buildMenu(rol)}
             </div>
-            <div className="bottom mt-5">
+            <div className="bottom mt-auto">
                 {buildBottom(rol)}
             </div>
         </Sider>

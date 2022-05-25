@@ -27,7 +27,7 @@
     text-decoration: none;
     font-weight: bold;
 
-    :hover, :focus, :active {
+    &:hover, &:focus, &:active {
       color: #ffc107;
     }
   }
@@ -42,12 +42,12 @@
     background-color: #ffc107;
     border-width: 0;
     /*font-family: "29LT Bukra Semibold";*/
-    :hover {
+    &:hover {
       background-color: #ffc107;
       color: #202f56;
       border-width: 0;
     }
-    :focus, :active, .active, :focus:active {
+    &:focus, &:active, &.active, &:focus:active {
       background-color: #202f56;
       color: #ffc107;
       border-width: 0;
@@ -114,11 +114,11 @@
     border-bottom-color: #202f56;
     background-color: #f1f1f1;
 
-    :focus {
+    &:focus {
       box-shadow: none;
     }
 
-    :-webkit-autofill, :-webkit-autofill:hover, :-webkit-autofill:focus, :-webkit-autofill:active {
+    &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active {
       -webkit-box-shadow: 0 0 0px 1000px #cacaca inset;
       transition: background-color 5000s ease-in-out 0s;
     }
@@ -143,7 +143,7 @@
     color: #202f56;
     opacity: 75%;
 
-    :hover {
+    &:hover {
       cursor: pointer;
     }
   }
@@ -198,9 +198,16 @@
   flex: 0 0 270px !important;
 }
 
+.ant-layout-sider-children{
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh;
+}
+
 .ant-layout-content{
   width:100%;
   background-color: #f1f1f1;
+  height: 100vh;
 }
 
 .sidebar {
@@ -208,6 +215,7 @@
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 100vh;
   width: 500px;
+  position: fixed;
   background-color: white;
   color: white;
 
@@ -261,14 +269,11 @@
     padding-left: 40px;
     padding-right: 15px;
 
-    .usuario{
-      margin-top: 20vh;
-    }
-    .freelanzer{
-      margin-top: 11vh;
+    .usuario, .freelanzer{
+      margin-bottom: 4rem;
     }
     .visitante{
-      margin-top: 17vh;
+      margin-bottom: 2rem;
 
       hr{
         color:#202f56;
