@@ -2,7 +2,7 @@ import React from 'react'
 import {Layout} from "antd"
 import Sidebar from "../components/Sidebar"
 import useAuth from '../hooks/useAuth'
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 function Usuario (props) {
 

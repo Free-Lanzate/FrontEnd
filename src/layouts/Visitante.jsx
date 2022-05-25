@@ -1,6 +1,8 @@
 import React from 'react'
 import {Layout} from "antd"
 import Sidebar from "../components/Sidebar"
+import {getAccessToken} from "../api/auth";
+import {Navigate} from "react-router-dom";
 
 function Visitante (props) {
 
@@ -9,7 +11,12 @@ function Visitante (props) {
   const side = props.side;
   const rol = "/";
 
-    if (side){
+
+  if(getAccessToken()){
+    return <Navigate to = '/usuario'/>
+  }
+
+  else if (side){
       return (
         <div>
           <Layout className='d-flex flex-row'>

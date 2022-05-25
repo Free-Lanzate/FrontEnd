@@ -4,6 +4,7 @@ import {iniciar_sesion} from "../api/user"
 import {TOKEN} from "../utils/tokens"
 import {notification} from "antd"
 import{getAccessToken} from "../api/auth"
+import jwtDecode from "jwt-decode";
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
 import {showHide} from "../utils/passwordVisibility"
@@ -57,15 +58,13 @@ function Login (){
       notification["success"]({
         message: "Login correcto."
         });
+      if (!jwtDecode(token).sub.isFreelancer)
         window.location.href = "usuario";
+      else{
+        window.location.href = "freelanzer";
+      }
     }
   }
-
-  if(getAccessToken()){
-    return <Navigate to = '/usuario'/>
-  }
-
-
   return (
     <div className="login text-center d-flex" style={style}>
       <div className="form-signin rounded max-w-log my-auto" onChange={changeForm} onSubmit={login}>
