@@ -1,5 +1,4 @@
 .login, .reg, .forgot, .contenedorPerfil {
-
   .container {
     width: 100%;
     padding: 15px;
@@ -27,10 +26,10 @@
     font-size: medium;
     text-decoration: none;
     font-weight: bold;
-  }
 
-  .badge:hover, .badge:focus, .badge:active {
-    color: #ffc107;
+    :hover, :focus, :active {
+      color: #ffc107;
+    }
   }
 
   .welcome {
@@ -43,20 +42,18 @@
     background-color: #ffc107;
     border-width: 0;
     /*font-family: "29LT Bukra Semibold";*/
-  }
-
-  .btn:hover {
-    background-color: #ffc107;
-    color: #202f56;
-    border-width: 0;
-  }
-
-  .btn:focus, .btn:active, .btn.active, .btn:focus:active {
-    background-color: #202f56;
-    color: #ffc107;
-    border-width: 0;
-    outline: none;
-    box-shadow: none;
+    :hover {
+      background-color: #ffc107;
+      color: #202f56;
+      border-width: 0;
+    }
+    :focus, :active, .active, :focus:active {
+      background-color: #202f56;
+      color: #ffc107;
+      border-width: 0;
+      outline: none;
+      box-shadow: none;
+    }
   }
 
   /*
@@ -116,15 +113,15 @@
     border-right: none;
     border-bottom-color: #202f56;
     background-color: #f1f1f1;
-  }
 
-  input:focus {
-    box-shadow: none;
-  }
+    :focus {
+      box-shadow: none;
+    }
 
-  input:-webkit-autofill, .form-signin input:-webkit-autofill:hover, .form-signin input:-webkit-autofill:focus, .form-signin input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0px 1000px #cacaca inset;
-    transition: background-color 5000s ease-in-out 0s;
+    :-webkit-autofill, :-webkit-autofill:hover, :-webkit-autofill:focus, :-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0px 1000px #cacaca inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
   }
 
   .bd-placeholder-img {
@@ -135,7 +132,7 @@
     user-select: none;
   }
 
-  .bi, .fab, .fa-whatsapp, .fa-facebook-f, .fa-instagram, .fa-linkedin-in {
+  .bi, .fa {
     font-size: x-large;
   }
 
@@ -145,10 +142,10 @@
     top: 10px;
     color: #202f56;
     opacity: 75%;
-  }
 
-  .form-icon:hover {
-    cursor: pointer;
+    :hover {
+      cursor: pointer;
+    }
   }
 
   .button-icon {

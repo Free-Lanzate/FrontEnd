@@ -7,7 +7,7 @@ import {Navigate} from "react-router-dom";
 
 function Freelanzer(props) {
 
-  const {items} = props;
+  const {children} = props;
   const {Header, Content, Footer, Sider} = Layout;
   const rol = props.rol;
   const{user, isLoading} = useAuth();
@@ -28,7 +28,7 @@ function Freelanzer(props) {
                     <Sider>
                         <Sidebar rol={rol}/>
                     </Sider>
-                    <Content> {items} </Content>
+                    <Content> {children} </Content>
                 </Layout>
 
             </div>

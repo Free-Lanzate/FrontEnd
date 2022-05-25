@@ -11,7 +11,6 @@ function Visitante (props) {
   const side = props.side;
   const rol = "/";
 
-
   if(getAccessToken()){
     return <Navigate to = '/usuario'/>
   }
