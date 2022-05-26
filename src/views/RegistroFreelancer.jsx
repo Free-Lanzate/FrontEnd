@@ -20,14 +20,19 @@ const RegistroFreelancer = () => {
 
     const [inputs, setInputs] = useState({
         UserId: localStorage.getItem('ID'),
-        oneliner : 'req.body.oneliner',
-        websiteUrl : 'req.body.websiteUrl',
-        freelancerDescription: 'req.body.freelancerRating',
+        oneliner : '',
+        websiteUrl : '',
+        facebookUrl : '',
+        instagramUrl : '',
+        twitterUrl : '',
+        linkedinUrl : '',
+        freelancerDescription: '',
         country: '',
         city: '',
         postalCode: '',
         address: '',
-        freelancerRating: 1,
+        freelancerRating: 0,
+        phoneNumber: ''
       });
 
       const changeForm = e => {
@@ -60,14 +65,19 @@ const RegistroFreelancer = () => {
 
         setInputs({
             UserId: localStorage.getItem('ID'),
-            oneliner : 'req.body.oneliner',
-            websiteUrl : 'req.body.websiteUrl',
-            freelancerDescription: 'req.body.freelancerRating',
+            oneliner : '',
+            websiteUrl : '',
+            facebookUrl : '',
+            instagramUrl : '',
+            twitterUrl : '',
+            linkedinUrl : '',
+            freelancerDescription: '',
             country: '',
             city: '',
             postalCode: '',
             address: '',
-            freelancerRating: 1,
+            freelancerRating: 0,
+            phoneNumber: ''
         });
       };
 
@@ -76,7 +86,7 @@ const RegistroFreelancer = () => {
 
   return (
     <div className="reg text-center d-flex" style={style} onSubmit={registrar} onChange={changeForm} >
-        <div className="form-signin rounded max-w-reg my-auto">
+        <div className="form-signin rounded max-w-regfree my-auto">
             <form>
                 <img className="mb-4 d-flex justify-content-start" src={Logo} alt="Free-Lánzate"/>
                     <h5 className="welcome mb-3 fw-bold">¡Hola, freelancer!</h5>
@@ -110,7 +120,7 @@ const RegistroFreelancer = () => {
                                         />
                                         <label htmlFor="ciudad">Ciudad</label>
                                     </div>
-                                    <div className="form-floating mx-4 mt-2">
+                                    <div className="form-floating flex-grow-1 mx-4 mt-2">
                                         <input
                                             type="number"
                                             className="form-control mb-3"
@@ -144,52 +154,140 @@ const RegistroFreelancer = () => {
                         <div className="col">
                             <p className="h5 mb-3 fw-bold text-gb">Datos de contacto</p>
                             <div className="row">
-                                <p className="text-start ms-4">Número de celular:</p>
-                                <div className="input-group mx-4 mt-1">
-                                    <div>
+                                <div className="col">
+                                    <p className="text-start ms-4">Celular:</p>
+                                    <div className="input-group mx-4 mt-1">
+                                        <div>
                                         <span className="input-group-text bg-b text-white mb-3"><i
                                             className="fa fa-whatsapp"> </i></span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            className="form-control mb-3 mx-3 w-50"
+                                            id="phoneNumber"
+                                            name="phoneNumber"
+                                            placeholder=""
+                                            defaultValue={inputs.phoneNumber}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <p className="text-start ms-4">Página web:</p>
+                                    <div className="input-group mx-4 mt-1">
+                                        <div>
+                                        <span className="input-group-text bg-b text-white mb-3"><i
+                                            className="fa fa-external-link"> </i></span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            className="form-control mb-3 mx-3 w-50"
+                                            id="websiteUrl"
+                                            name="websiteUrl"
+                                            placeholder=""
+                                            defaultValue={inputs.websiteUrl}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <p className="text-start ms-4">Facebook:</p>
+                                    <div className="input-group mx-4 mt-1">
+                                        <div>
+                                        <span className="input-group-text bg-b text-white mb-3"><i
+                                            className="fa fa-facebook"> </i></span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            className="form-control mb-3 mx-3 w-50"
+                                            id="facebookUrl"
+                                            name="facebookUrl"
+                                            placeholder=""
+                                            defaultValue={inputs.facebookUrl}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="row">
+
+                                <div className="col">
+                                    <p className="text-start ms-4">Instagram:</p>
+                                    <div className="input-group mx-4 mt-1">
+                                        <div>
+                                        <span className="input-group-text bg-b text-white mb-3"><i
+                                            className="fa fa-instagram"> </i></span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            className="form-control mb-3 mx-3 w-50"
+                                            id="instagramUrl"
+                                            name="instagramUrl"
+                                            placeholder=""
+                                            defaultValue={inputs.instagramUrl}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <p className="text-start ms-4">Twitter:</p>
+                                    <div className="input-group mx-4 mt-1">
+                                        <div>
+                                        <span className="input-group-text bg-b text-white mb-3"><i
+                                            className="fa fa-twitter"> </i></span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            className="form-control mb-3 mx-3 w-50"
+                                            id="twitterUrl"
+                                            name="twitterUrl"
+                                            placeholder=""
+                                            defaultValue={inputs.twitterUrl}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <p className="text-start ms-4">Linkedin:</p>
+                                    <div className="input-group mx-4 mt-1">
+                                        <div>
+                                        <span className="input-group-text bg-b text-white mb-3"><i
+                                            className="fa fa-linkedin"> </i></span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            className="form-control mb-3 mx-3 w-50"
+                                            id="linkedinUrl"
+                                            name="linkedinUrl"
+                                            placeholder=""
+                                            defaultValue={inputs.linkedinUrl}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div className="col-4">
+                            <p className="h5 mb-3 fw-bold text-gb">Descripción</p>
+                            <div className="col">
+                                <div className="input-group me-4 mt-1">
+                                    <div>
+                                        <span> Oneliner: </span>
                                     </div>
                                     <input
                                         type="text"
                                         className="form-control mb-3 mx-3"
-                                        id="prefijo"
-                                        name="prefijo"
-                                        placeholder="+57"
-                                    />
-                                    <input
-                                        type="text"
-                                        className="form-control mb-3 w-50"
-                                        id="cel"
-                                        name="cel"
+                                        id="oneliner"
+                                        name="oneliner"
                                         placeholder=""
+                                        defaultValue={inputs.oneliner}
                                     />
                                 </div>
-                            </div>
-                            <div className="row my-3">
-                                <div className="col text-center d-flex">
-                                    <p className="text-start ms-4 my-auto">Redes sociales:</p>
-                                    <span className="input-group-text bg-b text-white mx-4"><i
-                                        className="fa fa-facebook-f"> </i> </span>
-                                    <span className="input-group-text bg-b text-white mx-4"><i
-                                        className="fa fa-instagram"> </i></span>
-                                    <span className="input-group-text bg-b text-white mx-4"><i
-                                        className="fa fa-linkedin"> </i></span>
-                                    <i className="bi bi-three-dots ms-4"> </i>
+                                <div className="mx-4 mt-1">
+                                    <textarea
+                                        className="form-control mb-1 mx-3 w-100"
+                                        id="freelancerDescription"
+                                        name="freelancerDescription"
+                                        placeholder="Ingresa aquí los detalles"
+                                        defaultValue={inputs.freelancerDescription}
+                                    />
                                 </div>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <p className="h5 mb-3 fw-bold text-gb">Foto de perfil</p>
-                            <div className="col d-flex">
-                                <svg className="ms-5" height="100" width="100">
-                                    <circle cx="50" cy="50" r="40" fill="grey"/>
-                                </svg>
-                                <button
-                                    className="w-50 btn btn-lg btn-primary fw-bold mx-3 mt-4 mb-3 d-flex align-items-center bg-b">
-                                    Cargar archivo
-                                    <i className="bi bi-folder-fill button-icon2"> </i>
-                                </button>
                             </div>
                             <button className="w-75 btn btn-lg btn-primary fw-bold mx-auto mt-4 mb-3"
                                     type="submit">Finalizar Inscripción

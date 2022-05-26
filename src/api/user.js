@@ -1,6 +1,7 @@
 
 
 export function registro(data){
+  data.username = data.email.substring(0,data.email.indexOf('@'))
   const url = 'http://localhost:8000/register';
     const params = {
         method: "POST",

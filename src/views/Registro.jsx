@@ -22,8 +22,8 @@ const Registro = () => {
 
     const [inputs, setInputs] = useState({
         username: "",
-        firstName: "Juan",
-        lastName: "Bustamante",
+        firstName: "",
+        lastName: "",
         password: "",
         email: "",
         location: "",
@@ -101,7 +101,7 @@ const Registro = () => {
                         window.location.href = "login";
                     }
                 }
-            };
+            }
         }
     }
 
@@ -116,8 +116,8 @@ const Registro = () => {
 
         setInputs({
             username: "",
-            firstName: "Juan",
-            lastName: "Bustamante",
+            firstName: "",
+            lastName: "",
             password: "",
             repeatPassword: "",
             email: "",
@@ -152,16 +152,33 @@ const Registro = () => {
                                 <input
                                         type="text"
                                         className="form-control mb-3"
-                                        id="username"
-                                        name="username"
-                                        placeholder="name"
+                                        id="firstName"
+                                        name="firstName"
+                                        placeholder="firstName"
                                         onChange={inputValidation}
-                                        value = {inputs.username}
+                                        value = {inputs.firstName}
                                 />
-                                <label htmlFor="nombre">Nombre completo</label>
+                                <label htmlFor="firstName">Nombres</label>
                             </div>
                         </div>
-                        <div className="input-group w-75 mx-auto">
+                        <div className="input-group w-75 mx-auto mt-2">
+                            <div>
+                                <span className="input-group-text bg-gb text-white"><i className="bi bi-person-badge-fill my-1"> </i></span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                    type="text"
+                                    className="form-control mb-3"
+                                    id="lastName"
+                                    name="lastName"
+                                    placeholder="lastName"
+                                    onChange={inputValidation}
+                                    value = {inputs.lastName}
+                                />
+                                <label htmlFor="lastName">Apellidos</label>
+                            </div>
+                        </div>
+                        <div className="input-group w-75 mx-auto mt-2">
                             <div>
                                 <span className="input-group-text bg-gb text-white"><i className="bi bi-envelope-fill my-1"> </i></span>
                             </div>
@@ -198,7 +215,7 @@ const Registro = () => {
                                 <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
                             </div>
                         </div>
-                        <div className="input-group w-75 mx-auto">
+                        <div className="input-group w-75 mx-auto mt-2">
                             <div>
                                 <span className="input-group-text bg-gb text-white"><i className="bi bi-shield-fill-check my-1"> </i></span>
                             </div>
@@ -216,19 +233,19 @@ const Registro = () => {
                                 <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
                             </div>
                         </div>
+                        <div className="w-75 mx-auto mt-4 h5 fw-bold free">
+                            <input
+                                type="checkbox"
+                                className="me-3"
+                                id="isFreelancer"
+                                name="isFreelancer"
+                                defaultChecked = {inputs.isFreelancer}
+                            />
+                            <label htmlFor="free"> Deseo registrarme como freelancer</label>
+                        </div>
                     </div>
                 </div>
                 <div className="row g-2 my-3">
-                    <div className="w-75 mx-auto my-2 h5 fw-bold free">
-                        <input
-                            type="checkbox"
-                            className="me-3"
-                            id="isFreelancer"
-                            name="isFreelancer"
-                            defaultChecked = {inputs.isFreelancer}
-                        />
-                        <label htmlFor="free"> Deseo registrarme como freelancer</label>
-                    </div>
                     <p>¿Ya estás registrado?<a href="/login" className="badge">Inicia sesión</a></p>
                     <button className="w-75 btn btn-lg btn-primary fw-bold mx-auto" type="submit">Continuar</button>
                 </div>
