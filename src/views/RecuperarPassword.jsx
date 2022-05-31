@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
+import {recoverPassword} from "../api/recover";
+import {notification} from "antd";
 
 const RecuperarPassword = () => {
 
@@ -14,10 +16,39 @@ const RecuperarPassword = () => {
         height: '100vh'
     }
 
+    const [inputs, setInputs] = useState({
+        email: "",
+    });
+
+    const changeForm = e => {
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const enviarCorreo = async e => {
+        e.preventDefault();
+        const result = await recoverPassword(inputs);
+        if (result === "El email para la recuperación ha sido enviado") {
+            notification["success"]({
+                message: "El email para la recuperación ha sido enviado"
+            });
+            resetForm();
+            window.location.href = "/login";
+        }
+    }
+
+    const resetForm = () => {
+        setInputs({
+            email: "",
+        });
+    };
+
     return (
       <div className="forgot text-center d-flex" style={style}>
         <div className="form-signin rounded max-w-forgp my-auto">
-            <form>
+            <form onSubmit={enviarCorreo} onChange={changeForm}>
                 <img className="w-25 mb-4 d-flex justify-content-start" src={Logo} alt="Free-Lánzate"/>
                 <h5 className="welcome mb-3 fw-bold">¿Olvidaste tu contraseña?</h5>
                 <div className="form-floating w-75 mx-auto mt-5">
