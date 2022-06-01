@@ -29,7 +29,7 @@ const routesVisitante = [
         layout: Visitante
     },
     {
-        path: '/restablecer',
+        path: '/restablecer/:id/:token',
         component: RestablecerPassword,
         layout: Visitante,
     },

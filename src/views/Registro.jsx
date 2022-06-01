@@ -25,6 +25,7 @@ const Registro = () => {
         firstName: "",
         lastName: "",
         password: "",
+        repeatPassword: "",
         email: "",
         location: "",
         avatarUrl: "",
@@ -212,7 +213,7 @@ const Registro = () => {
                                         value = {inputs.password}
                                 />
                                 <label htmlFor="password">Contraseña nueva</label>
-                                <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
+                                <i className="bi bi-eye-slash-fill form-icon r-16" onClick={((e) => showHide(e.target))}> </i>
                             </div>
                         </div>
                         <div className="input-group w-75 mx-auto mt-2">
@@ -230,7 +231,7 @@ const Registro = () => {
                                         value = {inputs.repeatPassword}
                                 />
                                 <label htmlFor="repeatPassword">Confirma la contraseña</label>
-                                <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
+                                <i className="bi bi-eye-slash-fill form-icon r-16" onClick={((e) => showHide(e.target))}> </i>
                             </div>
                         </div>
                         <div className="w-75 mx-auto mt-4 h5 fw-bold free">

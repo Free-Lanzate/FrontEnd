@@ -92,7 +92,7 @@ function Login (){
                             placeholder="Password"
                     />
                     <label htmlFor="password">Contraseña</label>
-                    <i className="bi bi-eye-slash-fill form-icon" onClick={((e) => showHide(e.target))}> </i>
+                    <i className="bi bi-eye-slash-fill form-icon r-16" onClick={((e) => showHide(e.target))}> </i>
                 </div>
                 <div className="h3 mb-3 fw-normal">
                     <Link to = "/recuperar" className="badge mt-2 mb-2">¿Olvidaste tu contraseña?</Link>

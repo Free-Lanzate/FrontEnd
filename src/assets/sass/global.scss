@@ -138,7 +138,6 @@
 
   .form-icon {
     position: absolute;
-    right: 16px;
     top: 10px;
     color: #202f56;
     opacity: 75%;
@@ -146,6 +145,14 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .r-16{
+    right: 16px;
+  }
+
+  .r-30{
+    right: 30px;
   }
 
   .button-icon {
@@ -207,7 +214,6 @@
 .ant-layout-content{
   width:100%;
   background-color: #f1f1f1;
-  height: 100vh;
 }
 
 .sidebar {

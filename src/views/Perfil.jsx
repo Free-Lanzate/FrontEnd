@@ -6,6 +6,7 @@ import{getAccessToken} from "../api/auth"
 import jwtDecode from "jwt-decode";
 import {miPerfil, editarPerfil, registroFreelancer} from "../api/user";
 import {notification} from "antd";
+import {emailValidation, minLengthValidation} from "../utils/formValidation";
 
 
 const Perfil = () => {
@@ -17,7 +18,9 @@ const Perfil = () => {
         firstName: "",
         lastName: "",
         email: "",
-        username: ""
+        username: "",
+        newPassword: "",
+        repeatPassword: ""
     });
 
     const profile = async () => {
@@ -36,6 +39,12 @@ const Perfil = () => {
         profile();
     }, []);
 
+    const [formValid, setFormValid] = useState({
+        email: false,
+        newPassword: false,
+        repeatPassword: false,
+    });
+
     const changeForm = e => {
         setInputs({
             ...inputs,
@@ -43,26 +52,55 @@ const Perfil = () => {
         });
     };
 
+    const inputValidation = e => {
+        const { type, name } = e.target;
+        if (type === "password") {
+            setFormValid({ ...formValid, [name]: minLengthValidation(e.target, 6) });
+        }
+    };
+
     const guardarCambios = async e => {
         e.preventDefault();
-
-        const result = await editarPerfil(UserId,inputs);
-        if (result.message === "User was updated successfully.") {
-            notification["success"]({
-                message: "User was updated successfully."
+        const passwordVal = inputs.newPassword;
+        const repeatPasswordVal = inputs.repeatPassword;
+        if (passwordVal !== repeatPasswordVal) {
+            notification["error"]({
+                message: "Las contraseñas tienen que ser iguales."
             });
-            resetForm();
-            window.location.href = "/";
+        } else {
+            const result = await editarPerfil(UserId, inputs);
+            if (result.message === "User was updated successfully.") {
+                notification["success"]({
+                    message: "User was updated successfully."
+                });
+                resetForm();
+                window.location.href = "/";
+            }
         }
     }
 
     const resetForm = () => {
+        const inputs = document.getElementsByTagName("input");
+
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].classList.remove("success");
+            inputs[i].classList.remove("error");
+        }
+
         setInputs({
             location: "",
             firstName: "",
             lastName: "",
             email: "",
-            username: ""
+            username: "",
+            newPassword: "",
+            repeatPassword: ""
+        });
+
+        setFormValid({
+            email: false,
+            newPassword: false,
+            repeatPassword: false
         });
     };
 
@@ -95,7 +133,7 @@ const Perfil = () => {
                               placeholder="firstName"
                               value = {inputs.firstName}
                           />
-                          <label htmlFor="password" className="ms-3">Nombres</label>
+                          <label htmlFor="firstName" className="ms-3">Nombres</label>
                       </div>
                       <div className="form-floating col">
                           <input
@@ -106,7 +144,7 @@ const Perfil = () => {
                               placeholder="lastName"
                               value = {inputs.lastName}
                           />
-                          <label htmlFor="password" className="ms-3">Apellidos</label>
+                          <label htmlFor="lastName" className="ms-3">Apellidos</label>
                       </div>
                   </div>
                   <div className="row mt-3">
@@ -119,7 +157,7 @@ const Perfil = () => {
                               placeholder="email"
                               value = {inputs.email}
                           />
-                          <label htmlFor="password" className="ms-3">Correo electrónico</label>
+                          <label htmlFor="email" className="ms-3">Correo electrónico</label>
                       </div>
                       <div className="form-floating col">
                           <input
@@ -130,9 +168,38 @@ const Perfil = () => {
                               placeholder="username"
                               value = {inputs.username}
                           />
-                          <label htmlFor="password" className="ms-3">Nombre de usuario</label>
+                          <label htmlFor="username" className="ms-3">Nombre de usuario</label>
                       </div>
                   </div>
+              <h5 className="mt-5 welcome mb-3 fw-bold">Cambiar contraseña</h5>
+              <div className="row mt-3">
+                  <div className="form-floating col">
+                      <input
+                          type="password"
+                          className="form-control mb-3"
+                          id="newPassword"
+                          name="newPassword"
+                          placeholder="password"
+                          onChange={inputValidation}
+                          value = {inputs.newPassword}
+                      />
+                      <label htmlFor="password" className="ms-3">Nueva contraseña</label>
+                      <i className="bi bi-eye-slash-fill form-icon r-30" onClick={((e) => showHide(e.target))}> </i>
+                  </div>
+                  <div className="form-floating col">
+                      <input
+                          type="password"
+                          className="form-control mb-3"
+                          id="repeatPassword"
+                          name="repeatPassword"
+                          placeholder="repeatPassword"
+                          onChange={inputValidation}
+                          value = {inputs.repeatPassword}
+                      />
+                      <label htmlFor="repeatPassword" className="ms-3">Confirmar contraseña</label>
+                      <i className="bi bi-eye-slash-fill form-icon r-30" onClick={((e) => showHide(e.target))}> </i>
+                  </div>
+              </div>
                 <div className="row mt-5">
                     <button className="w-50 btn btn-lg btn-primary fw-bold mx-auto" type="submit">Guardar Cambios</button>
                 </div>
