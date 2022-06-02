@@ -1,14 +1,53 @@
-import React from "react";
+import { React, useState } from "react"
+import  {Categorias}  from "../components/Categorias"
+import {Freelacer} from "../components/Freelacer"
+import { Anuncios } from "../components/Anuncios"
 
-const buscar = () => {
-  return (
+const Buscar = () => {
 
-      <div className="contenedorPerfil text-center d-flex">
-        <div className="container rounded row w-100">
-          <h5 className=" welcome mb-3 fw-bold">Buscar</h5>
-        </div>
+  const[activo, setActivo] = useState("Categorias")
+
+  if(activo === 'Categorias'){
+    return (
+      <div className='buscar' >
+        <nav className="top">
+          <button onClick={()=>setActivo("Categorias")}>Categorias</button>
+          <button onClick={()=>setActivo("Freelancer")}>Freelancer</button>
+          <button onClick={()=>setActivo("Anuncios")}>Anuncios</button>
+        </nav>
+        <Categorias/>
       </div>
-  )
+      )
+  }
+  if(activo === 'Freelancer'){
+    return (
+      <div className='buscar' >
+        <nav className="top">
+          <button onClick={()=>setActivo("Categorias")}>Categorias</button>
+          <button onClick={()=>setActivo("Freelancer")}>Freelancer</button>
+          <button onClick={()=>setActivo("Anuncios")}>Anuncios</button>
+        </nav>
+        <Freelacer/>
+      </div>
+      )
+  }
+  if(activo === 'Anuncios'){
+    return (
+      <div className='buscar' >
+        <nav className="top">
+    <button onClick={()=>setActivo("Categorias")}>Categorias</button>
+    <button onClick={()=>setActivo("Freelancer")}>Freelancer</button>
+    <button onClick={()=>setActivo("Anuncios")}>Anuncios</button>
+    </nav>
+        <Anuncios/>
+      </div>
+
+      )
+  }
+
+return(
+  <div></div>
+)
 }
 
-export default buscar
+export default Buscar
