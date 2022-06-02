@@ -3,20 +3,24 @@ import {notification} from "antd";
 import {anuncia, categorias} from "../api/posts";
 import{getAccessToken} from "../api/auth"
 import jwtDecode from "jwt-decode";
+import {buscarCategoria} from "../api/buscar";
 
 const Anuncios = () => {
 
-  /*let lista;
-
-  const listarCategorias = async () => {
-    const l = await categorias();
-    lista = l[1]
-  }
+  const[category, setCategory] = useState([])
 
   useEffect(() => {
-    listarCategorias();
-    console.log(lista);
-  }, []);*/
+    buscarCategoria().then(response => {
+      setCategory(response);
+    })
+  }, [])
+
+  const options = category.map((category)=>{
+        return(
+            <option value={category.id}>{category.categoryName}</option>
+        )
+      }
+  )
 
   const user = jwtDecode(getAccessToken())
 
@@ -77,15 +81,15 @@ const Anuncios = () => {
           <form>
             <div className="row mt-3">
               <div className="form-floating col">
-                <input
-                    type="text"
+                <select
                     className="form-control mb-3"
                     id="postCategory"
                     name="postCategory"
                     placeholder="postCategory"
                     value = {inputs.postCategory}
-                    readOnly
-                />
+                >
+                  {options}
+                </select>
                 <label htmlFor="PostCategoryId" className="ms-3">Categoría</label>
               </div>
               <div className="form-floating col">
@@ -113,7 +117,7 @@ const Anuncios = () => {
             </div>
               <div className="form-floating col">
                 <textarea
-                    className="form-control mb-3 h-100"
+                    className="form-control mb-3"
                     id="postDescription"
                     name="postDescription"
                     placeholder="postDescription"

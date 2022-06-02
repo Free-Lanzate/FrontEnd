@@ -22,12 +22,7 @@ export const ModalAnuncio = (props) => {
         <p>
         {anuncio.postDescription}
         </p>
-        <p>
-        {anuncio.postDescription}
-        </p>
-        <p>
-        {anuncio.postDescription}
-        </p>
+
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
