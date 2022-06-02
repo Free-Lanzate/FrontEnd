@@ -1,5 +1,6 @@
 import Anuncios from "./views/Anuncios"
 import Buscar from "./views/Buscar"
+import Categoria from "./views/buscar/Categoria"
 import Carrito from "./views/Carrito"
 import Ordenes from "./views/Ordenes"
 import Perfil from "./views/Perfil"
@@ -31,10 +32,16 @@ const routesSidebar = [
         component: Anuncios,
     },
     {
+        path: 'buscarcategoria',
+        component: Categoria
+    },
+    {
         path: '',
         component: Perfil,
     }
 ]
+    
+
 
 const internalRoutes = [...routesSidebar]
 

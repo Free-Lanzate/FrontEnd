@@ -22,14 +22,16 @@ const Registro = () => {
 
     const [inputs, setInputs] = useState({
         username: "",
-        firstName: "Juan",
-        lastName: "Bustamante",
+        firstName: "nn",
+        lastName: "algo",
         password: "",
+        repeatPassword: "",
         email: "",
-        location: "",
         avatarUrl: "",
         isFreelancer: false
       });
+
+      console.log(inputs)
 
       const [formValid, setFormValid] = useState({
         email: false,
@@ -116,12 +118,11 @@ const Registro = () => {
 
         setInputs({
             username: "",
-            firstName: "Juan",
-            lastName: "Bustamante",
+            firstName: "nn",
+            lastName: "algo",
             password: "",
             repeatPassword: "",
             email: "",
-            location: "",
             avatarUrl: "",
             isFreelancer: false
         });
