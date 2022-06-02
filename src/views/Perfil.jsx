@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Logo from "../assets/images/Logo.png";
 import {showHide} from "../utils/passwordVisibility";
 import {Link} from "react-router-dom";
-import{getAccessToken} from "../api/auth"
+import{getAccessToken, logout} from "../api/auth"
 import jwtDecode from "jwt-decode";
 import {miPerfil, editarPerfil, registroFreelancer} from "../api/user";
 import {notification} from "antd";
@@ -19,8 +19,6 @@ const Perfil = () => {
         lastName: "",
         email: "",
         username: "",
-        newPassword: "",
-        repeatPassword: ""
     });
 
     const profile = async () => {
@@ -41,8 +39,6 @@ const Perfil = () => {
 
     const [formValid, setFormValid] = useState({
         email: false,
-        newPassword: false,
-        repeatPassword: false,
     });
 
     const changeForm = e => {
@@ -93,16 +89,17 @@ const Perfil = () => {
             lastName: "",
             email: "",
             username: "",
-            newPassword: "",
-            repeatPassword: ""
         });
 
         setFormValid({
             email: false,
-            newPassword: false,
-            repeatPassword: false
         });
     };
+
+    function changePassword(){
+        logout();
+        window.location.href = "/clave/" + inputs.email
+    }
 
   return (
       <div className="contenedorPerfil text-center d-flex">
@@ -171,36 +168,8 @@ const Perfil = () => {
                           <label htmlFor="username" className="ms-3">Nombre de usuario</label>
                       </div>
                   </div>
-              <h5 className="mt-5 welcome mb-3 fw-bold">Cambiar contraseña</h5>
-              <div className="row mt-3">
-                  <div className="form-floating col">
-                      <input
-                          type="password"
-                          className="form-control mb-3"
-                          id="newPassword"
-                          name="newPassword"
-                          placeholder="password"
-                          onChange={inputValidation}
-                          value = {inputs.newPassword}
-                      />
-                      <label htmlFor="password" className="ms-3">Nueva contraseña</label>
-                      <i className="bi bi-eye-slash-fill form-icon r-30" onClick={((e) => showHide(e.target))}> </i>
-                  </div>
-                  <div className="form-floating col">
-                      <input
-                          type="password"
-                          className="form-control mb-3"
-                          id="repeatPassword"
-                          name="repeatPassword"
-                          placeholder="repeatPassword"
-                          onChange={inputValidation}
-                          value = {inputs.repeatPassword}
-                      />
-                      <label htmlFor="repeatPassword" className="ms-3">Confirmar contraseña</label>
-                      <i className="bi bi-eye-slash-fill form-icon r-30" onClick={((e) => showHide(e.target))}> </i>
-                  </div>
-              </div>
-                <div className="row mt-5">
+              <p className="mt-5 mb-3">¿Desea cambiar su contraseña? Haga clic<b className="badge" onClick={changePassword}>aquí</b></p>
+                <div className="row mt-4">
                     <button className="w-50 btn btn-lg btn-primary fw-bold mx-auto" type="submit">Guardar Cambios</button>
                 </div>
               </div>

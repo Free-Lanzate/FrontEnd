@@ -1,10 +1,22 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {notification} from "antd";
-import {anuncia} from "../api/posts";
+import {anuncia, categorias} from "../api/posts";
 import{getAccessToken} from "../api/auth"
 import jwtDecode from "jwt-decode";
 
 const Anuncios = () => {
+
+  /*let lista;
+
+  const listarCategorias = async () => {
+    const l = await categorias();
+    lista = l[1]
+  }
+
+  useEffect(() => {
+    listarCategorias();
+    console.log(lista);
+  }, []);*/
 
   const user = jwtDecode(getAccessToken())
 

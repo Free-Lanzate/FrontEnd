@@ -138,6 +138,7 @@
 
   .form-icon {
     position: absolute;
+    right: 16px;
     top: 10px;
     color: #202f56;
     opacity: 75%;
@@ -145,14 +146,6 @@
     &:hover {
       cursor: pointer;
     }
-  }
-
-  .r-16{
-    right: 16px;
-  }
-
-  .r-30{
-    right: 30px;
   }
 
   .button-icon {

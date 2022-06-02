@@ -5,9 +5,8 @@ import {showHide} from "../utils/passwordVisibility"
 import {useParams} from "react-router-dom";
 import {minLengthValidation} from "../utils/formValidation";
 import {notification} from "antd";
-import {miPerfil, resetPassword} from "../api/user";
-
-//TODO: Validar que las contraseñas y coincidan y reemplazar alguien@example.com por el email.
+import {miPerfil} from "../api/user";
+import {resetPassword} from "../api/recover"
 
 const RestablecerPassword = () => {
 

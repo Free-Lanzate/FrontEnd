@@ -24,7 +24,7 @@ const routesVisitante = [
         layout: Visitante,
     },
     {
-        path: '/recuperar',
+        path: '/clave/:action',
         component: RecuperarPassword,
         layout: Visitante
     },
