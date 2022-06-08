@@ -5,6 +5,7 @@ import { idCategoria, nombreCategoria } from '../utils/tokens';
 
 
 
+
 export const Categorias = () => {
   const[category, setCategory] = useState([])
 
