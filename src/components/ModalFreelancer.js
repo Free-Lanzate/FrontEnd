@@ -2,7 +2,7 @@
 import { Modal, Button } from "react-bootstrap";
 import {React, useState} from 'react'
 
- const ModalAnuncio = ({anuncio}) => {
+ const ModalFreelancer = ({freelancer}) => {
 
   const [show, setShow] = useState(false);
 
@@ -17,13 +17,15 @@ import {React, useState} from 'react'
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{anuncio.postTitle}</Modal.Title>
+          <Modal.Title>{freelancer.firstName + " " + freelancer.lastName }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {anuncio.postDescription}
+          {freelancer.username}
           <p>
-            Precio: 
-            {anuncio.postPrice}
+            {'Rating: ' + freelancer.freelancerRating}
+          </p>
+          <p>
+          {freelancer.freelancerDescription}
           </p>
         </Modal.Body>
         <Modal.Footer>
@@ -39,7 +41,7 @@ import {React, useState} from 'react'
       )
   }
 
-  export default ModalAnuncio
+  export default ModalFreelancer
 
 
 

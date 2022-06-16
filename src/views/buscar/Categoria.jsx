@@ -2,6 +2,7 @@ import { idCategoria, nombreCategoria } from "../../utils/tokens";
 import {React, useState, useEffect} from 'react'
 import { buscarAnunciosPorCategoria } from '../../api/buscar'
 import Table from 'react-bootstrap/Table';
+import ModalAnuncio from "../../components/ModalAnuncio";
 
 
  const Categoria = () => {
@@ -17,25 +18,7 @@ import Table from 'react-bootstrap/Table';
     window.location.href = "buscar";
   }
 
-  const tableRows=anuncio.map((anuncio)=>{
-    return( 
-      <tr>
-        <td>
-          {anuncio.postTitle}
-          </td>
-          <td>
-          {anuncio.postPrice}
-          </td>
-          <td>
-          {anuncio.postDescription}
-          </td>
-        <td>
-          <button onClick={() => console.log("algo va a pasar...")}>saber más...</button>
-        </td>
-      </tr>
-    )
-  }
-  )
+  
 return(
   <div>
     <div>Estos son los resultados para la categoria {localStorage.getItem(nombreCategoria)}</div>
@@ -48,7 +31,23 @@ return(
           </tr>
         </thead>
         <tbody>
-          {tableRows}
+        {
+          anuncio.map((anuncio)=>( 
+            <tr>
+              <td>
+                {anuncio.postTitle}
+                </td>
+                <td>
+                {anuncio.postPrice}
+                </td>
+                <td>
+                {anuncio.postDescription}
+                </td>
+              <td>
+                <ModalAnuncio anuncio={anuncio} />
+              </td>
+            </tr>))
+            }
         </tbody>
     </Table>      
     <button onClick={volver}>Volver</button>  

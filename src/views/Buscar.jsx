@@ -1,6 +1,6 @@
 import { React, useState } from "react"
 import  {Categorias}  from "../components/Categorias"
-import {Freelacer} from "../components/Freelacer"
+import {Freelancer} from "../components/Freelancer"
 import { Anuncios } from "../components/Anuncios"
 
 const Buscar = () => {
@@ -27,7 +27,7 @@ const Buscar = () => {
           <button onClick={()=>setActivo("Freelancer")}>Freelancer</button>
           <button onClick={()=>setActivo("Anuncios")}>Anuncios</button>
         </nav>
-        <Freelacer/>
+        <Freelancer/>
       </div>
       )
   }
