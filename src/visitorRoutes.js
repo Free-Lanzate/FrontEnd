@@ -5,7 +5,7 @@ import RecuperarPassword from "./views/RecuperarPassword";
 import RestablecerPassword from "./views/RestablecerPassword";
 import Buscar from "./views/Buscar";
 import Visitante from "./layouts/Visitante";
-import Categoria from "./views/buscar/Categoria"
+import Categoria from "./components/buscar/Categoria"
 
 const routesVisitante = [
 

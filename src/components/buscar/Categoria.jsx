@@ -2,7 +2,7 @@ import { idCategoria, nombreCategoria } from "../../utils/tokens";
 import {React, useState, useEffect} from 'react'
 import { buscarAnunciosPorCategoria } from '../../api/buscar'
 import Table from 'react-bootstrap/Table';
-import ModalAnuncio from "../../components/ModalAnuncio";
+import ModalAnuncio from "../ModalAnuncio";
 
 
  const Categoria = () => {
