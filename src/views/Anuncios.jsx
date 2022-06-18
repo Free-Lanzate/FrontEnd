@@ -117,7 +117,7 @@ const Anuncios = () => {
             </div>
               <div className="form-floating col">
                 <textarea
-                    className="form-control mb-3"
+                    className="form-control mb-3 descripcion"
                     id="postDescription"
                     name="postDescription"
                     placeholder="postDescription"
