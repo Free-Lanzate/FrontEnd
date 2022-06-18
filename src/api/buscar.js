@@ -66,3 +66,37 @@ export function buscarCategoria(){
         return result;
       })
   }
+
+  export function buscarAnunciosPorPalabra(palabra){
+    const url = 'http://localhost:8000/search?keyword=' + palabra;
+      const params = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+  
+      return fetch(url, params).then(response =>{
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+  }
+
+  export function buscarFreelancerPorPalabra(palabra){
+    const url = 'http://localhost:8000/searchFreelancer?keyword=' + palabra;
+      const params = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+  
+      return fetch(url, params).then(response =>{
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+  }

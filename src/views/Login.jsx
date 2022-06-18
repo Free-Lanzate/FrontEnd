@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import {iniciar_sesion} from "../api/user"
 import {TOKEN} from "../utils/tokens"
 import {notification} from "antd"
-
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
 import {showHide} from "../utils/passwordVisibility"
