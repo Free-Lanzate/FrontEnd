@@ -3,7 +3,9 @@ import { buscarAnunciosPorPalabra } from '../../api/buscar';
 import Table from 'react-bootstrap/Table';
 import ModalAnuncio from '../ModalAnuncio';
 
-const BusquedaAnuncioio = () => {
+const BusquedaAnuncio = (props) => {
+
+  const anuncio = props.anuncio
 
   const [input, setInput] = useState({
     buscar: ""
@@ -44,6 +46,36 @@ const BusquedaAnuncioio = () => {
             Buscar
             </button>
           </form>
+        </div>
+        <div className="d-flex align-items-center justify-content-center">
+          <Table hover>
+            <thead>
+            <tr>
+              <th>Anuncios</th>
+              <th>Precio</th>
+              <th>Descripción</th>
+            </tr>
+            </thead>
+            <tbody>
+            {
+              anuncio.map((anuncio)=>(
+                  <tr>
+                    <td>
+                      {anuncio.postTitle}
+                    </td>
+                    <td>
+                      {anuncio.postPrice}
+                    </td>
+                    <td>
+                      {anuncio.postDescription}
+                    </td>
+                    <td>
+                      <ModalAnuncio anuncio={anuncio} />
+                    </td>
+                  </tr>))
+            }
+            </tbody>
+          </Table>
         </div>
       </div>
     )
@@ -100,4 +132,4 @@ const BusquedaAnuncioio = () => {
   }
 }
 
-export default BusquedaAnuncioio
+export default BusquedaAnuncio

@@ -3,7 +3,10 @@ import { buscarFreelancerPorPalabra } from '../../api/buscar';
 import Table from 'react-bootstrap/Table';
 import ModalFreelancer from '../ModalFreelancer';
 
-const BusquedaFreelancer = () => {
+const BusquedaFreelancer = (props) => {
+
+    const freelancer = props.freelancer
+
     const [input, setInput] = useState({
         buscar: ""
       });
@@ -43,6 +46,39 @@ const BusquedaFreelancer = () => {
                 Buscar
                 </button>
               </form>
+            </div>
+            <div className="d-flex align-items-center justify-content-center">
+              <Table hover>
+                <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Usuario</th>
+                  <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                  freelancer.map((freelancer)=>(
+                      <tr>
+                        <td>
+                          {freelancer.firstName + " " + freelancer.lastName }
+                        </td>
+                        <td>
+                          {freelancer.username}
+                        </td>
+                        <td>
+                          {freelancer.freelancerRating}
+                        </td>
+                        <td>
+                          {freelancer.freelancerDescription}
+                        </td>
+                        <td>
+                          <ModalFreelancer freelancer={freelancer}/>
+                        </td>
+                      </tr>))
+                }
+                </tbody>
+              </Table>
             </div>
           </div>
         )

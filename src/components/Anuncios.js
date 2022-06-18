@@ -16,39 +16,7 @@ export const Anuncios = () => {
 
 
 return(
-  <div>
-    <BusquedaAnuncio/>
-    <div className="d-flex align-items-center justify-content-center">
-      <Table hover>
-          <thead>
-            <tr>    
-              <th>Anuncios</th>
-              <th>Precio</th>
-              <th>Descripción</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              anuncio.map((anuncio)=>( 
-              <tr>
-                <td>
-                  {anuncio.postTitle}
-                  </td>
-                  <td>
-                  {anuncio.postPrice}
-                  </td>
-                  <td>
-                  {anuncio.postDescription}
-                  </td>
-                <td>
-                  <ModalAnuncio anuncio={anuncio} />
-                </td>
-              </tr>))
-            }
-          </tbody>
-      </Table>      
-    </div>
-  </div>
+    <BusquedaAnuncio anuncio={anuncio}/>
   )
 }
 
