@@ -26,13 +26,19 @@ export const Categorias = () => {
   const tableRows=category.map((category)=>{
         return( 
           <tr>
-            <td>
-              
-              {category.categoryName}
-              
+              <td>
+                  <svg
+                      className="bd-placeholder-img rounded" width="160" height="90" role="img">
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#eee"></rect>
+                      <text x="50%" y="50%" fill="#aaa" dy=".3em">Imagen</text>
+                  </svg>
               </td>
+            <td className="text-center">
+              {category.categoryName}
+            </td>
             <td>
-              <button onClick={() => (mostrar(category))}>saber más...</button>
+              <button className="btn btn-primary fw-bold float-end" onClick={() => (mostrar(category))}>Saber más »</button>
             </td>
           </tr>
         )
@@ -41,21 +47,19 @@ export const Categorias = () => {
 
   return(
     <div>
-        
-      <Table hover>
-          <thead>
-            <tr>    
-              <th>Categoria</th>
-              
+      <p className="text-center mb-3">Aquí podrás navegar entre todas las categorías disponibles para encontrar productos y servicios afines con tus intereses.</p>
+      <Table className="align-middle" hover>
+          <thead className="text-center">
+            <tr className="table-primary welcome">
+                <th></th>
+              <th>Categoría</th>
+                <th></th>
             </tr>
           </thead>
           <tbody>
             {tableRows}
           </tbody>
-        </Table>  
-
-         
-          
+        </Table>
     </div>
 )
 }

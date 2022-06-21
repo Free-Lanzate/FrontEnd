@@ -38,6 +38,34 @@
     text-decoration: none;
   }
 
+  .welcome2 {
+    color: white;
+    background-color: #202f56;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 0.5em;
+  }
+
+  .btn2 {
+    padding:7px 14px;
+    background-color: #202f56;
+    color: white;
+    border-width: 0;
+    /*font-family: "29LT Bukra Semibold";*/
+    &:hover {
+      background-color: #202f56;
+      color: #ffc107;
+      border-width: 0;
+    }
+    &:focus, &:active, &.active, &:focus:active {
+      background-color: #ffc107;
+      color: #202f56;
+      border-width: 0;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
   .btn {
     background-color: #ffc107;
     border-width: 0;
@@ -185,8 +213,19 @@
     opacity: 1;
   }
 
+  .separador{
+    //color:#ffc107;
+    //background-color: #ffc107;
+    height: 5px !important;
+  }
+
   .free{
     color: #7a8399;
+  }
+
+  .stars{
+    color: #ffc107;
+    font-size: 24px;
   }
 
   @media (min-width: 768px) {

@@ -11,8 +11,8 @@ import {React, useState} from 'react'
   
     return(
       <>
-      <Button variant="primary" onClick={handleShow}>
-        saber mas...
+      <Button className="btn btn-primary fw-bold float-end" onClick={handleShow}>
+        Saber más »
       </Button>
 
       <Modal show={show} onHide={handleClose}>
