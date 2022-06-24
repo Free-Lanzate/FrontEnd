@@ -27,9 +27,9 @@ const Ordenes = () => {
               <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son
               los productos y servicios que has adquirido:</h5>
           {
-              ordenes.map((orden)=>(
+              ordenes.map((orden, index)=>(
                   <div>
-                      <p className="text-center fw-bold w-100 badge">Orden # {orden.id}</p>
+                      <p className="text-center fw-bold w-100 badge">Orden # {index+1}</p>
                       <div className="d-flex w-100">
                           <p className="me-auto"><b>Valor total: </b>${orden.orderTotal} pesos colombianos</p>
                           <p><b>Fecha: </b>{fecha(new Date(orden.createdAt))}</p>

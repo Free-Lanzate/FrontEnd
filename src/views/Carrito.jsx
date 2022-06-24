@@ -33,16 +33,15 @@ const Carrito = () => {
   return (
       <div className="contenedorPerfil text-center d-flex">
         <div className="container rounded row w-100">
-          <h5 className=" welcome mb-3 fw-bold">Carrito</h5>
           <div className="col contenedorPerfil d-flex">
           <div className="row container rounded w-100">
               <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son
               los productos y servicios que hay en tu carrito:</h5>
           {
-              items.map((items)=>(
+              items.map((items, index)=>(
                   <div>
-                      <p className="text-center fw-bold w-100 badge">Orden # {items.id}</p>
-                      
+                      <p className="text-center fw-bold w-100 badge">Item # {index+1}</p>
+
                       <Table hover>
                           <thead>
                           <tr className="table-primary welcome">
@@ -63,15 +62,16 @@ const Carrito = () => {
                                     {items.Post.Freelancer.User.firstName + " " + items.Post.Freelancer.User.lastName}
                                 </th>
                             </tr>
-                            <div className="d-flex w-100">
-                                <p className="me-auto"><b>Valor </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
-                            </div>
-                            <CambiarCantidad id = {items.id} cantidad = {items.quantity}/> 
-                            <Button onClick={() => eliminar(items.postId)}>
-                                eliminar
-                            </Button> 
+
                           </tbody>
                       </Table>
+                      <div className="d-flex w-100">
+                          <p className="me-auto"><b>Valor </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
+                          <CambiarCantidad className="float-end" id = {items.id} cantidad = {items.quantity}/>
+                          <button className="btn2 rounded mt-2 mb-3 fw-bold" onClick={() => eliminar(items.postId)}>
+                              Eliminar
+                          </button>
+                      </div>
                       <hr className="separador"/>
                   </div>
                 ))
