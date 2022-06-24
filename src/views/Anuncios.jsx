@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {notification} from "antd";
-import {anuncia, categorias} from "../api/posts";
+import {anuncia} from "../api/posts";
 import{getAccessToken} from "../api/auth"
 import jwtDecode from "jwt-decode";
 import {buscarCategoria} from "../api/buscar";

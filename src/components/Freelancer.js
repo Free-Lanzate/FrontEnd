@@ -1,7 +1,5 @@
 import {React, useState, useEffect} from 'react'
 import { buscarFreelancer } from '../api/buscar';
-import Table from 'react-bootstrap/Table';
-import ModalFreelancer from './ModalFreelancer';
 import BusquedaFreelancer from './buscar/BusquedaFreelancer';
 
 export const Freelancer = () => {

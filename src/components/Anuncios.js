@@ -1,7 +1,5 @@
 import {React, useState, useEffect} from 'react'
 import { buscarAnuncios } from '../api/buscar'
-import Table from 'react-bootstrap/Table';
-import ModalAnuncio from './ModalAnuncio'
 import BusquedaAnuncio from './buscar/BusquedaAnuncio';
 
 export const Anuncios = () => {

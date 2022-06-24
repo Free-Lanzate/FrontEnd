@@ -1,13 +1,36 @@
 
 import { Modal, Button } from "react-bootstrap";
 import {React, useState} from 'react'
+import { agregarItem } from "../api/canasta";
 
  const ModalAnuncio = ({anuncio}) => {
 
   const [show, setShow] = useState(false);
 
+  const [data, setData] = useState({
+    userId: null, 
+    postId: null
+  });
+
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    cambiarData()
+    setShow(true);
+  }
+
+  const añadirAlCarrito = async e =>{
+    e.preventDefault();
+    const result = await agregarItem(data);
+    console.log(result)
+    setShow(false);
+  }
+
+  function cambiarData(){
+    setData({
+      userId: 1, 
+      postId: anuncio.id
+    })
+  }
   
     return(
       <>
@@ -30,7 +53,7 @@ import {React, useState} from 'react'
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={añadirAlCarrito}>
             Añadir al carrito
           </Button>
         </Modal.Footer>

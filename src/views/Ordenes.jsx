@@ -2,7 +2,6 @@ import {React,useEffect, useState} from 'react'
 import jwtDecode from "jwt-decode";
 import {getAccessToken} from "../api/auth";
 import {verOrdenes} from "../api/orders";
-import ModalAnuncio from "../components/ModalAnuncio";
 import Table from "react-bootstrap/Table";
 
 
@@ -15,7 +14,7 @@ const Ordenes = () => {
         verOrdenes(UserId).then(response => {
             setOrdenes(response);
         })
-    }, [])
+    }, [UserId])
 
     const fecha = (date) => {
         return(date.toLocaleDateString('es-ES', {year: 'numeric', month: 'long', day: 'numeric'
