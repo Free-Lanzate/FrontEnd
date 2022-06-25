@@ -81,7 +81,7 @@ const Carrito = () => {
             ))
           }
         </div>
-        <div className="row container rounded w-50">
+        <div className="row col container rounded w-50 h-100">
           <div>
               <h5 className=" welcome mb-3 fw-bold">
                   <i className="bi bi-cart4 me-3"></i>
@@ -107,8 +107,8 @@ const Carrito = () => {
                 </div>
               </div>
               <div className="row">
-                <button className="btn btn-primary mt-4 w-75 mx-auto fw-bold" onClick={() => alert('Implement Checkout!')}>
-                  Checkout
+                <button className="btn btn-primary mt-4 mb-2 w-75 mx-auto fw-bold" onClick={() => alert('Implement Checkout!')}>
+                  Realizar Compra
                 </button>
               </div>
           </div>
