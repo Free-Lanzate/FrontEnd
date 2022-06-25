@@ -71,7 +71,7 @@ const Carrito = () => {
                           <p className="me-auto"><b>Valor </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
                           <CambiarCantidad className="float-end" id = {items.id} cantidad = {items.quantity}/>
                           <button className="btn2 rounded mt-2 mb-3 fw-bold" onClick={() => eliminar(items.postId)}>
-                              Eliminar
+                              Eliminarrr
                           </button>
                       </div>
                       <hr className="separador"/>
