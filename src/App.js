@@ -34,7 +34,7 @@ function App() {
                 <Route
                   key={index3}
                   path={visitorRoute.path}
-                  element = {<visitorRoute.layout side={visitorRoute.path === "/"}>
+                  element = {<visitorRoute.layout side={visitorRoute.path === "/" || visitorRoute.path === "/informacionExtra"}>
                       <visitorRoute.component/>
                   </visitorRoute.layout>}
                 />

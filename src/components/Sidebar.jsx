@@ -62,11 +62,11 @@ function Sidebar (props)  {
                         ¡Únete ahora!
                     </span> 
                 </div>
-                <Menu.Item key="2">
+                <Menu.Item className="mt-4" key="2">
                     <Link to = '/informacionExtra'>  
                         <span>
-                            <i className="bi bi-arrow-left-square-fill me-3"> </i>
-                            ¿Quieres saber más acerca de nosotros?
+                            <i className="bi bi-info-circle me-3"> </i>
+                            Más información
                         </span>
                     </Link>
                 </Menu.Item>
@@ -143,14 +143,14 @@ function Sidebar (props)  {
         else return(
             <ul className={rol.substring(1)}>
                 <li>
-                    <Link to = '../informacionExtra'>  
+                    <Link to = '../informacionExtra'>
                         <span>
-                            <i className="bi bi-arrow-right-square-fill me-3"> </i>
+                            <i className="bi bi-info-circle-fill me-4"></i>
                              Acerca de nosotros
                         </span>
                     </Link>
                 </li> 
-                <li>
+                <li className="mt-2">
                     <span onClick={logoutUser}>
                         <i className="bi bi-arrow-left-square-fill me-3"> </i>
                         Salir

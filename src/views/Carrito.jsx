@@ -35,85 +35,81 @@ const Carrito = () => {
   return (
       <div className="contenedorPerfil text-center d-flex">
         <div className="container rounded row w-100">
-              <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son
-              los productos y servicios que están en tu carrito:</h5>
+          <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son
+          los productos y servicios que están en tu carrito:</h5>
           {
-              items.map((items, index)=>(
-                  <div>
-                      <p className="text-center fw-bold w-100 badge">Item # {index+1}</p>
-
-                      <Table hover>
-                          <thead>
-                          <tr className="table-primary welcome">
-                              <th colSpan="2">Producto o Servicio Adquirido</th>
-                              <th>Cantidad</th>
-                              <th>Freelancer</th>
-                          </tr>
-                          </thead>
-                          <tbody className="align-middle">
-                            <tr>
-                                <td>
-                                    <svg
-                                        className="bd-placeholder-img rounded" width="160" height="90" role="img">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#eee"></rect>
-                                        <text x="50%" y="50%" fill="#aaa" dy=".3em">Imagen</text>
-                                    </svg>
-                                </td>
-                                <td>
-                                    {items.Post.postTitle}
-                                </td>
-                                <td>
-                                    {items.quantity}
-                                </td>
-                                <td>
-                                    {items.Post.Freelancer.User.firstName + " " + items.Post.Freelancer.User.lastName}
-                                </td>
-                            </tr>
-
-                          </tbody>
-                      </Table>
-                      <div className="d-flex w-100">
-                          <p className="me-auto my-auto"><b>Precio resultante: </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
-                          <CambiarCantidad className="float-end" id = {items.id} cantidad = {items.quantity}/>
-                          <button className="btn2 rounded mt-2 mb-3 fw-bold" onClick={() => eliminar(items.postId)}>
-                              Eliminar
-                          </button>
-                      </div>
-                      <hr className="separador"/>
-                  </div>
-                ))
-              }
-        </div>
-          <div>
-            <div className="row container rounded w-100">
-              Carrito
+          items.map((items, index)=>(
               <div>
-            <>
+                  <p className="text-center fw-bold w-100 badge">Item # {index+1}</p>
+
+                  <Table hover>
+                      <thead>
+                      <tr className="table-primary welcome">
+                          <th colSpan="2">Producto o Servicio Adquirido</th>
+                          <th>Freelancer</th>
+                      </tr>
+                      </thead>
+                      <tbody className="align-middle">
+                        <tr>
+                            <td>
+                                <svg
+                                    className="bd-placeholder-img rounded" width="160" height="90" role="img">
+                                    <title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#eee"></rect>
+                                    <text x="50%" y="50%" fill="#aaa" dy=".3em">Imagen</text>
+                                </svg>
+                            </td>
+                            <td>
+                                {items.Post.postTitle}
+                            </td>
+                            <td>
+                                {items.Post.Freelancer.User.firstName + " " + items.Post.Freelancer.User.lastName}
+                            </td>
+                        </tr>
+
+                      </tbody>
+                  </Table>
+                  <div className="d-flex w-100">
+                      <p className="me-auto my-auto"><b>Precio unitario: </b>${items.Post.postPrice} pesos colombianos</p>
+                      <CambiarCantidad className="float-end" id = {items.id} cantidad = {items.quantity}/>
+                      <button className="btn2 rounded mt-2 mb-3 fw-bold" onClick={() => eliminar(items.postId)}>
+                          Eliminar
+                      </button>
+                  </div>
+                  <hr className="separador"/>
+              </div>
+            ))
+          }
+        </div>
+        <div className="row container rounded w-50">
+          <div>
+              <h5 className=" welcome mb-3 fw-bold">
+                  <i className="bi bi-cart4 me-3"></i>
+                  Resumen de tu carrito
+              </h5>
               <hr className="separador"/>
               {items.map((items, index)=>(
                   <div>
-                      <p className="text-center fw-bold w-100 badge">Item # {index+1}</p>
-                      <p className="me-auto"><b>Valor </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
-                      <hr/>     
+                      <p className="text-center fw-bold w-100 badge">{items.Post.postTitle}</p>
+                      <p className="me-auto"><b>Cantidad a comprar: </b> {items.quantity}</p>
+                      <p className="me-auto"><b>Precio resultante: </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
+                      <hr/>
                   </div>
                 ))}
-              <div className="row">
-                <div className="col-2">
-                  <strong>Total Price</strong>
+              <div className="welcome2 row d-flex mt-4">
+                <div className="col-5">
+                  <strong>Precio total:</strong>
                 </div>
-                <div className="col-1 text-right">
+                <div className="col-3 text-right">
                   <strong>$</strong>
                 </div>
               </div>
               <div className="row">
-                <button onClick={() => alert('Implement Checkout!')}>
+                <button className="btn btn-primary mt-4 w-75 mx-auto fw-bold" onClick={() => alert('Implement Checkout!')}>
                   Checkout
                 </button>
               </div>
-            </>
-        </div>
-            </div>
+          </div>
         </div>
       </div>
   )
