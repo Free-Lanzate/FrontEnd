@@ -19,8 +19,8 @@ function Freelanzer(props) {
       <Navigate to = "/login" />
       </>
     )
-
   }
+
   if(user && !isLoading && !isFreelancer){
     return(
       <>

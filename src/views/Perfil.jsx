@@ -7,9 +7,14 @@ import jwtDecode from "jwt-decode";
 import {miPerfil, editarPerfil, registroFreelancer} from "../api/user";
 import {notification} from "antd";
 import {emailValidation, minLengthValidation} from "../utils/formValidation";
+import {Modal} from "react-bootstrap";
 
 
 const Perfil = () => {
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const UserId = jwtDecode(getAccessToken()).sub.id;
 
@@ -46,13 +51,6 @@ const Perfil = () => {
             ...inputs,
             [e.target.name]: e.target.value
         });
-    };
-
-    const inputValidation = e => {
-        const { type, name } = e.target;
-        if (type === "password") {
-            setFormValid({ ...formValid, [name]: minLengthValidation(e.target, 6) });
-        }
     };
 
     const guardarCambios = async e => {
@@ -105,7 +103,7 @@ const Perfil = () => {
       <div className="contenedorPerfil text-center d-flex">
           <form className="d-flex" onChange={changeForm} onSubmit={guardarCambios}>
           <div className="container rounded row w-100">
-              <h5 className=" welcome mb-3 fw-bold">Datos de facturación</h5>
+              <h5 className=" welcome mb-3 fw-bold">Ubicación</h5>
                   <div className="row mt-3">
                       <div className="form-floating">
                           <input
@@ -168,12 +166,35 @@ const Perfil = () => {
                           <label htmlFor="username" className="ms-3">Nombre de usuario</label>
                       </div>
                   </div>
-              <p className="mt-5 mb-3">¿Desea cambiar su contraseña? Haga clic<b className="badge" onClick={changePassword}>aquí</b></p>
+              <p className="mt-5 mb-3">¿Desea cambiar su contraseña? Haga clic<b className="badge" onClick={handleShow}>aquí</b></p>
                 <div className="row mt-4">
                     <button className="w-50 btn btn-lg btn-primary fw-bold mx-auto" type="submit">Guardar Cambios</button>
                 </div>
               </div>
           </form>
+
+          <Modal id="modal" className="login" show={show} backdrop="static" keyboard={false} centered onHide={handleClose}>
+              <Modal.Header closeButton closeVariant="white">
+                  <Modal.Title className="text-white fw-bold">
+                      <i className="bi bi-info-circle"> </i>
+                      Esto cerrará tu sesión
+                  </Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="b-white text-center">
+                  <h5>Para realizar el cambio de contraseña de manera segura
+                      se cerrará la sesión de tu cuenta.</h5>
+                  <img className="logo mb-4 mt-3" src={Logo} alt="Free-Lánzate"/>
+                  <h5>¿Deseas continuar?</h5>
+              </Modal.Body>
+              <Modal.Footer className="b-white">
+                  <button className="btn3 rounded fw-bold" onClick={handleClose}>
+                      No, regrésame
+                  </button>
+                  <button className="btn btn-primary fw-bold float-end" onClick={changePassword}>
+                      ¡Sí, vamos!
+                  </button>
+              </Modal.Footer>
+          </Modal>
       </div>
   )
 }

@@ -67,7 +67,7 @@ export function registroFreelancer(data){
 }
 
 export function miPerfil(id){
-  const url = 'http://localhost:8000/user/' + id;
+  const url = 'http://localhost:8000/profile/' + id;
   const params = {
     method: "GET",
     headers: {

@@ -32,7 +32,7 @@ function Sidebar (props)  {
     function anuncio(rol) {
         if (rol==="/freelanzer") return(
             <Menu.Item key="6">
-                <Link to="../anuncio">
+                <Link to="../tarifa">
                 <span>
                     <i className="bi bi-megaphone-fill me-3"> </i>
                     Anunciarme

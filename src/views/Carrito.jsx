@@ -33,10 +33,8 @@ const Carrito = () => {
   return (
       <div className="contenedorPerfil text-center d-flex">
         <div className="container rounded row w-100">
-          <div className="col contenedorPerfil d-flex">
-          <div className="row container rounded w-100">
               <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son
-              los productos y servicios que hay en tu carrito:</h5>
+              los productos y servicios que están en tu carrito:</h5>
           {
               items.map((items, index)=>(
                   <div>
@@ -45,28 +43,36 @@ const Carrito = () => {
                       <Table hover>
                           <thead>
                           <tr className="table-primary welcome">
-                              <th >Producto o Servicio Adquirido</th>
+                              <th colSpan="2">Producto o Servicio Adquirido</th>
                               <th>Cantidad</th>
                               <th>Freelancer</th>
                           </tr>
                           </thead>
-                          <tbody>
+                          <tbody className="align-middle">
                             <tr>
-                                <th>
+                                <td>
+                                    <svg
+                                        className="bd-placeholder-img rounded" width="160" height="90" role="img">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="#eee"></rect>
+                                        <text x="50%" y="50%" fill="#aaa" dy=".3em">Imagen</text>
+                                    </svg>
+                                </td>
+                                <td>
                                     {items.Post.postTitle}
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     {items.quantity}
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     {items.Post.Freelancer.User.firstName + " " + items.Post.Freelancer.User.lastName}
-                                </th>
+                                </td>
                             </tr>
 
                           </tbody>
                       </Table>
                       <div className="d-flex w-100">
-                          <p className="me-auto"><b>Valor </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
+                          <p className="me-auto my-auto"><b>Precio resultante: </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
                           <CambiarCantidad className="float-end" id = {items.id} cantidad = {items.quantity}/>
                           <button className="btn2 rounded mt-2 mb-3 fw-bold" onClick={() => eliminar(items.postId)}>
                               Eliminar
@@ -76,8 +82,6 @@ const Carrito = () => {
                   </div>
                 ))
               }
-          </div>
-      </div>
         </div>
       </div>
   )
