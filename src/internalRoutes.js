@@ -6,6 +6,7 @@ import Ordenes from "./views/Ordenes"
 import Perfil from "./views/Perfil"
 import Recomendaciones from "./views/Recomendaciones"
 import ExtraInfo from "./views/ExtraInfo"
+import Tarifas from "./views/Tarifas";
 
 const routesSidebar = [
     {
@@ -31,6 +32,10 @@ const routesSidebar = [
     {
         path: 'anuncio',
         component: Anuncios,
+    },
+    {
+        path: 'tarifa',
+        component: Tarifas,
     },
     {
         path: 'buscarcategoria',

@@ -2,12 +2,19 @@ import {React, useState, useEffect} from 'react'
 import { buscarCategoria } from '../api/buscar';
 import Table from 'react-bootstrap/Table';
 import { idCategoria, nombreCategoria } from '../utils/tokens';
-
+import useAuth from '../hooks/useAuth';
+import {Button, Modal} from "react-bootstrap";
+import Logo from "../assets/images/Logo.png";
 
 
 
 export const Categorias = () => {
   const[category, setCategory] = useState([])
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleLogin = () => window.location.href = "./login";
 
   useEffect(() => {
     buscarCategoria().then(response => {
@@ -15,10 +22,17 @@ export const Categorias = () => {
     })
   }, [])
 
+  const{user, isLoading} = useAuth();
+
   function mostrar(category){
-    localStorage.setItem(idCategoria, category.id);
-    localStorage.setItem(nombreCategoria, category.categoryName);
-    window.location.href = "./buscarcategoria";
+      if(!user && !isLoading){
+          handleShow()
+      }
+      else {
+          localStorage.setItem(idCategoria, category.id);
+          localStorage.setItem(nombreCategoria, category.categoryName);
+          window.location.href = "./buscarcategoria";
+      }
     }
 
     
@@ -60,6 +74,28 @@ export const Categorias = () => {
             {tableRows}
           </tbody>
         </Table>
+        <Modal id="modal" className="login" show={show} backdrop="static" keyboard={false} centered onHide={handleClose}>
+            <Modal.Header closeButton closeVariant="white">
+                <Modal.Title className="text-white fw-bold">
+                    <i className="bi bi-info-circle"> </i>
+                    Acceso Restringido
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="b-white text-center">
+                <h5>Para acceder a las categorías es necesario
+                    que inicies sesión en tu cuenta.</h5>
+                <img className="logo mb-4 mt-3" src={Logo} alt="Free-Lánzate"/>
+                <h5>¿Deseas continuar?</h5>
+            </Modal.Body>
+            <Modal.Footer className="b-white">
+                <button className="btn3 rounded fw-bold" onClick={handleClose}>
+                    No, regrésame
+                </button>
+                <button className="btn btn-primary fw-bold float-end" onClick={handleLogin}>
+                    ¡Sí, vamos!
+                </button>
+            </Modal.Footer>
+        </Modal>
     </div>
 )
 }

@@ -81,40 +81,46 @@ const Anuncios = () => {
           <div onSubmit={publish} onChange={changeForm}>
           <form>
             <div className="row mt-3">
-              <div className="form-floating col">
-                <select
-                    className="form-control mb-3"
-                    id="postCategory"
-                    name="postCategory"
-                    placeholder="postCategory"
-                    value = {inputs.postCategory}
-                >
-                  {options}
-                </select>
-                <label htmlFor="PostCategoryId" className="ms-3">Categoría</label>
+              <div className="input-group col">
+                <span className="input-group-text bg-gb text-white mb-3"><i className="bi bi-tag-fill"></i></span>
+                <div className="form-floating flex-grow-1">
+                  <select
+                      className="form-control mb-3"
+                      id="postCategory"
+                      name="postCategory"
+                      placeholder="postCategory"
+                      value = {inputs.postCategory}
+                  >
+                    {options}
+                  </select>
+                  <label htmlFor="PostCategoryId" className="ms-3">Categoría</label>
+                </div>
               </div>
               <div className="form-floating col">
                 <input
                     type="text"
-                    className="form-control mb-3"
+                    className="form-control mb-3 welcome2 fw-bold"
                     id="postTitle"
                     name="postTitle"
                     placeholder="postTitle"
                     value = {inputs.postTitle}
                 />
-                <label htmlFor="postTitle" className="ms-3">Título</label>
+                <label htmlFor="postTitle" className="ms-3 text-white">Título</label>
               </div>
-            <div className="form-floating col">
-              <input
-                  type="text"
-                  className="form-control mb-3"
-                  id="postPrice"
-                  name="postPrice"
-                  placeholder="postPrice"
-                  value = {inputs.postPrice}
-              />
-              <label htmlFor="postPrice" className="ms-3">Precio</label>
-            </div>
+              <div className="input-group col">
+                <span className="input-group-text bg-gb text-white mb-3"><i className="bi bi-cash-coin"></i></span>
+                <div className="form-floating flex-grow-1">
+                  <input
+                      type="text"
+                      className="form-control mb-3"
+                      id="postPrice"
+                      name="postPrice"
+                      placeholder="postPrice"
+                      value = {inputs.postPrice}
+                  />
+                  <label htmlFor="postPrice" className="ms-3">Precio</label>
+                </div>
+              </div>
             </div>
               <div className="form-floating col">
                 <textarea

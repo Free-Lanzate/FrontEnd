@@ -2,6 +2,7 @@ import {React, useState} from 'react'
 import { buscarFreelancerPorPalabra } from '../../api/buscar';
 import Table from 'react-bootstrap/Table';
 import ModalFreelancer from '../ModalFreelancer';
+import {starRating} from "../../api/reviews";
 
 const BusquedaFreelancer = (props) => {
 
@@ -26,24 +27,17 @@ const BusquedaFreelancer = (props) => {
         setResultado(resultadoBusqueda)
       }
 
-      const starRating = (num) =>{
-        switch (num){
-          case 1:
-            return "★☆☆☆☆"
-          case 2:
-            return "★★☆☆☆"
-          case 3:
-            return "★★★☆☆"
-          case 4:
-            return "★★★★☆"
-          case 5:
-            return "★★★★★"
-        }
-      }
-
       const freelancerRating = (num) => {
         return <p className="stars">{starRating(num)}</p>
       }
+
+    const buscaInfo = (info) => {
+      if (info === null){
+        return (<p>-</p>)
+      } else {
+        return (<p>{info}</p>)
+      }
+    }
     
     
       if (!resultado) {
@@ -75,8 +69,8 @@ const BusquedaFreelancer = (props) => {
                   <tr className="table-primary welcome">
                     <th></th>
                     <th>Nombre</th>
-                    <th>Usuario</th>
-                    <th className="text-center">Rating</th>
+                    <th>Eslogan</th>
+                    <th className="text-center">Puntuación promedio</th>
                     <th></th>
                     <th></th>
                   </tr>
@@ -97,7 +91,7 @@ const BusquedaFreelancer = (props) => {
                           {freelancer.firstName + " " + freelancer.lastName }
                         </td>
                         <td>
-                          {freelancer.username}
+                          {buscaInfo(freelancer.oneliner)}
                         </td>
                         <td className="text-center">
                           {freelancerRating(freelancer.freelancerRating)}
@@ -106,7 +100,7 @@ const BusquedaFreelancer = (props) => {
                           {freelancer.freelancerDescription}
                         </td>
                         <td>
-                          <ModalFreelancer freelancer={freelancer}/>
+                          <ModalFreelancer freelancer={freelancer} rating={freelancer.freelancerRating}/>
                         </td>
                       </tr>))
                 }
@@ -143,8 +137,8 @@ const BusquedaFreelancer = (props) => {
                 <tr className="table-primary welcome">
                   <th></th>
                   <th>Nombre</th>
-                  <th>Usuario</th>
-                  <th className="text-center">Rating</th>
+                  <th>Eslogan</th>
+                  <th className="text-center">Puntuación Promedio</th>
                   <th></th>
                 </tr>
               </thead>
@@ -164,13 +158,13 @@ const BusquedaFreelancer = (props) => {
                       {resultado.User.firstName + " " + resultado.User.lastName}
                       </td>
                       <td>
-                      {resultado.User.username}
+                      {buscaInfo(resultado.oneliner)}
                       </td>
                       <td className="text-center">
                         {freelancerRating(resultado.freelancerRating)}
                       </td>
                     <td>
-                      <ModalFreelancer freelancer={resultado.User} />
+                      <ModalFreelancer freelancer={resultado.User} rating={resultado.freelancerRating}/>
                     </td>
                   </tr>))
                 }
