@@ -1,6 +1,6 @@
 import {Button} from "react-bootstrap";
 import {React, useState} from 'react';
-import {cambiarCantidad, eliminarItem} from "../api/canasta";
+import {cambiarCantidad} from "../api/canasta";
 
 const CambiarCantidad = (props) => {
 

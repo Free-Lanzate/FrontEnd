@@ -4,6 +4,7 @@ import {anuncia} from "../api/posts";
 import{getAccessToken} from "../api/auth"
 import jwtDecode from "jwt-decode";
 import {buscarCategoria} from "../api/buscar";
+import SubirImagen from '../components/SubirImagen';
 
 const Anuncios = () => {
 
@@ -130,7 +131,9 @@ const Anuncios = () => {
             </div>
           </form>
           </div>
+          <SubirImagen/>
         </div>
+        
       </div>
   )
 }

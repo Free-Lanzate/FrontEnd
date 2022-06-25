@@ -2,9 +2,12 @@
 import { Modal, Button } from "react-bootstrap";
 import {React, useState} from 'react'
 import { agregarItem } from "../api/canasta";
+import jwtDecode from "jwt-decode";
+import {getAccessToken} from "../api/auth";
 
  const ModalAnuncio = ({anuncio}) => {
 
+  const UserId = jwtDecode(getAccessToken()).sub.id;
   const [show, setShow] = useState(false);
 
   const [data, setData] = useState({
@@ -27,7 +30,7 @@ import { agregarItem } from "../api/canasta";
 
   function cambiarData(){
     setData({
-      userId: 1, 
+      userId: UserId, 
       postId: anuncio.id
     })
   }

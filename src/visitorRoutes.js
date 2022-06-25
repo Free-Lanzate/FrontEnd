@@ -5,7 +5,7 @@ import RecuperarPassword from "./views/RecuperarPassword";
 import RestablecerPassword from "./views/RestablecerPassword";
 import Buscar from "./views/Buscar";
 import Visitante from "./layouts/Visitante";
-import Categoria from "./components/buscar/Categoria"
+import ExtraInfo from "./views/ExtraInfo";
 
 const routesVisitante = [
 
@@ -40,8 +40,9 @@ const routesVisitante = [
         layout: Visitante,
     },
     {
-        path: '/buscarcategoria',
-        component: Categoria
+        path: '/informacionExtra',
+        component: ExtraInfo,
+        layout: Visitante,
     }
 ]
 

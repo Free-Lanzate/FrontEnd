@@ -1,18 +1,20 @@
 import {React,useEffect, useState} from 'react'
 import { traerItemsCanasta } from '../api/canasta'
-import {Table, Button} from "react-bootstrap";
+import {Table} from "react-bootstrap";
 import { eliminarItem } from '../api/canasta';
 import CambiarCantidad from '../components/CambiarCantidad';
+import jwtDecode from "jwt-decode";
+import {getAccessToken} from "../api/auth";
+
 
 
 const Carrito = () => {
   
+  const UserId = jwtDecode(getAccessToken()).sub.id;
   const[items, setItems] = useState([])
 
- //console.log(data.newQuantity)
-
   useEffect(() => {
-      traerItemsCanasta(1).then(response => {
+      traerItemsCanasta(UserId).then(response => {
           setItems(response);
       })
     }, [])
@@ -22,7 +24,7 @@ const Carrito = () => {
       }
 
     const eliminar = async (postId) =>{
-        const result = await eliminarItem(1, postId);
+        const result = await eliminarItem(UserId, postId);
         console.log(result)
         refreshPage()
       }
@@ -78,6 +80,36 @@ const Carrito = () => {
               }
           </div>
       </div>
+        </div>
+          <div>
+            <div className="row container rounded w-100">
+              Carrito
+              <div>
+            <>
+              <hr className="separador"/>
+              {items.map((items, index)=>(
+                  <div>
+                      <p className="text-center fw-bold w-100 badge">Item # {index+1}</p>
+                      <p className="me-auto"><b>Valor </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
+                      <hr/>     
+                  </div>
+                ))}
+              <div className="row">
+                <div className="col-2">
+                  <strong>Total Price</strong>
+                </div>
+                <div className="col-1 text-right">
+                  <strong>$</strong>
+                </div>
+              </div>
+              <div className="row">
+                <button onClick={() => alert('Implement Checkout!')}>
+                  Checkout
+                </button>
+              </div>
+            </>
+        </div>
+            </div>
         </div>
       </div>
   )

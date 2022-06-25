@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Layout, Menu, Button } from 'antd'
+import { Layout, Menu} from 'antd'
 import { logout } from "../api/auth"
 import MenuBackground from "../assets/images/menu-lat.png";
 import Logo from "../assets/images/Logo.png"
@@ -60,8 +60,16 @@ function Sidebar (props)  {
                         de compras y, además, recibir recomendaciones?
 
                         ¡Únete ahora!
-                    </span>
+                    </span> 
                 </div>
+                <Menu.Item key="2">
+                    <Link to = '/informacionExtra'>  
+                        <span>
+                            <i className="bi bi-arrow-left-square-fill me-3"> </i>
+                            ¿Quieres saber más acerca de nosotros?
+                        </span>
+                    </Link>
+                </Menu.Item>
             </Menu>
         )
         else return(
@@ -135,11 +143,19 @@ function Sidebar (props)  {
         else return(
             <ul className={rol.substring(1)}>
                 <li>
+                    <Link to = '../informacionExtra'>  
+                        <span>
+                            <i className="bi bi-arrow-right-square-fill me-3"> </i>
+                             Acerca de nosotros
+                        </span>
+                    </Link>
+                </li> 
+                <li>
                     <span onClick={logoutUser}>
                         <i className="bi bi-arrow-left-square-fill me-3"> </i>
                         Salir
                     </span>
-                </li>
+                </li>    
             </ul>
         )
     }
