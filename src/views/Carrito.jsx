@@ -91,8 +91,10 @@ const Carrito = () => {
               {items.map((items, index)=>(
                   <div>
                       <p className="text-center fw-bold w-100 badge">{items.Post.postTitle}</p>
-                      <p className="me-auto"><b>Cantidad a comprar: </b> {items.quantity}</p>
-                      <p className="me-auto"><b>Precio resultante: </b>${items.Post.postPrice * items.quantity} pesos colombianos</p>
+                      <p className="me-auto"><b className="welcome1">Unidades de producto / Horas de servicio:
+                      </b> {items.quantity}</p>
+                      <p className="me-auto"><b className="welcome1">Precio resultante:
+                      </b> ${items.Post.postPrice * items.quantity} pesos colombianos</p>
                       <hr/>
                   </div>
                 ))}
