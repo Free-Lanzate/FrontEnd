@@ -3,6 +3,7 @@ import jwtDecode from "jwt-decode";
 import {getAccessToken} from "../api/auth";
 import {verOrdenes} from "../api/orders";
 import Table from "react-bootstrap/Table";
+import ModalReview from "../components/ModalReview";
 
 
 const Ordenes = () => {
@@ -19,6 +20,14 @@ const Ordenes = () => {
     const fecha = (date) => {
         return(date.toLocaleDateString('es-ES', {year: 'numeric', month: 'long', day: 'numeric'
         ,weekday:'long', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'shortGeneric'}))
+    }
+
+    function validaOrdenes(ordenes){
+        if (ordenes.length === 0){
+            return (
+                <p className="welcome1 fw-bold text-center">Aún no has realizado compras.</p>
+            )
+        }
     }
 
     return (
@@ -61,7 +70,8 @@ const Ordenes = () => {
                                           {item.Post.Freelancer.User.firstName + " " + item.Post.Freelancer.User.lastName}
                                       </td>
                                       <td>
-                                          <button className="btn btn-primary fw-bold float-end">Reseñar »</button>
+
+                                          <ModalReview userId={UserId} orderId={item.id}/>
                                       </td>
                                   </tr>))
                           }
@@ -71,7 +81,11 @@ const Ordenes = () => {
                   </div>
               ))
           }
+              {
+                  validaOrdenes(ordenes)
+              }
           </div>
+
       </div>
   )
 }

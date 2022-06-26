@@ -11,7 +11,6 @@ import {starRating} from "../api/reviews";
 
  const ModalAnuncio = ({anuncio}) => {
 
-  const UserId = jwtDecode(getAccessToken()).sub.id;
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
 
@@ -47,7 +46,7 @@ import {starRating} from "../api/reviews";
 
   function cambiarData(){
     setData({
-      userId: UserId,
+      userId: jwtDecode(getAccessToken()).sub.id,
       postId: anuncio.id
     })
   }

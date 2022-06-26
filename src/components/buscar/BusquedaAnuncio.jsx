@@ -54,7 +54,7 @@ const BusquedaAnuncio = (props) => {
           <Table hover>
             <thead>
             <tr className="table-primary welcome">
-              <th colSpan="2" className="text-center">Anuncios</th>
+              <th colSpan="2" className="text-center">Anuncio</th>
               <th>Precio</th>
               <th className="text-center">Descripción</th>
               <th></th>
@@ -117,7 +117,7 @@ const BusquedaAnuncio = (props) => {
         <Table hover>
           <thead>
           <tr className="table-primary welcome">
-            <th colSpan="2" className="text-center">Anuncios</th>
+            <th colSpan="2" className="text-center">Anuncio</th>
             <th>Precio</th>
             <th className="text-center">Descripción</th>
             <th></th>

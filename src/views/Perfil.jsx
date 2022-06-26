@@ -55,21 +55,13 @@ const Perfil = () => {
 
     const guardarCambios = async e => {
         e.preventDefault();
-        const passwordVal = inputs.newPassword;
-        const repeatPasswordVal = inputs.repeatPassword;
-        if (passwordVal !== repeatPasswordVal) {
-            notification["error"]({
-                message: "Las contraseñas tienen que ser iguales."
-            });
-        } else {
-            const result = await editarPerfil(UserId, inputs);
+        const result = await editarPerfil(UserId, inputs);
             if (result.message === "User was updated successfully.") {
                 notification["success"]({
                     message: "User was updated successfully."
                 });
                 resetForm();
                 window.location.href = "/";
-            }
         }
     }
 

@@ -35,7 +35,7 @@ const BusquedaFreelancer = (props) => {
       if (info === null){
         return (<p>-</p>)
       } else {
-        return (<p>{info}</p>)
+        return (<p className="mt-3">{info}</p>)
       }
     }
     
@@ -69,9 +69,8 @@ const BusquedaFreelancer = (props) => {
                   <tr className="table-primary welcome">
                     <th></th>
                     <th>Nombre</th>
-                    <th>Eslogan</th>
+                    <th className="text-center">Eslogan</th>
                     <th className="text-center">Puntuación promedio</th>
-                    <th></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -96,11 +95,15 @@ const BusquedaFreelancer = (props) => {
                         <td className="text-center">
                           {freelancerRating(freelancer.freelancerRating)}
                         </td>
+
                         <td>
-                          {freelancer.freelancerDescription}
-                        </td>
-                        <td>
-                          <ModalFreelancer freelancer={freelancer} rating={freelancer.freelancerRating}/>
+                          <ModalFreelancer
+                              freelancer={freelancer}
+                              username={freelancer.username}
+                              firstName={freelancer.firstName}
+                              lastName={freelancer.lastName}
+                              rating={freelancer.freelancerRating}
+                          />
                         </td>
                       </tr>))
                 }
@@ -158,13 +161,19 @@ const BusquedaFreelancer = (props) => {
                       {resultado.User.firstName + " " + resultado.User.lastName}
                       </td>
                       <td>
-                      {buscaInfo(resultado.oneliner)}
+                        {buscaInfo(resultado.oneliner)}
                       </td>
                       <td className="text-center">
                         {freelancerRating(resultado.freelancerRating)}
                       </td>
                     <td>
-                      <ModalFreelancer freelancer={resultado.User} rating={resultado.freelancerRating}/>
+                      <ModalFreelancer
+                          freelancer={resultado}
+                          username={resultado.User.username}
+                          firstName={resultado.User.firstName}
+                          lastName={resultado.User.lastName}
+                          rating={resultado.freelancerRating}
+                      />
                     </td>
                   </tr>))
                 }

@@ -155,7 +155,7 @@ const RegistroFreelancer = () => {
                             <p className="h5 mb-3 fw-bold text-gb">Datos de contacto</p>
                             <div className="row">
                                 <div className="col">
-                                    <p className="text-start ms-4">Celular:</p>
+                                    <p className="text-start ms-4">WhatsApp:</p>
                                     <div className="input-group mx-4 mt-1">
                                         <div>
                                         <span className="input-group-text bg-b text-white mb-3"><i
