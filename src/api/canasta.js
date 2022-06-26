@@ -70,3 +70,37 @@ export function traerItemsCanasta(id){
         return result;
       })
   }
+
+  export function traerSesion(id){
+    const url = 'http://localhost:8000/shopping/getSessionId/' + id;
+      const params = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+  
+      return fetch(url, params).then(response =>{
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+  }
+
+  export function terminarCompra(id){
+    const url = 'http://localhost:8000/shopping/endShoppingSession/' + id;
+      const params = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+  
+      return fetch(url, params).then(response =>{
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+  }
