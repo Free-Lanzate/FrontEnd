@@ -159,7 +159,7 @@ const RegistroFreelancer = () => {
                                     <div className="input-group mx-4 mt-1">
                                         <div>
                                         <span className="input-group-text bg-b text-white mb-3"><i
-                                            className="fa fa-whatsapp"> </i></span>
+                                            className="fa fa-whatsapp me-2"> </i> +57 </span>
                                         </div>
                                         <input
                                             type="text"

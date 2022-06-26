@@ -35,6 +35,31 @@ const Recomendaciones = () => {
         }
     }
 
+    function validaRecomendados(ordenes,orden,item){
+        let diferencias = 0;
+        let total = 0;
+        const revisa = ordenes.slice(0,ordenes.indexOf(orden))
+        if (revisa.length > 0){
+            revisa.forEach(previo => {
+                previo.OrderItems.forEach(checkItem => {
+                    if (item.Post.PostTitle !== checkItem.Post.PostTitle){
+                        diferencias++;
+                    }
+                    total++;
+                })
+            })
+        }
+        if (diferencias === total) {
+            return (
+                <div>
+                    <h5 className="mb-3">Porque compraste <b className="mid-badge">{item.Post.PostTitle}</b>, te
+                        recomendamos:</h5>
+                    <PostsRelacionados id={item.PostId}/>
+                </div>
+            )
+        }
+    }
+
   return (
       <div className="contenedorPerfil text-center d-flex">
         <div className="container rounded row w-100">
@@ -85,10 +110,7 @@ const Recomendaciones = () => {
                 {
                     ordenes.map((orden)=>(
                         orden.OrderItems.map((item)=>(
-                            <div>
-                                <h5 className="mb-3">Porque compraste <b className="mid-badge">{item.Post.PostTitle}</b>, te recomendamos:</h5>
-                                <PostsRelacionados id={item.PostId}/>
-                            </div>
+                            validaRecomendados(ordenes,orden,item)
                         ))
                     ))
                 }

@@ -82,7 +82,7 @@ const BusquedaAnuncio = (props) => {
                       {anuncio.postDescription}
                     </td>
                     <td>
-                      <ModalAnuncio anuncio={anuncio} />
+                      <ModalAnuncio anuncio={anuncio} id={anuncio.UserId} />
                     </td>
                   </tr>))
             }
@@ -145,7 +145,7 @@ const BusquedaAnuncio = (props) => {
                   {resultado.postDescription}
                   </td>
                 <td>
-                  <ModalAnuncio anuncio={resultado} />
+                  <ModalAnuncio anuncio={resultado} id={resultado.Freelancer.User.id}/>
                 </td>
               </tr>))
             }

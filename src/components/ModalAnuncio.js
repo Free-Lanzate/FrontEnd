@@ -9,10 +9,14 @@ import Logo from "../assets/images/Logo.png";
 import {buscarAnuncios, infoAnuncio} from "../api/buscar";
 import {starRating} from "../api/reviews";
 
- const ModalAnuncio = ({anuncio}) => {
+ const ModalAnuncio = (props) => {
+
+  const anuncio = props.anuncio
+  const anuncioUserId = props.id
 
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
 
   const{user, isLoading} = useAuth();
 
@@ -26,6 +30,7 @@ import {starRating} from "../api/reviews";
   const handleClose = () => {
     setShow(false);
     setShow2(false);
+    setShow3(false);
   }
   const handleShow = () => {
       if(!user && !isLoading){
@@ -39,9 +44,13 @@ import {starRating} from "../api/reviews";
 
   const agregarAlCarrito = async e =>{
     e.preventDefault();
-    const result = await agregarItem(data);
-    console.log(result)
-    setShow(false);
+    if (anuncioUserId === data.userId){
+        setShow(false);
+        setShow3(true);
+    } else {
+        const result = await agregarItem(data);
+        setShow(false);
+    }
   }
 
   function cambiarData(){
@@ -62,8 +71,6 @@ import {starRating} from "../api/reviews";
           setInfo(response);
       })
   }, []);
-
-  //console.log(info[0].firstName)
 
      function printReview(postInfo,index){
          if (postInfo.fn === null){
@@ -181,6 +188,25 @@ import {starRating} from "../api/reviews";
                   </button>
                   <button className="btn btn-primary fw-bold float-end" onClick={handleLogin}>
                       ¡Sí, vamos!
+                  </button>
+              </Modal.Footer>
+          </Modal>
+
+          <Modal id="modal" className="login" show={show3} backdrop="static" keyboard={false} centered onHide={handleClose}>
+              <Modal.Header closeButton closeVariant="white">
+                  <Modal.Title className="text-white fw-bold">
+                      <i className="bi bi-info-circle"> </i>
+                      Acceso Restringido
+                  </Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="b-white text-center">
+                  <h5>Parece que estás tratando de adquirir uno de tus propios productos o servicios.
+                  Esta acción no está permitida.</h5>
+                  <img className="logo mb-4 mt-3" src={Logo} alt="Free-Lánzate"/>
+              </Modal.Body>
+              <Modal.Footer className="b-white">
+                  <button className="btn btn-primary fw-bold float-end" onClick={handleClose}>
+                      Entendido
                   </button>
               </Modal.Footer>
           </Modal>
