@@ -3,11 +3,14 @@ import Logo from "../assets/images/Logo.png";
 import {deleteAcc, getAccessToken, logout} from "../api/auth"
 import jwtDecode from "jwt-decode";
 import {miPerfil, editarPerfil, perfilFreelancer, editarPerfilFreelancer, eliminarUsuario} from "../api/user";
-import {notification} from "antd";
 import {Modal} from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
+import ModalError from "../components/ModalError";
+import {emailValidation, minLengthValidation} from "../utils/formValidation";
 
 const Perfil = () => {
+
+    const error = localStorage.getItem("ERR")
 
     const{user, isLoading, isFreelancer} = useAuth();
 
@@ -110,14 +113,24 @@ const Perfil = () => {
     };
 
     const guardarCambios = async e => {
+        const location = inputs.location
+        const firstName = inputs.firstName
+        const lastName = inputs.lastName
+        const email = inputs.email
+        const username = inputs.username
         e.preventDefault();
-        const result = await editarPerfil(UserId, inputs);
-            if (result.message === "User was updated successfully.") {
-                notification["success"]({
-                    message: "User was updated successfully."
-                });
+        if (location === "" || firstName === "" || lastName === "" || email === "" || username === ""){
+            localStorage.setItem("ERR","Todos los datos del usuario deben estar diligenciados.")
+            window.location.reload();
+        } else {
+            const result = await editarPerfil(UserId, inputs);
+            if (result.message === "El usuario se actualizó correctamente.") {
                 resetForm();
-                window.location.href = "/";
+                window.location.reload();
+            } else {
+                localStorage.setItem("ERR", result.message)
+                window.location.reload()
+            }
         }
     }
 
@@ -126,11 +139,11 @@ const Perfil = () => {
         const result = await editarPerfilFreelancer(UserId, inputs2);
         console.log(result)
         if (result.message === "Freelancer was updated successfully.") {
-            notification["success"]({
-                message: "Freelancer was updated successfully."
-            });
             resetForm2();
-            window.location.href = "/";
+            window.location.reload();
+        } else {
+            localStorage.setItem("ERR",result.message)
+            window.location.reload()
         }
     }
 
