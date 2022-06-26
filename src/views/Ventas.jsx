@@ -2,19 +2,27 @@ import {React,useEffect, useState} from 'react'
 import jwtDecode from "jwt-decode";
 import {getAccessToken} from "../api/auth";
 import Table from "react-bootstrap/Table";
-import { traerVentas } from '../api/ventas';
+import { traerMisAnuncios, traerVentas } from '../api/ventas';
 
 const Ventas = () => {
     const UserId = jwtDecode(getAccessToken()).sub.id;
+    const[misAnuncios, setMisAnuncios] = useState([])
     const[ventas, setVentas] = useState([])
 
     useEffect(() => {
         traerVentas(UserId).then(response => {
             setVentas(response);
         })
-    }, [UserId])
+    }, [])
+
+    useEffect(() => {
+        traerMisAnuncios(UserId).then(response => {
+            setMisAnuncios(response);
+        })
+    }, [])
 
     console.log(ventas)
+    console.log(misAnuncios)
 
     
     const fecha = (date) => {
@@ -26,8 +34,52 @@ const Ventas = () => {
       <div className="col contenedorPerfil d-flex">
           <div className="row container rounded w-100">
               <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son
-              los productos y servicios que has vendido:</h5>
+              los productos y servicios que has publicado:</h5>
           {
+              misAnuncios.map((misAnuncios, index)=>(
+                  <div>
+                      <p className="text-center fw-bold w-100 badge">Anuncio # {index+1}</p>
+                      <div className="d-flex w-100">
+                          <p><b>Fecha de publicación: </b>{fecha(new Date(misAnuncios.createdAt))}</p>
+                      </div>
+                      <Table hover>
+                          <thead>
+                          <tr className="table-primary welcome">
+                              <th className="text-center" colSpan="2">Producto o Servicio publicado</th>
+                              <th>Descripción</th>
+                              <th>Precio</th>
+                          </tr>
+                          </thead>
+                          <tbody className="align-middle">
+                            <tr>
+                                <td>
+                                    <svg
+                                        className="bd-placeholder-img rounded" width="160" height="90" role="img">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="#eee"></rect>
+                                        <text x="50%" y="50%" fill="#aaa" dy=".3em">Imagen</text>
+                                    </svg>
+                                </td>
+                                <td>
+                                    {misAnuncios.postTitle}
+                                </td>
+                                <td>
+                                    {misAnuncios.postDescription}
+                                </td>
+                                <td>
+                                    {misAnuncios.postPrice}
+                                </td>
+                            </tr>
+                          </tbody>
+                      </Table>
+                      <hr className="separador"/>
+                  </div>
+              ))
+            }
+            <br/>
+            <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son
+              los productos y servicios que has vendido:</h5>
+            {
               ventas.map((ventas, index)=>(
                   <div>
                       <p className="text-center fw-bold w-100 badge">Orden # {index+1}</p>
@@ -39,8 +91,8 @@ const Ventas = () => {
                           <thead>
                           <tr className="table-primary welcome">
                               <th className="text-center" colSpan="2">Producto o Servicio vendido</th>
-                              <th>descripción</th>
-                              <th>cantidad</th>
+                              <th>Descripción</th>
+                              <th>Cantidad</th>
                               <th></th>
                           </tr>
                           </thead>
@@ -55,7 +107,7 @@ const Ventas = () => {
                                     </svg>
                                 </td>
                                 <td>
-                                    {ventas.PostTitle}
+                                    {ventas.postTitle}
                                 </td>
                                 <td>
                                     {ventas.postDescription}
@@ -64,7 +116,7 @@ const Ventas = () => {
                                     {ventas.itemAmount}
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary fw-bold float-end">Reseñar »</button>
+                                    <button className="btn btn-primary fw-bold float-end">Reseñas»</button>
                                 </td>
                             </tr>
                           </tbody>
