@@ -6,6 +6,7 @@ import Ordenes from "./views/Ordenes"
 import Perfil from "./views/Perfil"
 import Recomendaciones from "./views/Recomendaciones"
 import ExtraInfo from "./views/ExtraInfo"
+import Ventas from "./views/Ventas"
 
 const routesSidebar = [
     {
@@ -43,6 +44,10 @@ const routesSidebar = [
     {
         path: 'informacionExtra',
         component: ExtraInfo,
+    },
+    {
+        path: 'misVentas',
+        component: Ventas,
     }
 ]
     

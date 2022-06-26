@@ -31,6 +31,7 @@ function Sidebar (props)  {
 
     function anuncio(rol) {
         if (rol==="/freelanzer") return(
+            <>
             <Menu.Item key="6">
                 <Link to="../anuncio">
                 <span>
@@ -38,7 +39,17 @@ function Sidebar (props)  {
                     Anunciarme
                 </span>
                 </Link>
-            </Menu.Item>)
+            </Menu.Item>
+            <Menu.Item key="7">
+                <Link to="../misVentas">
+                <span>
+                    <i className="bi bi-cash-coin me-3"> </i>
+                    Mis ventas
+                </span>
+                </Link>
+            </Menu.Item>
+            </>
+            )
         else return null
     }
 

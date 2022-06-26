@@ -1,58 +1,57 @@
-import React from 'react'
-import ImageUploading from "react-images-uploading";
+import React, {Fragment, useState} from 'react';
 
-const SubirImagen = () => {
-    const [images, setImages] = React.useState([]);
-    const maxNumber = 69;
-    const onChange = (imageList, addUpdateIndex) => {
-      // data for submit
-      console.log(imageList, addUpdateIndex);
-      setImages(imageList);
-    };
+const SubirImagen = ({inputs, setInputs}) => {
+  const [file, setFile] = useState(null)
+
+  const selectedHandler = e => {
+    setFile(e.target.files[0])
+  }
+
+  const sendHandler = () => {
+    if(!file){
+      alert('you must upload file')
+      return
+    }
+
+    const formdata = new FormData()
+    formdata.append('image', file)
+
+    /*setInputs({
+      if (inputs.name ===) {
+        
+      }
+    });*/
+
+    console.log(inputs)
+    console.log(file)
+
+    //document.getElementById('fileinput').value = null
+
+    //setFile(null)
+  }
 
   return (
-    <div>
-      <ImageUploading
-        multiple
-        value={images}
-        onChange={onChange}
-        maxNumber={maxNumber}
-        dataURLKey="data_url"
-      >
-        {({
-          imageList,
-          onImageUpload,
-          onImageRemoveAll,
-          onImageUpdate,
-          onImageRemove,
-          isDragging,
-          dragProps
-        }) => (
-          // write your building UI
-          <div className="upload__image-wrapper">
-            <button
-              style={isDragging ? { color: "red" } : null}
-              onClick={onImageUpload}
-              {...dragProps}
-            >
-              Subir imagen
-            </button>
-            &nbsp;
-            <button onClick={onImageRemoveAll}>Remove all images</button>
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image.data_url} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
-                </div>
-              </div>
-            ))}
+    <Fragment>
+      <div className="container mt-5">
+        <div className="card p-3">
+          <div className="row">
+            <div className="col-10">
+              <input 
+                id="fileinput"
+                name='fileinput' 
+                onChange={selectedHandler} 
+                className="form-control" 
+                type="file"
+                />
+            </div>
+            <div className="col-2">
+              <button onClick={sendHandler} type="button" className="btn btn-primary col-12">Upload</button>
+            </div>
           </div>
-        )}
-      </ImageUploading>
-    </div>
-  )
+        </div>
+      </div>
+    </Fragment>
+  );
 }
 
 export default SubirImagen

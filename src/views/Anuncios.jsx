@@ -131,7 +131,7 @@ const Anuncios = () => {
             </div>
           </form>
           </div>
-          <SubirImagen/>
+          <SubirImagen inputs={inputs.thumbnailUrl} setInputs={setInputs}/>
         </div>
         
       </div>
