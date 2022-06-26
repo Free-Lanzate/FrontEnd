@@ -5,8 +5,11 @@ import{getAccessToken} from "../api/auth"
 import jwtDecode from "jwt-decode";
 import {buscarCategoria} from "../api/buscar";
 import SubirImagen from '../components/SubirImagen';
+import ModalApproved from "../components/ModalApproved";
 
 const Anuncios = () => {
+
+  const payment = localStorage.getItem('PAID');
 
   const[category, setCategory] = useState([])
 
@@ -14,6 +17,15 @@ const Anuncios = () => {
     buscarCategoria().then(response => {
       setCategory(response);
     })
+  }, [])
+
+  useEffect(() => {
+    if (payment && payment !== "none") {
+      setInputs({
+        ...inputs,
+        adPriority: parseInt(payment)
+      });
+    }
   }, [])
 
   const options = category.map((category)=>{
@@ -42,7 +54,13 @@ const Anuncios = () => {
       });
   };
 
+  function loadApproved(){
+    return(<ModalApproved location="anuncio"/>)
+  }
+
   const publish = async e => {
+    localStorage.removeItem('PAID')
+    localStorage.setItem('PAID',"done")
     e.preventDefault();
     const result = await anuncia(inputs,user.sub.id);
     console.log(result)
@@ -52,7 +70,7 @@ const Anuncios = () => {
       });
     } else {
         resetForm();
-        window.location.href = "/";
+        window.location.reload();
     }
   }
 
@@ -74,74 +92,82 @@ const Anuncios = () => {
       adPriority: 0
     });
   };
-  return (
-      <div className="contenedorPerfil text-center d-flex">
-        <div className="container rounded row">
-          <h5 className=" welcome mb-3 fw-bold">Anunciarme</h5>
-          <div onSubmit={publish} onChange={changeForm}>
-          <form>
-            <div className="row mt-3">
-              <div className="input-group col">
-                <span className="input-group-text bg-gb text-white mb-3"><i className="bi bi-tag-fill"></i></span>
-                <div className="form-floating flex-grow-1">
-                  <select
-                      className="form-control mb-3"
-                      id="postCategory"
-                      name="postCategory"
-                      placeholder="postCategory"
-                      value = {inputs.postCategory}
-                  >
-                    {options}
-                  </select>
-                  <label htmlFor="PostCategoryId" className="ms-3">Categoría</label>
+  if (!payment || payment === "null") {
+    localStorage.setItem("PAID",'none')
+    window.location.href = "./tarifa"
+  } else {
+    return (
+        <div className="contenedorPerfil text-center d-flex">
+          <div className="container rounded row">
+            <h5 className=" welcome mb-3 fw-bold">Anunciarme</h5>
+            <div onSubmit={publish} onChange={changeForm}>
+              <form>
+                <div className="row mt-3">
+                  <div className="input-group col">
+                    <span className="input-group-text bg-gb text-white mb-3"><i className="bi bi-tag-fill"></i></span>
+                    <div className="form-floating flex-grow-1">
+                      <select
+                          className="form-control mb-3"
+                          id="postCategory"
+                          name="postCategory"
+                          placeholder="postCategory"
+                          value={inputs.postCategory}
+                      >
+                        {options}
+                      </select>
+                      <label htmlFor="PostCategoryId" className="ms-3">Categoría</label>
+                    </div>
+                  </div>
+                  <div className="form-floating col">
+                    <input
+                        type="text"
+                        className="form-control mb-3 welcome2 fw-bold"
+                        id="postTitle"
+                        name="postTitle"
+                        placeholder="postTitle"
+                        value={inputs.postTitle}
+                    />
+                    <label htmlFor="postTitle" className="ms-3 text-white">Título</label>
+                  </div>
+                  <div className="input-group col">
+                    <span className="input-group-text bg-gb text-white mb-3"><i className="bi bi-cash-coin"></i></span>
+                    <div className="form-floating flex-grow-1">
+                      <input
+                          type="text"
+                          className="form-control mb-3"
+                          id="postPrice"
+                          name="postPrice"
+                          placeholder="postPrice"
+                          value={inputs.postPrice}
+                      />
+                      <label htmlFor="postPrice" className="ms-3">Precio</label>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="form-floating col">
-                <input
-                    type="text"
-                    className="form-control mb-3 welcome2 fw-bold"
-                    id="postTitle"
-                    name="postTitle"
-                    placeholder="postTitle"
-                    value = {inputs.postTitle}
-                />
-                <label htmlFor="postTitle" className="ms-3 text-white">Título</label>
-              </div>
-              <div className="input-group col">
-                <span className="input-group-text bg-gb text-white mb-3"><i className="bi bi-cash-coin"></i></span>
-                <div className="form-floating flex-grow-1">
-                  <input
-                      type="text"
-                      className="form-control mb-3"
-                      id="postPrice"
-                      name="postPrice"
-                      placeholder="postPrice"
-                      value = {inputs.postPrice}
-                  />
-                  <label htmlFor="postPrice" className="ms-3">Precio</label>
-                </div>
-              </div>
-            </div>
-              <div className="form-floating col">
+                <div className="form-floating col">
                 <textarea
                     className="form-control mb-3 descripcion"
                     id="postDescription"
                     name="postDescription"
                     placeholder="postDescription"
-                    value = {inputs.postDescription}
+                    value={inputs.postDescription}
                 />
-                <label htmlFor="postDescription" className="ms-3">¿En qué consiste el producto o servicio que deseas ofrecer?</label>
-              </div>
-            <div className="col">
-              <button className="w-70 btn btn-lg btn-primary fw-bold" type="submit">Publicar</button>
+                  <label htmlFor="postDescription" className="ms-3">¿En qué consiste el producto o servicio que deseas
+                    ofrecer?</label>
+                </div>
+                <div className="col">
+                  <button className="w-70 btn btn-lg btn-primary fw-bold" type="submit">Publicar</button>
+                </div>
+              </form>
             </div>
-          </form>
+
           </div>
-          <SubirImagen/>
+          {
+            loadApproved()
+          }
         </div>
-        
-      </div>
-  )
+    )
+  }
 }
 
 export default Anuncios

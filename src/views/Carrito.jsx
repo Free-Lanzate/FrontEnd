@@ -1,15 +1,24 @@
 import {React,useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import { traerItemsCanasta, traerSesion, terminarCompra } from '../api/canasta'
 import {Table} from "react-bootstrap";
 import { eliminarItem } from '../api/canasta';
 import CambiarCantidad from '../components/CambiarCantidad';
 import jwtDecode from "jwt-decode";
 import {getAccessToken} from "../api/auth";
-
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import ModalApproved from "../components/ModalApproved";
 
 
 const Carrito = () => {
+
+    const estado = useParams()
+
+    const initialOptions = {
+        "client-id": "Aa9dtYax1fms_6h0oLlp1G1ji_t_aHok_-iWzvhE1jE3JFDHmy-luKUetTIAx85ibBweGhbgCR-J02d5",
+        locale: "es_CO",
+        currency: "USD"
+    };
   
   const UserId = jwtDecode(getAccessToken()).sub.id;
   const[items, setItems] = useState([])
@@ -28,7 +37,7 @@ const Carrito = () => {
     }, [])
 
     function refreshPage() {
-        window.location.reload(false);
+        window.location.reload();
       }
 
     const eliminar = async (postId) =>{
@@ -37,38 +46,40 @@ const Carrito = () => {
         refreshPage()
       }
 
-    const finalizarCompra = async e =>{
+    const finalizarCompra = async (code) =>{
       const result = await terminarCompra(UserId);
-        console.log(result)
+      localStorage.setItem("PAID",code)
         refreshPage()
     }
 
-    //console.log(items)
-    //console.log(cantidad)
+    function loadApproved(){
+      return(<ModalApproved location="carrito"/>)
+    }
+
+    function dolares(num){
+      const dolar = Math.round(num*100/4138.5)/100
+      return dolar.toString()
+    }
 
     if (items.length === 0) {
         return(
             <div className="contenedorPerfil text-center d-flex">
                 <div className="container rounded row w-100">
-                    <div className="col contenedorPerfil d-flex">
-                        <div className="row container rounded w-100">
-                            <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son los productos y servicios que hay en tu carrito:</h5>
-                            <div>
-                                ¡Al parecer tu carrito se encuantra vacio!
-                                <br/>
-                                <Link to="/freelanzer/buscar">
-                        <span>
-                            ¡Haz click acá para buscar eso que necesitas!
-                            <i className="bi bi-search me-3"> </i>
-                        </span>
-                                </Link>
-                            </div>
-                        </div>
+                    <h5 className="text-center welcome2 rounded-pill mb-3 fw-bold">Estos son los productos y servicios que hay en tu carrito:</h5>
+                    <div>
+                        <h5>Al parecer, tu carrito se encuentra vacío</h5>
+                        <Link to="../buscar">
+                            <span className="badge mt-2 text-decoration-underline">
+                                ¡Haz click acá para buscar eso que necesitas!
+                                <i className="bi bi-search ms-3"> </i>
+                            </span>
+                        </Link>
                     </div>
+                    {loadApproved(estado)}
                 </div>
             </div>
         )
-    }else {
+    } else {
         return (
             <div className="contenedorPerfil text-center d-flex">
                 <div className="container rounded row w-100">
@@ -136,18 +147,37 @@ const Carrito = () => {
                             </div>
                         ))}
                         <div className="welcome2 row d-flex mt-4">
-                            <div className="col-5">
+                            <div className="col">
                                 <strong>Precio total:</strong>
                             </div>
-                            <div className="col-3 text-right">
+                            <div className="col float-end">
                                 <strong>$ {sesion.total} </strong>
                             </div>
                         </div>
-                        <div className="row">
-                            <button className="btn btn-primary mt-4 mb-2 w-75 mx-auto fw-bold" onClick={finalizarCompra}>
-                                Realizar Compra
-                            </button>
+
+                        <div className="row mt-4">
+                            <PayPalScriptProvider options={initialOptions}>
+                                <PayPalButtons
+                                    createOrder={(data, actions) => {
+                                        return actions.order.create({
+                                            purchase_units: [
+                                                {
+                                                    amount: {
+                                                        value: dolares(sesion.total),
+                                                    },
+                                                },
+                                            ],
+                                        });
+                                    }}
+                                    onApprove={(data, actions) => {
+                                        return actions.order.capture().then((details) => {
+                                            finalizarCompra(data.payerID);
+                                        });
+                                    }}
+                                />
+                            </PayPalScriptProvider>
                         </div>
+
                     </div>
                 </div>
             </div>
