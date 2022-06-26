@@ -18,6 +18,10 @@ export function logout() {
   localStorage.clear();
 }
 
+export function deleteAcc() {
+    localStorage.removeItem(TOKEN);
+}
+
 function willExpireToken(token) {
   const seconds = 60;
   const metaToken = jwtDecode(token);

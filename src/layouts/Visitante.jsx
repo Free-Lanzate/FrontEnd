@@ -12,6 +12,7 @@ function Visitante (props) {
   const rol = "/";
 
   if(getAccessToken()){
+    localStorage.setItem("ERR","Estás registrado como usuario. Para acceder al rol de freelancer y/o visitante debes cerrar sesión.")
     return <Navigate to = '/usuario'/>
   }
 

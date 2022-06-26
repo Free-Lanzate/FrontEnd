@@ -1,14 +1,19 @@
 import React,{useState} from 'react';
-import { notification } from "antd";
 import { emailValidation, minLengthValidation} from "../utils/formValidation";
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
 import {showHide} from "../utils/passwordVisibility"
 import {registro} from "../api/user";
-
+import ModalError from "../components/ModalError";
 
 
 const Registro = () => {
+
+    const error = localStorage.getItem("ERR");
+
+    function refreshPage() {
+        window.location.reload();
+    }
 
     const style = {
         backgroundImage: `url(${Background})`,
@@ -72,32 +77,23 @@ const Registro = () => {
         const repeatPasswordVal = inputs.repeatPassword;
 
         if (!emailVal || !passwordVal || !repeatPasswordVal) {
-        notification["error"]({
-            message: "Todos los campos son obligatorios"
-        });
+            localStorage.setItem('ERR',"Todos los campos son obligatorios.")
+            refreshPage()
         } else {
             if (passwordVal !== repeatPasswordVal) {
-                notification["error"]({
-                message: "Las contraseñas tienen que ser iguales."
-                });
+                localStorage.setItem('ERR',"Las contraseñas tienen que ser iguales. Por favor, intente de nuevo.")
+                refreshPage()
             } else {
                 const result = await registro(inputs);
                 console.log(result)
                 if (!result.ok) {
-                    notification["error"]({
-                    message: result.message
-                    });
+                    localStorage.setItem('ERR',result.message)
+                    refreshPage()
                 } else {
                     if(result.free){
-                        notification["success"]({
-                        message: result.message
-                        });
                         resetForm();
                         window.location.href = "registro-freelancer";
                     }else{
-                        notification["success"]({
-                        message: result.message
-                        });
                         resetForm();
                         window.location.href = "login";
                     }
@@ -252,6 +248,7 @@ const Registro = () => {
                 </div>
             </form>
         </div>
+        <ModalError error={error}/>
     </div>
   )
 }

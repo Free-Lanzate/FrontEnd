@@ -69,7 +69,7 @@ const BusquedaFreelancer = (props) => {
                   <tr className="table-primary welcome">
                     <th></th>
                     <th>Nombre</th>
-                    <th className="text-center">Eslogan</th>
+                    <th className="text-center">Oneliner</th>
                     <th className="text-center">Puntuación promedio</th>
                     <th></th>
                   </tr>
@@ -140,7 +140,7 @@ const BusquedaFreelancer = (props) => {
                 <tr className="table-primary welcome">
                   <th></th>
                   <th>Nombre</th>
-                  <th>Eslogan</th>
+                  <th>Oneliner</th>
                   <th className="text-center">Puntuación Promedio</th>
                   <th></th>
                 </tr>

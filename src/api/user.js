@@ -84,7 +84,7 @@ export function miPerfil(id){
 }
 
 export function perfilFreelancer(id){
-  const url = 'http://localhost:8000//freelancer/user/' + id;
+  const url = 'http://localhost:8000/freelancer/user/' + id;
   const params = {
     method: "GET",
     headers: {
@@ -123,6 +123,23 @@ export function editarPerfilFreelancer(id, data){
   const params = {
     method: "POST",
     body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  return fetch(url, params).then(response =>{
+    return response.json();
+  })
+      .then(result => {
+        return result;
+      })
+}
+
+export function eliminarUsuario(id){
+  const url = 'http://localhost:8000/user/' + id + '/delete';
+  const params = {
+    method: "POST",
     headers: {
       "Content-Type": "application/json"
     }

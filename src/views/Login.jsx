@@ -2,13 +2,15 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import {iniciar_sesion} from "../api/user"
 import {TOKEN} from "../utils/tokens"
-import {notification} from "antd"
 import Logo from "../assets/images/Logo.png"
 import Background from "../assets/images/fondo.png"
 import {showHide} from "../utils/passwordVisibility"
 import jwtDecode from 'jwt-decode'
+import ModalError from "../components/ModalError";
 
 function Login (){
+
+    const error = localStorage.getItem("ERR")
 
     const style = {
         backgroundImage: `url(${Background})`,
@@ -32,31 +34,29 @@ function Login (){
     });
   };
 
+    function refreshPage() {
+        window.location.reload();
+    }
+
   const login = async e =>{
     e.preventDefault();
     const result = await iniciar_sesion(inputs);
 
-    if(result === 'Nombre de usuario incorrecto') {
-      notification["error"]({
-        message: result
-      });
+    if(result === 'Nombre de usuario incorrecto.') {
+        localStorage.setItem('ERR',result)
+        refreshPage()
     }
-    else if(result ==='La contraseña es incorrecta'){
-      notification["error"]({
-        message: result
-      });
+    else if(result ==='La contraseña es incorrecta.'){
+        localStorage.setItem('ERR',result)
+        refreshPage()
     }
-    else if(result ==='Por favor ingrese todos los campos'){
-      notification["error"]({
-        message: result
-      });
+    else if(result ==='Por favor ingrese todos los campos.'){
+        localStorage.setItem('ERR',result)
+        refreshPage()
     }
     else{
       const free = jwtDecode(result)
       localStorage.setItem(TOKEN, result);
-      notification["success"]({
-        message: "Login correcto."
-        });
         if(free.sub.isFreelancer){
           window.location.href = "freelanzer";
         }else{
@@ -103,6 +103,7 @@ function Login (){
                 <p>¿No tienes cuenta?<a href="/registro" className="badge mt-4">Regístrate</a></p>
             </div>
         </div>
+        <ModalError error={error}/>
     </div>
   )
 }

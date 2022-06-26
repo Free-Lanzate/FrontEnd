@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Logo from "../assets/images/Logo.png";
-import{getAccessToken, logout} from "../api/auth"
+import {deleteAcc, getAccessToken, logout} from "../api/auth"
 import jwtDecode from "jwt-decode";
-import {miPerfil, editarPerfil, perfilFreelancer} from "../api/user";
+import {miPerfil, editarPerfil, perfilFreelancer, editarPerfilFreelancer, eliminarUsuario} from "../api/user";
 import {notification} from "antd";
 import {Modal} from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
@@ -12,8 +12,18 @@ const Perfil = () => {
     const{user, isLoading, isFreelancer} = useAuth();
 
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [show2, setShow2] = useState(false);
+    const handleClose = () => {
+        setShow(false);
+        setShow2(false);
+    }
+    const handleShow = () => {
+        setShow(true);
+    }
+
+    const handleShow2 = () => {
+        setShow2(true);
+    }
 
     const UserId = jwtDecode(getAccessToken()).sub.id;
 
@@ -52,8 +62,8 @@ const Perfil = () => {
     }
 
     const profileFreelancer = async () => {
-        const myUser2 = await perfilFreelancer(UserId);
-        console.log()
+        let myUser2 = await perfilFreelancer(UserId);
+        myUser2 = myUser2[0];
         setInputs2({
             ...inputs2,
             oneliner: myUser2.oneliner,
@@ -73,6 +83,9 @@ const Perfil = () => {
 
     useEffect(() => {
         profile();
+    }, []);
+
+    useEffect(() => {
         if(isFreelancer){
             profileFreelancer();
         }
@@ -110,12 +123,13 @@ const Perfil = () => {
 
     const guardarCambios2 = async e => {
         e.preventDefault();
-        const result = await editarPerfil(UserId, inputs);
+        const result = await editarPerfilFreelancer(UserId, inputs2);
+        console.log(result)
         if (result.message === "Freelancer was updated successfully.") {
             notification["success"]({
                 message: "Freelancer was updated successfully."
             });
-            resetForm();
+            resetForm2();
             window.location.href = "/";
         }
     }
@@ -170,6 +184,21 @@ const Perfil = () => {
         window.location.href = "/clave/" + inputs.email
     }
 
+    const borrarCuenta = () => {
+        deleteAcc();
+        window.location.href = "../login";
+    };
+
+    const eliminarCuenta = async e =>{
+        e.preventDefault();
+        const result = await eliminarUsuario(UserId);
+        if(result.message === 'El usuario fue eliminado de forma correcta.') {
+            handleClose();
+            localStorage.setItem("ERR","Tu cuenta ha sido eliminada.")
+            borrarCuenta();
+        }
+    }
+
     function confirmacion(){
         return(
             <Modal id="modal" className="login" show={show} backdrop="static" keyboard={false} centered
@@ -198,8 +227,36 @@ const Perfil = () => {
         )
     }
 
+    function confirmacion2(){
+        return(
+            <Modal id="modal" className="login" show={show2} backdrop="static" keyboard={false} centered
+                   onHide={handleClose}>
+                <Modal.Header closeButton closeVariant="white">
+                    <Modal.Title className="text-white fw-bold">
+                        <i className="bi bi-exclamation-triangle-fill me-2"></i>
+                        ¡Cuidado!
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="b-white text-center">
+                    <h5>Esta acción eliminará los datos de tu cuenta de manera permanente y no se podrá deshacer.</h5>
+                    <img className="logo mb-4 mt-3" src={Logo} alt="Free-Lánzate"/>
+                    <h5>¿Deseas continuar?</h5>
+                </Modal.Body>
+                <Modal.Footer className="b-white">
+                    <button className="btn3 rounded fw-bold" onClick={handleClose}>
+                        No, regrésame
+                    </button>
+                    <button className="btn btn-primary fw-bold float-end " onClick={eliminarCuenta}>
+                        ¡Sí, estoy seguro!
+                    </button>
+                </Modal.Footer>
+            </Modal>
+        )
+    }
+
     if(!isFreelancer) {
         return (
+            <>
             <div className="contenedorPerfil text-center d-flex">
                 <form className="d-flex" onChange={changeForm} onSubmit={guardarCambios}>
                     <div className="container rounded row w-100">
@@ -315,6 +372,15 @@ const Perfil = () => {
                     confirmacion()
                 }
             </div>
+                <div className="text-center">
+                    <button className="w-75 btn btn-danger fw-bold mt-3 mb-5" onClick={handleShow2}>
+                        Eliminar mi cuenta
+                    </button>
+                    {
+                        confirmacion2()
+                    }
+                </div>
+            </>
         )
     } else {
         return (
@@ -417,11 +483,12 @@ const Perfil = () => {
             <form className="d-flex" onChange={changeForm2} onSubmit={guardarCambios2}>
                 <div className="container rounded row w-100">
                     <h5 className="mt-3 welcome mb-3 fw-bold">Datos del freelancer</h5>
+                    <h5 className="mt-3 welcome1 mb-3 fw-bold">Ubicación</h5>
                     <div className="row mt-3">
                         <div className="col input-group">
                             <div>
                               <span className="input-group-text bg-gb text-white">
-                                  <i className="bi bi-person-circle my-1"> </i>
+                                  <i className="fa fa-globe mt-2 mb-2 pb-1"></i>
                               </span>
                             </div>
                             <div className="form-floating flex-grow-1">
@@ -439,7 +506,7 @@ const Perfil = () => {
                         <div className="col input-group">
                             <div>
                               <span className="input-group-text bg-gb text-white">
-                                  <i className="bi bi-person-badge-fill my-1"> </i>
+                                  <i className="bi bi-pin-map-fill my-1"></i>
                               </span>
                             </div>
                             <div className="form-floating flex-grow-1">
@@ -456,10 +523,10 @@ const Perfil = () => {
                         </div>
                     </div>
                     <div className="row mt-3">
-                        <div className="col input-group">
+                        <div className="w-75 input-group">
                             <div>
                               <span className="input-group-text bg-gb text-white">
-                                  <i className="bi bi-envelope-fill my-1"> </i>
+                                  <i className="bi bi-cursor-fill my-1"></i>
                               </span>
                             </div>
                             <div className="form-floating flex-grow-1">
@@ -474,10 +541,10 @@ const Perfil = () => {
                                 <label htmlFor="address">Dirección</label>
                             </div>
                         </div>
-                        <div className="col input-group">
+                        <div className="w-25 input-group">
                             <div>
                               <span className="input-group-text bg-gb text-white">
-                                  <i className="bi bi-at my-1"></i>
+                                  <i className="bi bi-mailbox2 my-1"></i>
                               </span>
                             </div>
                             <div className="form-floating flex-grow-1">
@@ -489,9 +556,153 @@ const Perfil = () => {
                                     placeholder="postalCode"
                                     value={inputs2.postalCode}
                                 />
-                                <label htmlFor="postalCode">Códido postal</label>
+                                <label htmlFor="postalCode">Código postal</label>
                             </div>
                         </div>
+                    </div>
+                    <h5 className="mt-3 welcome1 mb-3 fw-bold">Contacto</h5>
+                    <div className="row mt-3">
+                        <div className="col input-group">
+                            <div>
+                              <span className="input-group-text bg-gb text-white">
+                                  <i className="fa fa-facebook mt-2 mb-2 pb-1"></i>
+                              </span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                    type="text"
+                                    className="form-control mb-3"
+                                    id="facebookUrl"
+                                    name="facebookUrl"
+                                    placeholder="facebookUrl"
+                                    value={inputs2.facebookUrl}
+                                />
+                                <label htmlFor="facebookUrl">Facebook</label>
+                            </div>
+                        </div>
+                        <div className="col input-group">
+                            <div>
+                              <span className="input-group-text bg-gb text-white">
+                                  <i className="fa fa-twitter mt-2 mb-2 pb-1"></i>
+                              </span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                    type="text"
+                                    className="form-control mb-3"
+                                    id="twitterUrl"
+                                    name="twitterUrl"
+                                    placeholder="twitterUrl"
+                                    value={inputs2.twitterUrl}
+                                />
+                                <label htmlFor="twitterUrl">Twitter</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mt-3">
+                        <div className="col input-group">
+                            <div>
+                              <span className="input-group-text bg-gb text-white">
+                                  <i className="fa fa-instagram mt-2 mb-2 pb-1"></i>
+                              </span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                    type="text"
+                                    className="form-control mb-3"
+                                    id="instagramUrl"
+                                    name="instagramUrl"
+                                    placeholder="instagramUrl"
+                                    value={inputs2.instagramUrl}
+                                />
+                                <label htmlFor="instagramUrl">Instagram</label>
+                            </div>
+                        </div>
+                        <div className="col input-group">
+                            <div>
+                              <span className="input-group-text bg-gb text-white">
+                                  <i className="fa fa-linkedin mt-2 mb-2 pb-1"></i>
+                              </span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                    type="text"
+                                    className="form-control mb-3"
+                                    id="linkedinUrl"
+                                    name="linkedinUrl"
+                                    placeholder="linkedinUrl"
+                                    value={inputs2.linkedinUrl}
+                                />
+                                <label htmlFor="linkedinUrl">LinkedIn</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mt-3">
+                        <div className="col input-group">
+                            <div>
+                              <span className="input-group-text bg-gb text-white">
+                                  <i className="bi bi-globe my-1"></i>
+                              </span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                    type="text"
+                                    className="form-control mb-3"
+                                    id="websiteUrl"
+                                    name="websiteUrl"
+                                    placeholder="websiteUrl"
+                                    value={inputs2.websiteUrl}
+                                />
+                                <label htmlFor="websiteUrl">Página Web</label>
+                            </div>
+                        </div>
+                        <div className="col input-group">
+                            <div>
+                              <span className="input-group-text bg-gb text-white">
+                                  <i className="fa fa-whatsapp me-2 mt-2 mb-2 pb-1"></i> +57
+                              </span>
+                            </div>
+                            <div className="form-floating flex-grow-1">
+                                <input
+                                    type="text"
+                                    className="form-control mb-3"
+                                    id="phoneNumber"
+                                    name="phoneNumber"
+                                    placeholder="phoneNumber"
+                                    value={inputs2.phoneNumber}
+                                />
+                                <label htmlFor="phoneNumber">WhatsApp</label>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 className="mt-4 welcome1 mb-3 fw-bold">¡Date a conocer!</h5>
+                    <div className="col mt-2 w-100 input-group">
+                        <div>
+                              <span className="input-group-text bg-gb text-white">
+                                  <i className="bi bi-card-text my-1"></i>
+                              </span>
+                        </div>
+                        <div className="form-floating flex-grow-1">
+                            <input
+                                type="text"
+                                className="form-control mb-3"
+                                id="oneliner"
+                                name="oneliner"
+                                placeholder="oneliner"
+                                value={inputs2.oneliner}
+                            />
+                            <label htmlFor="oneliner">Cuéntanos a qué te dedicas en una sola línea</label>
+                        </div>
+                    </div>
+                    <div className="form-floating w-100">
+                        <textarea
+                            className="form-control mb-3 descripcion"
+                            id="freelancerDescription"
+                            name="freelancerDescription"
+                            placeholder="freelancerDescription"
+                            value={inputs2.freelancerDescription}
+                        />
+                        <label htmlFor="freelancerDescription" className="ms-3">Ahora pon una descripción detallada sobre ti</label>
                     </div>
                     <div className="row mt-4">
                         <button className="w-50 btn btn-lg btn-primary fw-bold mx-auto" type="submit">Guardar
@@ -500,6 +711,14 @@ const Perfil = () => {
                     </div>
                 </div>
             </form>
+        </div>
+        <div className="text-center">
+        <button className="w-75 btn btn-danger fw-bold mt-3 mb-5" onClick={handleShow2}>
+            Eliminar mi cuenta
+        </button>
+            {
+                confirmacion2()
+            }
         </div>
         </>
         )

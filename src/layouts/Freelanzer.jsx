@@ -3,6 +3,7 @@ import {Layout} from "antd"
 import Sidebar from "../components/Sidebar"
 import useAuth from '../hooks/useAuth'
 import { Navigate } from "react-router-dom";
+import ModalError from "../components/ModalError";
 
 
 function Freelanzer(props) {
@@ -12,8 +13,10 @@ function Freelanzer(props) {
   const rol = props.rol;
   const{user, isLoading, isFreelancer} = useAuth();
   console.log("usuario: "+ user)
+  const error = localStorage.getItem("ERR")
 
   if(!user && !isLoading){
+      localStorage.setItem("ERR","Se ha cerrado tu sesión.")
     return(
       <>
       <Navigate to = "/login" />
@@ -22,6 +25,7 @@ function Freelanzer(props) {
   }
 
   if(user && !isLoading && !isFreelancer){
+      localStorage.setItem("ERR","Estás registrado como usuario. Para acceder al rol de freelancer y/o visitante debes cerrar sesión.")
     return(
       <>
       <Navigate to = "/usuario" />
@@ -38,7 +42,7 @@ function Freelanzer(props) {
                     </Sider>
                     <Content> {children} </Content>
                 </Layout>
-
+                <ModalError error={error}/>
             </div>
         )
     }
