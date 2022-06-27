@@ -102,6 +102,10 @@ function Login (){
             <div className="h3 mb-3 fw-normal">
                 <p>¿No tienes cuenta?<a href="/registro" className="badge mt-4">Regístrate</a></p>
             </div>
+
+          <div className="h3 mb-3 fw-normal">
+              <a href="/" className="mid-badge mt-4"><i className="bi bi-house-door-fill"></i></a>
+          </div>
         </div>
         <ModalError error={error}/>
     </div>
