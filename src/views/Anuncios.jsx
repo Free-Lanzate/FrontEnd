@@ -162,20 +162,22 @@ const Anuncios = () => {
                     placeholder="postDescription"
                     value={inputs.postDescription}
                 />
-                <label htmlFor="postDescription" className="ms-3">¿En qué consiste el producto o servicio que deseas ofrecer?</label>
-                <SubirImagen setUrl={setUrl} />
-              </div>
-            <div className="col">
-              <button className="w-70 btn btn-lg btn-primary fw-bold" type="submit">Publicar</button>
+                  <label htmlFor="postDescription" className="ms-3">¿En qué consiste el producto o servicio que deseas
+                    ofrecer?</label>
+                  <SubirImagen setUrl={setUrl}/>
+                </div>
+                <div className="col">
+                  <button className="w-70 btn btn-lg btn-primary fw-bold" type="submit">Publicar</button>
+                </div>
+              </form>
             </div>
-          </form>
           </div>
-        </div>
           {
             loadApproved()
           }
-      </div>
-  )
+        </div>
+    )
+  }
 }
 
 export default Anuncios

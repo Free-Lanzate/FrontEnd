@@ -46,25 +46,25 @@ export const Categorias = () => {
     function imagen(categoryName) {
       switch (categoryName) {
         case "Programacion y tecnología":
-          return (<img src={Programacion} alt="Imagen" width="180" height="180"/>)
+          return (<img src={Programacion} alt="Imagen" width="160" height="90"/>)
           break;
         case "Diseno Grafico":
-          return <img src={DiseñoGrafico} alt="Imagen" width="180" height="180"/>
+          return <img src={DiseñoGrafico} alt="Imagen" width="160" height="90"/>
           break;
         case "Video y animación":
-          return <img src={VideoAnimacion} alt="Imagen" width="180" height="180"/>
+          return <img src={VideoAnimacion} alt="Imagen" width="160" height="90"/>
           break;
           case "Audio":
-          return <img src={Audio} alt="Imagen" width="180" height="180"/>
+          return <img src={Audio} alt="Imagen" width="160" height="90"/>
           break;
           case "Traducción":
-          return <img src={Traduccion} alt="Imagen" width="180" height="180"/>
+          return <img src={Traduccion} alt="Imagen" width="160" height="90"/>
           break;
           case "Limpieza":
-          return <img src={Limpieza} alt="Imagen" width="180" height="180"/>
+          return <img src={Limpieza} alt="Imagen" width="160" height="90"/>
           break;
           case "Confección":
-           return <img src={Confeccion} alt="Imagen" width="180" height="180"/>
+           return <img src={Confeccion} alt="Imagen" width="160" height="90"/>
           break;
 
         default:
