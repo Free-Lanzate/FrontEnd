@@ -107,10 +107,9 @@ const QuienesSomos = () => {
                         <hr className="separador"/>
                         <h3 className="welcome1 fw-bold">¿En qué consiste la sección de "Mis ventas"?</h3>
                         <p className="w-75 mx-auto">
-                            Es una página exclusiva para freelancers en la que podrás visualizar y editar tus anuncios publicados.
+                            Es una página exclusiva para freelancers en la que podrás visualizar y eliminar tus anuncios publicados.
                             <br/>
-                            Así mismo, aquí podrás consultar quienes han pagado por uno de tus productos o contratado uno
-                            de tus servicios para verificar que el pago fue realizado de manera segura.
+                            Así mismo, aquí podrás consultar las ventas realizadas de tus productos y/o servicios para verificar que los pagos fue realizado de manera segura.
                             <br/>
                         </p>
                         <hr className="separador"/>
@@ -126,7 +125,7 @@ const QuienesSomos = () => {
                             se brinda aún mayor confianza y seguridad para ambas partes involucradas.
                         </p>
                         <hr className="separador"/>
-                        <h3 className="welcome1 fw-bold">¿Cuáles son los costos de vender un producto</h3>
+                        <h3 className="welcome1 fw-bold">¿Cuáles son los costos de vender un producto?</h3>
                         <p className="w-75 mx-auto">
                             Vender algún producto o servicio en Free-Lánzate tiene un costo mínimo: ¡nada más son 0.01 dólares para que tu anuncio sea publicado!
                              Sin embargo, si deseas aumentar tu alcance y tener mayor visibilidad hacía los compradores, deberás pagar un tarifa estándar de
