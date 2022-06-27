@@ -1,18 +1,19 @@
 import React, {useState, useEffect} from 'react'
-import Logo from "../assets/images/Logo.png";
-import {showHide} from "../utils/passwordVisibility";
-import {Link} from "react-router-dom";
 import{getAccessToken, logout} from "../api/auth"
 import jwtDecode from "jwt-decode";
-import {miPerfil, editarPerfil, registroFreelancer} from "../api/user";
+import {miPerfil, editarPerfil} from "../api/user";
 import {notification} from "antd";
-import {emailValidation, minLengthValidation} from "../utils/formValidation";
+import {minLengthValidation} from "../utils/formValidation";
+import SubirImagen from '../components/SubirImagen';
 
 
 const Perfil = () => {
 
     const UserId = jwtDecode(getAccessToken()).sub.id;
 
+    const[url, setUrl] = useState({
+        thumbnailUrl: ""
+      })
     const [inputs, setInputs] = useState({
         location: "",
         firstName: "",
@@ -57,7 +58,8 @@ const Perfil = () => {
 
     const guardarCambios = async e => {
         e.preventDefault();
-        const passwordVal = inputs.newPassword;
+        actualizarImagen(UserId, url)
+        /*const passwordVal = inputs.newPassword;
         const repeatPasswordVal = inputs.repeatPassword;
         if (passwordVal !== repeatPasswordVal) {
             notification["error"]({
@@ -72,7 +74,12 @@ const Perfil = () => {
                 resetForm();
                 window.location.href = "/";
             }
-        }
+        }*/
+    }
+
+    const actualizarImagen = (id, data) =>{
+        console.log(id)
+        console.log(data)
     }
 
     const resetForm = () => {
@@ -166,6 +173,10 @@ const Perfil = () => {
                               value = {inputs.username}
                           />
                           <label htmlFor="username" className="ms-3">Nombre de usuario</label>
+                      </div>
+                      <div>
+                        ¿Quieres actualizar tu foto de perfil? Hazlo acá
+                        <SubirImagen setUrl={setUrl} />
                       </div>
                   </div>
               <p className="mt-5 mb-3">¿Desea cambiar su contraseña? Haga clic<b className="badge" onClick={changePassword}>aquí</b></p>

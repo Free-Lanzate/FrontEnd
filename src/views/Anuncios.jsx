@@ -5,10 +5,14 @@ import{getAccessToken} from "../api/auth"
 import jwtDecode from "jwt-decode";
 import {buscarCategoria} from "../api/buscar";
 import SubirImagen from '../components/SubirImagen';
+import { unirImagen } from '../api/imagen';
 
 const Anuncios = () => {
 
   const[category, setCategory] = useState([])
+  const[url, setUrl] = useState({
+    thumbnailUrl: ""
+  })
 
   useEffect(() => {
     buscarCategoria().then(response => {
@@ -52,9 +56,17 @@ const Anuncios = () => {
       });
     } else {
         resetForm();
+        añadirImagen(result.id)
         window.location.href = "/";
     }
   }
+
+  async function añadirImagen(postId) {
+    const result = await unirImagen(postId, url)
+    console.log(result)
+  }
+
+  console.log(url)
 
   const resetForm = () => {
     const inputs = document.getElementsByTagName("input");
@@ -125,13 +137,13 @@ const Anuncios = () => {
                     value = {inputs.postDescription}
                 />
                 <label htmlFor="postDescription" className="ms-3">¿En qué consiste el producto o servicio que deseas ofrecer?</label>
+                <SubirImagen setUrl={setUrl} />
               </div>
             <div className="col">
               <button className="w-70 btn btn-lg btn-primary fw-bold" type="submit">Publicar</button>
             </div>
           </form>
           </div>
-          <SubirImagen inputs={inputs.thumbnailUrl} setInputs={setInputs}/>
         </div>
         
       </div>

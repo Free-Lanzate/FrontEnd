@@ -1,38 +1,34 @@
 import React, {Fragment, useState} from 'react';
+import { subirImagen } from '../api/imagen';
 
-const SubirImagen = ({inputs, setInputs}) => {
+const SubirImagen = ({setUrl}) => {
   const [file, setFile] = useState(null)
 
   const selectedHandler = e => {
     setFile(e.target.files[0])
   }
 
-  const sendHandler = () => {
+  const sendHandler = async e => {
+    e.preventDefault();
     if(!file){
       alert('you must upload file')
       return
     }
-
     const formdata = new FormData()
     formdata.append('image', file)
+    
+    const result = await subirImagen(formdata)
 
-    /*setInputs({
-      if (inputs.name ===) {
-        
-      }
-    });*/
+    setUrl({thumbnailUrl:result.filename})
 
-    console.log(inputs)
-    console.log(file)
+    document.getElementById('fileinput').value = null
 
-    //document.getElementById('fileinput').value = null
-
-    //setFile(null)
+    setFile(null)
   }
 
   return (
     <Fragment>
-      <div className="container mt-5">
+
         <div className="card p-3">
           <div className="row">
             <div className="col-10">
@@ -49,7 +45,7 @@ const SubirImagen = ({inputs, setInputs}) => {
             </div>
           </div>
         </div>
-      </div>
+
     </Fragment>
   );
 }
