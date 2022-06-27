@@ -6,12 +6,16 @@ import jwtDecode from "jwt-decode";
 import {buscarCategoria} from "../api/buscar";
 import SubirImagen from '../components/SubirImagen';
 import ModalApproved from "../components/ModalApproved";
+import { unirImagen } from '../api/imagen';
 
 const Anuncios = () => {
 
   const payment = localStorage.getItem('PAID');
 
   const[category, setCategory] = useState([])
+  const[url, setUrl] = useState({
+    thumbnailUrl: ""
+  })
 
   useEffect(() => {
     buscarCategoria().then(response => {
@@ -70,8 +74,14 @@ const Anuncios = () => {
       });
     } else {
         resetForm();
+        añadirImagen(result.id)
         window.location.reload();
     }
+  }
+
+  async function añadirImagen(postId) {
+    const result = await unirImagen(postId, url)
+    console.log(result)
   }
 
   const resetForm = () => {
@@ -152,22 +162,20 @@ const Anuncios = () => {
                     placeholder="postDescription"
                     value={inputs.postDescription}
                 />
-                  <label htmlFor="postDescription" className="ms-3">¿En qué consiste el producto o servicio que deseas
-                    ofrecer?</label>
-                </div>
-                <div className="col">
-                  <button className="w-70 btn btn-lg btn-primary fw-bold" type="submit">Publicar</button>
-                </div>
-              </form>
+                <label htmlFor="postDescription" className="ms-3">¿En qué consiste el producto o servicio que deseas ofrecer?</label>
+                <SubirImagen setUrl={setUrl} />
+              </div>
+            <div className="col">
+              <button className="w-70 btn btn-lg btn-primary fw-bold" type="submit">Publicar</button>
             </div>
-
+          </form>
           </div>
+        </div>
           {
             loadApproved()
           }
-        </div>
-    )
-  }
+      </div>
+  )
 }
 
 export default Anuncios

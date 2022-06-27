@@ -5,6 +5,14 @@ import { idCategoria, nombreCategoria } from '../utils/tokens';
 import useAuth from '../hooks/useAuth';
 import {Button, Modal} from "react-bootstrap";
 import Logo from "../assets/images/Logo.png";
+import Audio from "../assets/images/Categorias/Audio.jpg"
+import Confeccion from '../assets/images/Categorias/ConfeccionIcono.jpg'
+import DiseñoGrafico from '../assets/images/Categorias/DiseñoGrafico.jpg'
+import Limpieza from '../assets/images/Categorias/Limpieza.jpg'
+import Programacion from '../assets/images/Categorias/programacion.jpg'
+import Traduccion from '../assets/images/Categorias/Traduccion.jpg'
+import VideoAnimacion from '../assets/images/Categorias/VideoAnimacion.jpg'
+
 
 
 
@@ -35,18 +43,51 @@ export const Categorias = () => {
       }
     }
 
-    
+    function imagen(categoryName) {
+      switch (categoryName) {
+        case "Programacion y tecnología":
+          return (<img src={Programacion} alt="Imagen" width="180" height="180"/>)
+          break;
+        case "Diseno Grafico":
+          return <img src={DiseñoGrafico} alt="Imagen" width="180" height="180"/>
+          break;
+        case "Video y animación":
+          return <img src={VideoAnimacion} alt="Imagen" width="180" height="180"/>
+          break;
+          case "Audio":
+          return <img src={Audio} alt="Imagen" width="180" height="180"/>
+          break;
+          case "Traducción":
+          return <img src={Traduccion} alt="Imagen" width="180" height="180"/>
+          break;
+          case "Limpieza":
+          return <img src={Limpieza} alt="Imagen" width="180" height="180"/>
+          break;
+          case "Confección":
+           return <img src={Confeccion} alt="Imagen" width="180" height="180"/>
+          break;
+
+        default:
+          return (
+          <svg
+              className="bd-placeholder-img rounded" width="160" height="90" role="img">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee"></rect>
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">Categoría</text>
+          </svg>)
+          break;
+      }
+
+    }
+
+    console.log(category)
+
 
   const tableRows=category.map((category)=>{
-        return( 
+        return(
           <tr>
               <td>
-                  <svg
-                      className="bd-placeholder-img rounded" width="160" height="90" role="img">
-                      <title>Placeholder</title>
-                      <rect width="100%" height="100%" fill="#eee"></rect>
-                      <text x="50%" y="50%" fill="#aaa" dy=".3em">Imagen</text>
-                  </svg>
+              {imagen(category.categoryName)}
               </td>
             <td className="text-center">
               {category.categoryName}

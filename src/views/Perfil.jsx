@@ -7,6 +7,7 @@ import {Modal} from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import ModalError from "../components/ModalError";
 import {emailValidation, minLengthValidation} from "../utils/formValidation";
+import SubirImagen from '../components/SubirImagen';
 
 const Perfil = () => {
 
@@ -30,6 +31,9 @@ const Perfil = () => {
 
     const UserId = jwtDecode(getAccessToken()).sub.id;
 
+    const[url, setUrl] = useState({
+        thumbnailUrl: ""
+      })
     const [inputs, setInputs] = useState({
         location: "",
         firstName: "",
@@ -112,6 +116,13 @@ const Perfil = () => {
         });
     };
 
+    const inputValidation = e => {
+        const { type, name } = e.target;
+        if (type === "password") {
+            setFormValid({ ...formValid, [name]: minLengthValidation(e.target, 6) });
+        }
+    };
+
     const guardarCambios = async e => {
         const location = inputs.location
         const firstName = inputs.firstName
@@ -119,6 +130,7 @@ const Perfil = () => {
         const email = inputs.email
         const username = inputs.username
         e.preventDefault();
+        actualizarImagen(UserId, url)
         if (location === "" || firstName === "" || lastName === "" || email === "" || username === ""){
             localStorage.setItem("ERR","Todos los datos del usuario deben estar diligenciados.")
             window.location.reload();
@@ -132,6 +144,11 @@ const Perfil = () => {
                 window.location.reload()
             }
         }
+    }
+
+    const actualizarImagen = (id, data) =>{
+        console.log(id)
+        console.log(data)
     }
 
     const guardarCambios2 = async e => {
@@ -370,6 +387,10 @@ const Perfil = () => {
                                     <label htmlFor="username">Nombre de usuario</label>
                                 </div>
                             </div>
+                            <div>
+                                ¿Quieres actualizar tu foto de perfil? Hazlo acá
+                                <SubirImagen setUrl={setUrl} />
+                            </div>
                         </div>
                         <p className="mt-5 mb-3">¿Desea cambiar su contraseña? Haga clic<b className="badge"
                                                                                            onClick={handleShow}>aquí</b>
@@ -476,6 +497,10 @@ const Perfil = () => {
                                     />
                                     <label htmlFor="username">Nombre de usuario</label>
                                 </div>
+                            </div>
+                            <div>
+                                ¿Quieres actualizar tu foto de perfil? Hazlo acá
+                                <SubirImagen setUrl={setUrl} />
                             </div>
                         </div>
                         <p className="mt-5 mb-3">¿Desea cambiar su contraseña? Haga clic<b className="badge"
