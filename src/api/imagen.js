@@ -31,6 +31,21 @@ export function subirImagen(formdata){
       })
   }
 
+  export function subirImagenPerfil(formdata){
+    const url = 'http://localhost:8000/image/profileUpload';
+      const params = {
+          method: "POST",
+          body: formdata,
+        };
+  
+      return fetch(url, params).then(response =>{
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+  }
+
   export function imagenPersona(id, data){
     console.log("esto es id " + id)
     console.log("data " + data.thumbnailUrl)

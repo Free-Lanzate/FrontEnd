@@ -38,6 +38,7 @@ const BusquedaFreelancer = (props) => {
         return (<p className="mt-3">{info}</p>)
       }
     }
+    console.log(freelancer)
     
     
       if (!resultado) {
@@ -79,12 +80,7 @@ const BusquedaFreelancer = (props) => {
                   freelancer.map((freelancer)=>(
                       <tr>
                         <td>
-                          <svg
-                              className="bd-placeholder-img rounded-circle" width="90" height="90" role="img">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#eee"></rect>
-                            <text x="50%" y="50%" fill="#aaa" dy=".3em">Imagen</text>
-                          </svg>
+                        <img src={`http://localhost:8000/images/profiles/${freelancer.avatarUrl}`} alt="Imagen" width="180" height="180"/>
                         </td>
                         <td>
                           {freelancer.firstName + " " + freelancer.lastName }

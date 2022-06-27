@@ -7,7 +7,9 @@ import {Modal} from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import ModalError from "../components/ModalError";
 import {emailValidation, minLengthValidation} from "../utils/formValidation";
-import SubirImagen from '../components/SubirImagen';
+
+import { imagenPersona } from '../api/imagen';
+import SubirImagenPerfil from '../components/SubirImagenPerfil';
 
 const Perfil = () => {
 
@@ -32,8 +34,9 @@ const Perfil = () => {
     const UserId = jwtDecode(getAccessToken()).sub.id;
 
     const[url, setUrl] = useState({
-        thumbnailUrl: ""
+        avatarUrl: ""
       })
+
     const [inputs, setInputs] = useState({
         location: "",
         firstName: "",
@@ -146,9 +149,9 @@ const Perfil = () => {
         }
     }
 
-    const actualizarImagen = (id, data) =>{
-        console.log(id)
-        console.log(data)
+    async function actualizarImagen(id, url) {
+        const result = await imagenPersona(id, url)
+        console.log(result)
     }
 
     const guardarCambios2 = async e => {
@@ -389,7 +392,7 @@ const Perfil = () => {
                             </div>
                             <div>
                                 ¿Quieres actualizar tu foto de perfil? Hazlo acá
-                                <SubirImagen setUrl={setUrl} />
+                                <SubirImagenPerfil setUrl={setUrl} />
                             </div>
                         </div>
                         <p className="mt-5 mb-3">¿Desea cambiar su contraseña? Haga clic<b className="badge"
@@ -500,7 +503,7 @@ const Perfil = () => {
                             </div>
                             <div>
                                 ¿Quieres actualizar tu foto de perfil? Hazlo acá
-                                <SubirImagen setUrl={setUrl} />
+                                <SubirImagenPerfil setUrl={setUrl} />
                             </div>
                         </div>
                         <p className="mt-5 mb-3">¿Desea cambiar su contraseña? Haga clic<b className="badge"

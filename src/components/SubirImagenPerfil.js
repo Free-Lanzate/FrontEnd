@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
-import { subirImagen } from '../api/imagen';
+import { subirImagenPerfil } from '../api/imagen';
 
-const SubirImagen = ({setUrl}) => {
+const SubirImagenPerfil = ({setUrl}) => {
   const [file, setFile] = useState(null)
 
   const selectedHandler = e => {
@@ -17,10 +17,11 @@ const SubirImagen = ({setUrl}) => {
     const formdata = new FormData()
     formdata.append('image', file)
     
-    const result = await subirImagen(formdata)
+    const result = await subirImagenPerfil(formdata)
+    console.log(result)
     alert('Tu imagen a sido actualizada correctamente')
 
-    setUrl({thumbnailUrl:result.filename})
+    setUrl({avatarUrl:result.filename})
 
     document.getElementById('fileinput').value = null
 
@@ -51,4 +52,4 @@ const SubirImagen = ({setUrl}) => {
   );
 }
 
-export default SubirImagen
+export default SubirImagenPerfil
