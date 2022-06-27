@@ -160,6 +160,31 @@ const ModalApproved = (props) =>{
             </Modal>
         )
     }
+    else if (location === "info"){
+        return (
+            <Modal id="modal" className="login" show={show} backdrop="static" keyboard={false} centered
+                   onHide={handleClose2}>
+                <Modal.Header closeButton closeVariant="white">
+                    <Modal.Title className="text-white fw-bold">
+                        <i className="bi bi-balloon-heart-fill me-3"></i>
+                        Infinitas gracias
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="b-white text-center">
+                    <h5>
+                        ¡Transacción completada con éxito!
+                        Tu donación nos ayuda a mejorar este proyecto y a que nuestra plataforma siga creciendo cada día.
+                    </h5>
+                    <img className="logo mb-4 mt-3" src={Logo} alt="Free-Lánzate"/>
+                </Modal.Body>
+                <Modal.Footer className="b-white">
+                    <button className="btn btn-primary fw-bold float-end" onClick={handleClose2}>
+                        Volver
+                    </button>
+                </Modal.Footer>
+            </Modal>
+        )
+    }
 }
 
 export default ModalApproved
